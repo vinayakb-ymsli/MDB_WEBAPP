@@ -24,24 +24,26 @@ export default function Body() {
           <img src="/images/kv_main01.png" alt="" />
         </div>
 
-        <div className="introtext">
-          <h3>Cell picking & imaging System</h3>
+        <div className="descriptor">
+          <div className="introtext">
+            <h3>Cell picking & imaging System</h3>
 
-          <h1>CELL HANDLER</h1>
+            <h1>CELL HANDLER</h1>
 
-          <h3>Advancing cell research into a new era</h3>
-        </div>
+            <h3>Advancing cell research into a new era</h3>
+          </div>
 
-        <div className="uploadbutton">
-          <label for="images" class="drop-container" id="dropcontainer">
-            <input
-              onChange={handleFileChange}
-              type="file"
-              id="images"
-              accept="image/*"
-              required
-            />
-          </label>
+          <div className="uploadbutton">
+            <label for="images" class="drop-container" id="dropcontainer">
+              <input
+                onChange={handleFileChange}
+                type="file"
+                id="images"
+                accept="image/*"
+                required
+              />
+            </label>
+          </div>
         </div>
       </div>
     </div>

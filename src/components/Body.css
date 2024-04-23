@@ -25,7 +25,12 @@
 .banner img {
     width: 100%;
 }
-
+.intropage{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+}
 .bkgimg img {
     position: absolute;
     width: 100%;
@@ -36,16 +41,16 @@
 }
 
 .machineimg img{
-    position: absolute;
-    top: 35%;
-    left: 20%;
+    height: 60vh;
 
 }
-
+.descriptor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
 .introtext{
-    position: absolute;
-    top: 32%;
-    left: 50%;
+    margin-bottom: 10%;
 }
 
 .introtext h3 {
@@ -57,12 +62,12 @@
     color: white;
     font-size: 3rem;
 }
-
+/* 
 .uploadbutton{
     position: absolute;
     top: 55%;
     left: 53%;
-}
+} */
 
 .drop-container {
     position: relative;
