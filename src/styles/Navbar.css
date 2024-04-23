@@ -1,0 +1,48 @@
+.navbar {
+    display: flex;
+    font-family:'Roboto', 'Verdana', 'Geneva', sans-serif;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    height: 10vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .navbarContainer{
+    height: 20vh;
+  }
+  .banner{
+    min-height: 10vh;
+    max-width: 100%;
+  }
+  .left-section {
+    display: flex;
+    align-items: center;
+  }
+  .left-section img {
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .left-section span {
+    font-size: 18px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+  
+  .right-section a {
+    margin-left: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: black; 
+  }
+  
+  .right-section a:hover {
+    color: blue; 
+  }
+  @media (max-width: 1024px) {
+    .left-section span {
+      display: none;
+    }
+  }
+  

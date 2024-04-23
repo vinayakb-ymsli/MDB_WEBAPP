@@ -1,0 +1,58 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+.main {
+    display: flex;
+    position: relative;
+    height: 80vh;
+}
+.left,.right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.left{
+    border-right: 1px solid #ccc;
+}
+.right{
+    border-left: 1px solid #ccc;
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-direction: row;
+}
+.image-container{
+  width: 600px; /* Adjust as needed */
+  height: 600px;
+  border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.5); /* Translucent white */
+  margin-bottom: 10px;
+  display: flex;
+  border: 3px dashed rgb(62, 56, 56);
+  align-items: center;
+  justify-content: center;
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+button{
+    margin-right: 20px;
+    border: none;
+    background: green;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  .inputTag[type="file"] {
+    color: transparent;
+  }
