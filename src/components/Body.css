@@ -51,7 +51,7 @@
 
 .introtext{
     position: absolute;
-    top: 35%;
+    top: 32%;
     left: 50%;
 }
 
@@ -67,6 +67,50 @@
 
 .uploadbutton{
     position: absolute;
-    top: 65%;
-    left: 60%;
+    top: 55%;
+    left: 53%;
+}
+
+.drop-container {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed #00eaff;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+  
+.drop-container:hover {
+    background: #eee;
+    border-color: #111;
+}
+  
+.drop-container:hover .drop-title {
+    color: #222;
+}
+  
+.drop-title {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
 }

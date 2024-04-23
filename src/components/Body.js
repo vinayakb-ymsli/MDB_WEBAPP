@@ -1,8 +1,14 @@
 import React from 'react'
 import Banner from './Banner'
-import './Body.css'
+import './Body.css' 
 
-export default function Body() {
+export default function Body({ufile, dfile, setuFile, setdFile}) {
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setuFile(selectedFile);
+    };
+ 
     return (
         <>
             <Banner />
@@ -32,30 +38,15 @@ export default function Body() {
                 </div>
 
                 <div className="uploadbutton">
-                <button>
-                        Upload
-                </button>
+                    <label for="images" class="drop-container" id="dropcontainer">
+                        <span class="drop-title">Drop files here</span>
+                        or
+                        <input type="file" id="images" accept="image/*" required />
+                    </label>
+
                 </div>
             </div>
 
-
-            {/* <div className="holder">
-
-                <div className="upload">
-                    <h1>+</h1>
-                    <div className="imageupload">
-                        upload
-                    </div>
-                </div>
-
-                <div className="divider">
-                    
-                </div>
-
-                <div className="download">
-                    <h1>+</h1>
-                </div>
-            </div> */}
         </>
     )
 }
