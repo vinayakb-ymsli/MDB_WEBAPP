@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Body.css";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Body() {
   const navigate = useNavigate();
 

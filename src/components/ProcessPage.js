@@ -3,6 +3,9 @@ import Loader from "react-js-loader";
 
 import "../styles/ProcessPage.css";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+
+
 
 const ProcessPage = () => {
   const { state } = useLocation();
@@ -14,36 +17,58 @@ const ProcessPage = () => {
   const [processedImage, setProcessedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState("");
-  const processImage = () => {
+
+  
+  const processImage = async () => {
     // Assuming you have an API call to process the image
     setIsError("");
     setIsLoading(true);
+    try{
 
-    // Mock API call
+      // Mock API call
+      const formData = new FormData();
+      formData.append("image", state.image);
+      
+      // Send FormData using Axios
+      const response = await axios.post("https://ty2e2cc7bt.ap-south-1.awsapprunner.com/upload", formData)
+      // .then((response) => {
+        //   setIsLoading(false);
+        //   console.log("Response:", response.data);
+        // })
+        // .catch((error) => {
+          //   // Handle error
+          //   setIsError(error)
+          //   console.error("Error:", error);
+          // });
+          
+          // const response = await fetch("https://ty2e2cc7bt.ap-south-1.awsapprunner.com/upload",{
+            //   method: 'POST',
+            //   body: JSON.stringify({
+              //     image: formData
+              //   })
+              // })
+              
+              // const result = await response.json();
+              console.log("result",response.data);
+              const processedImage = `data:image/png;base64, ${response?.data?.image}`;
+              setProcessedImage(processedImage);
+              // setTimeout(() => {
+              //   // Mock processed image URL
+              //   const processedImageUrl = "url_of_processed_image";
+              //   setProcessedImage(processedImageUrl);
+              //   setIsLoading(false);
+              // }, 2000); // Simulating a delay of 2 seconds
+            // };
+          }
+          catch(error) {
+            alert(error.message);
+          }
+          finally{
+    setIsLoading(false);
 
-    // const formData = new FormData();
-    // formData.append("image", selectedFile);
-
-    // // Send FormData using Axios
-    // axios.post("your_api_endpoint", formData)
-    //   .then((response) => {
-    //     setIsLoading(false);
-    //     console.log("Response:", response.data);
-    //   })
-    //   .catch((error) => {
-    //     // Handle error
-    //     setIsError(error)
-    //     console.error("Error:", error);
-    //   });
-
-    setTimeout(() => {
-      // Mock processed image URL
-      const processedImageUrl = "url_of_processed_image";
-      setProcessedImage(processedImageUrl);
-      setIsLoading(false);
-    }, 2000); // Simulating a delay of 2 seconds
-  };
-
+          }
+        }
+            
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     const imageUrl = URL.createObjectURL(file);
@@ -85,7 +110,7 @@ const ProcessPage = () => {
               size={100}
             />
           ) : (
-            processedImage && <img src={processedImage} alt="Processed" />
+            processedImage && <img src={processedImage} alt="Processed"  height={100} width={400} />
           )}
         </div>
         <h3 style={{ color: "red" }}>{isError}</h3>
