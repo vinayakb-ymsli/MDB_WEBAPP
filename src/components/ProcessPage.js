@@ -5,74 +5,46 @@ import "../styles/ProcessPage.css";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-
-
 const ProcessPage = () => {
   const { state } = useLocation();
-  const uploadedImagePre = state.image;
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const imageObjects = state.zip.map((img) =>
+    URL.createObjectURL(img.fileData)
+  );
+
   const [uploadedImage, setUploadedImage] = useState(
-    URL.createObjectURL(uploadedImagePre)
+    imageObjects[selectedImageIndex]
   );
 
   const [processedImage, setProcessedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState("");
 
-  
   const processImage = async () => {
-    // Assuming you have an API call to process the image
     setIsError("");
     setIsLoading(true);
-    try{
-
-      // Mock API call
+    try {
       const formData = new FormData();
-      formData.append("image", state.image);
-      
-      // Send FormData using Axios
-      const response = await axios.post("https://ty2e2cc7bt.ap-south-1.awsapprunner.com/upload", formData)
-      // .then((response) => {
-        //   setIsLoading(false);
-        //   console.log("Response:", response.data);
-        // })
-        // .catch((error) => {
-          //   // Handle error
-          //   setIsError(error)
-          //   console.error("Error:", error);
-          // });
-          
-          // const response = await fetch("https://ty2e2cc7bt.ap-south-1.awsapprunner.com/upload",{
-            //   method: 'POST',
-            //   body: JSON.stringify({
-              //     image: formData
-              //   })
-              // })
-              
-              // const result = await response.json();
-              console.log("result",response.data);
-              const processedImage = `data:image/png;base64, ${response?.data?.image}`;
-              setProcessedImage(processedImage);
-              // setTimeout(() => {
-              //   // Mock processed image URL
-              //   const processedImageUrl = "url_of_processed_image";
-              //   setProcessedImage(processedImageUrl);
-              //   setIsLoading(false);
-              // }, 2000); // Simulating a delay of 2 seconds
-            // };
-          }
-          catch(error) {
-            alert(error.message);
-          }
-          finally{
-    setIsLoading(false);
+      formData.append("image", state.zip[selectedImageIndex]["fileData"]);
+      const response = await axios.post(
+        "https://ty2e2cc7bt.ap-south-1.awsapprunner.com/upload",
+        formData
+      );
+      console.log("result", response.data);
+      const processedImage = `data:image/png;base64, ${response?.data?.image}`;
+      setProcessedImage(processedImage);
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-          }
-        }
-            
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    const imageUrl = URL.createObjectURL(file);
-    setUploadedImage(imageUrl);
+  const handleImageSelect = (index) => {
+    setSelectedImageIndex(index);
+    setUploadedImage(imageObjects[index]);
     setProcessedImage(null);
   };
 
@@ -81,39 +53,47 @@ const ProcessPage = () => {
       <div className="bkgimg">
         <img src="/images/kv_pc.jpg" alt="" />
       </div>
-      <div className="left">
-        <h2>Uploaded Image</h2>
-        <div className="image-container">
-          {uploadedImage && <img src={uploadedImage} />}
-        </div>
-        <div className="buttonsContainer">
-          {!isLoading && (
-            <input
-              type="file"
-              className="inputTag"
-              accept="image/*"
-              onChange={handleImageUpload}
+
+      <div className="pageContainer">
+        <div className="selectingContainer">
+          {[...Array(5)].map((_, index) => (
+            <img
+              className="selectionImage"
+              key={index}
+              src={imageObjects[index]}
+              onClick={() => handleImageSelect(index)}
+              style={{ opacity: index < imageObjects.length ? 1 : 0.5 }}
             />
-          )}
-          {!isLoading && <button onClick={processImage}>Process Image</button>}
+          ))}
         </div>
-      </div>
-      <div className="right">
-        <h2>Processed Image</h2>
-        <div className="image-container">
-          {isLoading ? (
-            <Loader
-              type="bubble-loop"
-              bgColor="blue"
-              color="black"
-              title={"Processing Image"}
-              size={100}
-            />
-          ) : (
-            processedImage && <img src={processedImage} alt="Processed" />
-          )}
+        <div className="image-container-selector">
+          <h2>Selected Image</h2>
+          <div className="image-container">
+            {uploadedImage && <img src={uploadedImage} />}
+          </div>
+          <div className="buttonsContainer">
+            {!isLoading && (
+              <button onClick={processImage}>Process Image</button>
+            )}
+          </div>
         </div>
-        <h3 style={{ color: "red" }}>{isError}</h3>
+        <div className="right">
+          <h2>Processed Image</h2>
+          <div className="image-container">
+            {isLoading ? (
+              <Loader
+                type="bubble-loop"
+                bgColor="blue"
+                color="black"
+                title={"Processing Image"}
+                size={100}
+              />
+            ) : (
+              processedImage && <img src={processedImage} alt="Processed" />
+            )}
+          </div>
+          <h3 style={{ color: "red" }}>{isError}</h3>
+        </div>
       </div>
     </div>
   );

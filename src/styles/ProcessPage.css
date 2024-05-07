@@ -6,21 +6,13 @@ html, body {
 
 .main {
     display: flex;
-    position: relative;
     height: 80vh;
 }
-.left,.right{
-    flex: 1;
+.right{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: start;
-}
-.left{
-    border-right: 1px solid #ccc;
-}
-.right{
-    border-left: 1px solid #ccc;
+    flex-direction: column;
 }
 
 .buttonsContainer{
@@ -28,21 +20,19 @@ html, body {
     flex-direction: row;
 }
 .image-container{
-  width: 80%; /* Adjust as needed */
-  height: 80%;
-  border: 1px solid #ccc;
+  width: 30vw; 
+  height: 30vw;
   background-color: rgba(255, 255, 255, 0.5); /* Translucent white */
-  margin-bottom: 10px;
-  display: flex;
   border: 3px dashed rgb(62, 56, 56);
-  align-items: center;
-  justify-content: center;
+
 }
+
 .image-container img {
     width: 100%;
     height: 100%;
     object-fit: fill;
   }
+  
 button{
     margin-right: 20px;
     border: none;
@@ -55,4 +45,34 @@ button{
   }
   .inputTag[type="file"] {
     color: transparent;
+  }
+
+  .selectingContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .selectionImage{
+    border: black 2px solid;
+    margin: 10px 0px;
+    height: 20%;
+    width: 60%;
+  }
+
+  .pageContainer{
+    display: flex;
+  }
+  .image-container-selector{
+    margin: 0px 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    
+  }
+  .image-container-selector img{
+   border: 3px dashed rgb(62, 56, 56);
+   width: 30vw; 
+   height: 30vw;
   }
