@@ -17,6 +17,7 @@ const ProcessPage = () => {
   const [processedImage, setProcessedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState("");
+  const [selectedModel,setSelectedModel] = useState();
 
   
   const processImage = async () => {
@@ -25,9 +26,14 @@ const ProcessPage = () => {
     setIsLoading(true);
     try{
 
+      if(!selectedModel){
+        return;
+      }
+
       // Mock API call
       const formData = new FormData();
       formData.append("image", state.image);
+      formData.append("model", selectedModel);
       
       // Send FormData using Axios
       const response = await axios.post("https://ty2e2cc7bt.ap-south-1.awsapprunner.com/upload", formData)
@@ -92,12 +98,18 @@ const ProcessPage = () => {
               type="file"
               className="inputTag"
               accept="image/*"
-              onChange={handleImageUpload}
+              onCha nge={handleImageUpload}
             />
           )}
-          {!isLoading && <button onClick={processImage}>Process Image</button>}
+          { !isLoading && <select onChange={(e) => setSelectedModel(e.target.value)}>
+          <option value={null}>Select Model</option>
+          <option value="model1">Model 1</option>
+          <option value="model2">Model 2</option>
+          <option value="model3">Model 3</option>
+          </select>}
+          {!isLoading && <button disabled={!selectedModel} onClick={processImage}>Process Image</button>}
         </div>
-      </div>
+      </div>  
       <div className="right">
         <h2>Processed Image</h2>
         <div className="image-container">
