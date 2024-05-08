@@ -34,7 +34,8 @@ export default function Body() {
         formData
       );
       setIsLoading(false);
-      navigate("/processBatch", { state: { data: response.data } });
+      // navigate("/processBatch", { state: { data: response.data } });
+      navigate("/zipprocess", { state: { data: response.data } });
     } catch (error) {
       alert(error.message);
     } finally {

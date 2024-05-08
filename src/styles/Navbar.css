@@ -1,48 +1,77 @@
 .navbar {
-    display: flex;
-    font-family:'Roboto', 'Verdana', 'Geneva', sans-serif;
-    justify-content: space-around;
-    align-items: center;
-    background-color: white;
-    padding: 10px 20px;
-    height: 10vh;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .navbarContainer{
-    height: 20vh;
-  }
-  .banner{
-    min-height: 10vh;
-    max-width: 100%;
-  }
-  .left-section {
-    display: flex;
-    align-items: center;
-  }
-  .left-section img {
-    height: auto;
-    margin-right: 10px;
-  }
-  
-  .left-section span {
-    font-size: 18px;
-    margin-left: 20px;
-    font-weight: bold;
+  display: flex;
+  font-family:'Roboto', 'Verdana', 'Geneva', sans-serif;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  height: 10vh;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.secondNav{
+  display: flex;
+  font-family:'Roboto', 'Verdana', 'Geneva', sans-serif;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(0, 3, 59);
+  padding: 10px 20px;
+  height: 5vh;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: aliceblue;
+
+}
+.logo{
+position: absolute;
+top: 2.5%;
+left: 80%;
+  max-width: 245px; /* Set the maximum width */
+max-height: 45px;
+}
+.navbarContainer{
+  height: 17vh;
+}
+.banner{
+  min-height: 10vh;
+  max-width: 100%;
+}
+.left-section {
+  display: flex;
+  align-items: center;
   
-  .right-section a {
-    margin-left: 20px;
-    font-size: 18px;
-    text-decoration: none;
-    color: black; 
+}
+
+.left-section h6{
+  padding-top: 2.5%;
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+
+}
+
+.left-section img {
+  height: auto;
+  margin-right: 10px;
+}
+
+.left-section span {
+  font-size: 18px;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.right-section a {
+  margin-left: 20px;
+  font-size: 18px;
+  text-decoration: none;
+  color: rgb(255, 255, 255); 
+}
+
+.right-section a:hover {
+  color: blue; 
+}
+@media (max-width: 1024px) {
+  .left-section span {
+    display: none;
   }
-  
-  .right-section a:hover {
-    color: blue; 
-  }
-  @media (max-width: 1024px) {
-    .left-section span {
-      display: none;
-    }
-  }
-  
+}

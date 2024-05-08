@@ -4,11 +4,13 @@ import {
   Routes,
   Redirect,
 } from "react-router-dom";
+
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Body from "./components/Body";
 import { useState } from "react";
 import ProcessPage from "./components/ProcessPage";
+import ZipProcess from "./components/ZipProcess";
 
 
 
@@ -19,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Body />} />
         <Route path="/process" element={<ProcessPage />} />
+        <Route path="/zipprocess" element={<ZipProcess />} />
       </Routes>
     </Router>
   );

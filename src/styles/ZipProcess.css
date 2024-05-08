@@ -1,0 +1,40 @@
+.mainContainer{
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.ProcessedImageRow{
+    overflow: scroll;
+    width: 42%;
+    border: 10px solid #000;
+
+}
+
+.inputImageRow{
+    width: 42%;
+    border: 10px solid #000;
+
+}
+
+.leftNavRow{
+    overflow: scroll;
+    width: 14%;
+    border: 1px solid #000;
+}
+
+.ProcessedImageRow button{
+
+    margin-left: 45%;
+    margin-bottom: 2%;
+
+}
+
+.details{
+    width: 95%;
+    height: 30px;
+    border: 2px solid #000;
+    margin-left: 5%;
+    margin-right: 5%;
+}

@@ -1,0 +1,10 @@
+.image{
+    border: 10px solid #000;
+    width: 90%; /* Set default width to 300 pixels */
+    height: 70%;
+    margin-bottom: 2%;
+    margin-top: 20%;
+    padding-right: 2%;
+    margin-left: 5%;
+
+}

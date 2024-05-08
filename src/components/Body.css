@@ -1,5 +1,5 @@
 .mainContainer{
-    height: 80vh;
+    height: 90vh;
 }
 .upload {
     width: 100%;
@@ -31,43 +31,63 @@
     justify-content: space-evenly;
     height: 100%;
 }
+
 .bkgimg img {
     position: absolute;
     width: 100%;
-    height: 80vh;
+    height: 90vh;
     filter: grayscale(100%);
     z-index: -1;
-    opacity: 0.7;
-}
+    opacity: 0.1;
+}   
 
 .machineimg img{
     height: 60vh;
-
 }
+
+.machineimg {
+margin-left: 5%;
+margin-right: 5%;
+}
+
 .descriptor{
     display: flex;
     flex-direction: column;
-    justify-content: center
+    justify-content: center;
+    
 }
 .introtext{
     margin-bottom: 10%;
+    margin-top: 8%;
 }
 
-.introtext h3 {
-    color: white;
-    font-size: 1.7rem;
+.introtext h6 {
+    color: rgb(0, 0, 0);
+    padding-left: 7%;
+    margin-right: 10%;
 }
 
 .introtext h1 {
-    color: white;
+    color: rgb(13, 25, 114);
     font-size: 3rem;
+    padding-left: 30%;
+    padding-bottom: 3%;
 }
-/* 
+
 .uploadbutton{
-    position: absolute;
-    top: 55%;
-    left: 53%;
-} */
+    padding-left: 30%;
+    padding-right: 30%;
+    margin-left: 0%;
+
+}
+
+.uploadBoxes{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 21%;
+}
 
 .drop-container {
     position: relative;
@@ -79,16 +99,16 @@
     height: 200px;
     padding: 20px;
     border-radius: 10px;
-    border: 2px dashed #00eaff;
-    color: #ffffff;
+    border: 2px dashed #000000;
+    color: #000000;
     cursor: pointer;
     transition: background .2s ease-in-out, border .2s ease-in-out;
 }
   
 .drop-container:hover {
-    background: #eee;
-    border-color: #111;
-    color: black;
+    background: #928b8b;
+    border-color: #002aff;
+    color: rgb(0, 200, 255);
 }
   
 .drop-container:hover .drop-title {
