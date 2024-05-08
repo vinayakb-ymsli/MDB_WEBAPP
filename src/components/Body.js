@@ -49,18 +49,62 @@ const Body = () => {
       </div>
 
       <div className="intropage">
+
+        <div className="introtext">
+          <h1>CELL HANDLER</h1>
+          <h6>The CELL HANDLER™ is an automated system for selecting and isolating spheroids/organoids or single cells individually.
+            The integration of sophisticated picking and imaging technology enables precise cell isolation that is unattainable by conventional methods.
+            The CELL HANDLER™ can enhance the efficiency of drug discovery and biomedical research through the expansion of options in cell-based screening, cell quality management and cell line development.</h6>
+
+          <div className="uploadBoxes">
+            <div className="uploadbutton">
+              <label
+                htmlFor="images"
+                className="drop-container"
+                id="dropcontainer"
+              >
+                <input
+                  onChange={handleFileChange}
+                  type="file"
+                  id="images"
+                  accept=".zip"
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="uploadbutton">
+              <label
+                htmlFor="images"
+                className="drop-container"
+                id="dropcontainer"
+              >
+                <input
+                  onChange={handleFileChange}
+                  type="file"
+                  id="images"
+                  accept=".zip"
+                  required
+                />
+              </label>
+            </div>
+          </div>
+
+
+        </div>
+
         <div className="machineimg">
           <img src="/images/kv_main01.png" alt="" />
         </div>
 
         <div className="descriptor">
-          <div className="introtext">
+          {/* <div className="introtext">
             <h3>Cell picking & imaging System</h3>
             <h1>CELL HANDLER</h1>
             <h3>Advancing cell research into a new era</h3>
-          </div>
+          </div> */}
 
-          <div className="uploadbutton">
+          {/* <div className="uploadbutton">
             <label
               htmlFor="images"
               className="drop-container"
@@ -74,7 +118,7 @@ const Body = () => {
                 required
               />
             </label>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
