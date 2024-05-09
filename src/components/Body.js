@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Body.css";
 import { useNavigate } from "react-router-dom";
 import JSZip from "jszip";
+import upload from "../images/upload.png";
 
 const Body = () => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const Body = () => {
       <div className="intropage">
 
         <div className="introtext">
-          <h1>CELL HANDLER</h1>
+          <h1>CELL HANDLER™</h1>
           <h6>The CELL HANDLER™ is an automated system for selecting and isolating spheroids/organoids or single cells individually.
             The integration of sophisticated picking and imaging technology enables precise cell isolation that is unattainable by conventional methods.
             The CELL HANDLER™ can enhance the efficiency of drug discovery and biomedical research through the expansion of options in cell-based screening, cell quality management and cell line development.</h6>
@@ -63,22 +64,27 @@ const Body = () => {
                 className="drop-container"
                 id="dropcontainer"
               >
+              <img src={upload} alt="upload" style={{width: "75px", height: "75px"}}/>
+              <span>Drag and Drop Your image here</span>
                 <input
                   onChange={handleFileChange}
                   type="file"
                   id="images"
-                  accept=".zip"
+                  accept=".jpg"
                   required
+                  title="Upload an image file"
+
                 />
               </label>
             </div>
-
             <div className="uploadbutton">
               <label
                 htmlFor="images"
                 className="drop-container"
                 id="dropcontainer"
               >
+              <img src={upload} alt="upload" style={{width:"75px", height:"75px"}}/>
+              <span>Drag and Drop Your zip file here</span>
                 <input
                   onChange={handleFileChange}
                   type="file"
