@@ -7,7 +7,7 @@ html, body {
 .main {
     display: flex;
     position: relative;
-    height: 80vh;
+    height: 85vh;
 }
 .left,.right{
     flex: 1;

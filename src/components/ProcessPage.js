@@ -15,7 +15,6 @@ const ProcessPage = () => {
     URL.createObjectURL(uploadedImagePre)
   );
 
-
   const [processedImage, setProcessedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState("");
@@ -31,7 +30,7 @@ const ProcessPage = () => {
       formData.append("image", state.image);
 
       // Send FormData using Axios
-      const response = await axios.post("https://ty2e2cc7bt.ap-south-1.awsapprunner.com/upload", formData)
+      const response = await axios.post("https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload", formData)
       // .then((response) => {
       //   setIsLoading(false);
       //   console.log("Response:", response.data);

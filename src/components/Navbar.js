@@ -22,12 +22,66 @@ const Navbar = () => {
         </div>
       <div className="secondNav">
       <div className="left-section">
-        <h6> Home</h6>
-        <h6> Repositry</h6>
-        <h6> Visualization</h6>
-        <h6> Model</h6>
-        <h6> Metrics</h6>
-        <h6> Help</h6>
+        <div className="dropdown">
+          <h6 className="dropbtn">Home</h6>
+        </div>
+        <div className="dropdown">
+          <h6 className="dropbtn">Repository</h6>
+          <div className="dropdown-content">
+            <a href="#">Analytics</a>
+            <a href="#">Structure</a>
+            <a href="#">History</a>
+            <a href="#">Add a Repository</a>
+            <a href="#">Delete a Repository</a>
+            <a href="#">Update a Repository</a>
+            <a href="#">Filter a Repository</a>
+            <a href="#">Search a Repository</a>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <h6 className="dropbtn">Visualization</h6>
+          <div className="dropdown-content">
+            <a href="#">Input Images</a>
+            <a href="#">Output Images</a>
+            <a href="#">False Positive comparison</a>
+            <a href="#">Number of cells segmented</a>
+            <a href="#">Inference time graph</a>
+            <a href="#">Region of Interest comparison</a>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <h6 className="dropbtn">Model</h6>
+          <div className="dropdown-content">
+            <a href="#">Algorithms</a>
+            <a href="#">Intution</a>
+            <a href="#">Improvement area</a>
+            <a href="#">Comparison with older models</a>
+            <a href="#">Versioning</a>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <h6 className="dropbtn">Metrics</h6>
+          <div className="dropdown-content">
+            <a href="#">Accuracy</a>
+            <a href="#">Precision recall</a>
+            <a href="#">F1 score</a>
+            <a href="#">Intersection over union</a>
+            <a href="#">Area based normality</a>
+            <a href="#">Weights and parameters</a>
+            <a href="#">Precision curve</a>
+            <a href="#">Pixel based confusion matrix</a>
+            <a href="#">Pixel based sensitivity curve</a>
+            <a href="#">Pixel based specificity curve</a>
+            <a href="#">Picking condition</a>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <h6 className="dropbtn">Help</h6>
+        </div>
         </div>
         <div className="right-section">
           <a href="https://global.yamaha-motor.com/">Admin</a>
