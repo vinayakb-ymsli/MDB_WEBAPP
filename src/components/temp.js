@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function Body() {
   const navigate = useNavigate();
-
+  const [git, setgit] = useState(second)
   const [uploadedImage, setUploadedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState("");

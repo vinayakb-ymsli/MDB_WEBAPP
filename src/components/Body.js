@@ -20,7 +20,6 @@ const Body = () => {
     navigate("/process", { state: { image: selectedFile } });
   };
 
-
   const handleZipChange = async (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile.type !== "application/x-zip-compressed") {
