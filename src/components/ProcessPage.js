@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import Loader from "react-js-loader";
-
 import "../styles/ProcessPage.css";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-
-
 const ProcessPage = () => {
-
   const { state } = useLocation();
   const uploadedImagePre = state.image;
   const [uploadedImage, setUploadedImage] = useState(
@@ -16,21 +12,25 @@ const ProcessPage = () => {
   );
 
   const [processedImage, setProcessedImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);  //changed from false to true
+  const [loader, setLoader] = useState(false);  //new state defined for loader
   const [isError, setIsError] = useState("");
 
   const processImage = async () => {
     // Assuming you have an API call to process the image
     setIsError("");
-    setIsLoading(false);
+    setIsLoading(true);
+    setLoader(true);
     try {
-
       // Mock API call
       const formData = new FormData();
       formData.append("image", state.image);
 
       // Send FormData using Axios
-      const response = await axios.post("https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload", formData)
+      const response = await axios.post(
+        "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload",
+        formData
+      );
       // .then((response) => {
       //   setIsLoading(false);
       //   console.log("Response:", response.data);
@@ -59,15 +59,13 @@ const ProcessPage = () => {
       //   setIsLoading(false);
       // }, 2000); // Simulating a delay of 2 seconds
       // };
-    }
-    catch (error) {
+    } catch (error) {
       alert(error.message);
+    } finally {
+      // setIsLoading(false);
+      setLoader(false);
     }
-    finally {
-      setIsLoading(false);
-
-    }
-  }
+  };
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -101,7 +99,7 @@ const ProcessPage = () => {
       <div className="right">
         <h2>Processed Image</h2>
         <div className="image-container">
-          {isLoading ? (
+          {loader ? (
             <Loader
               type="bubble-loop"
               bgColor="blue"

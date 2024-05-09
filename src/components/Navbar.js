@@ -2,6 +2,10 @@ import React from "react";
 import "../styles/Navbar.css"; // Import CSS file for styling if needed
 // import img from "../images/yamaha.png";
 const Navbar = () => {
+
+  const handleFalsePositive = () => {
+    console.log("False Positive");
+  }
   return (
     <div className="navbarContainer">
       {/* <div className="navbar">
@@ -44,7 +48,7 @@ const Navbar = () => {
           <div className="dropdown-content">
             <a href="#">Input Images</a>
             <a href="#">Output Images</a>
-            <a href="#">False Positive comparison</a>
+            <a href="#" onClick={handleFalsePositive}>False Positive comparison</a>
             <a href="#">Number of cells segmented</a>
             <a href="#">Inference time graph</a>
             <a href="#">Region of Interest comparison</a>

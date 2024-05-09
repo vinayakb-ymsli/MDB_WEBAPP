@@ -11,7 +11,7 @@ import Body from "./components/Body";
 import { useState } from "react";
 import ProcessPage from "./components/ProcessPage";
 import ZipProcess from "./components/ZipProcess";
-
+// import Modal from react-Modal;
 
 
 function App() {
