@@ -11,6 +11,8 @@ import Body from "./components/Body";
 import { useState } from "react";
 import ProcessPage from "./components/ProcessPage";
 import ZipProcess from "./components/ZipProcess";
+import InfoPopup from "./components/InfoPopup";
+
 // import Modal from react-Modal;
 
 
@@ -22,6 +24,7 @@ function App() {
         <Route path="/" element={<Body />} />
         <Route path="/process" element={<ProcessPage />} />
         <Route path="/zipprocess" element={<ZipProcess />} />
+        <Route path="/InfoPopup" element={<InfoPopup />} />
       </Routes>
     </Router>
   );
