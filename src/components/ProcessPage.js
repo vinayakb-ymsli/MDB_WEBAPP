@@ -110,6 +110,7 @@ const ProcessPage = () => {
           ) : (
             processedImage && <img src={processedImage} alt="Processed" />
           )}
+          
         </div>
         <h3 style={{ color: "red" }}>{isError}</h3>
       </div>
