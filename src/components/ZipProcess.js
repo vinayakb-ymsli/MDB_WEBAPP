@@ -6,6 +6,8 @@ import { useLocation } from "react-router-dom";
 import Image from "./Image";
 import jsonData from "./test.json";
 import { Tooltip } from "react-tooltip";
+import { IconButton } from "@material-ui/core";
+import { ArrowBack, ArrowForward, GetApp, Info } from "@material-ui/icons";
 
 function ZipProcess() {
   const { state } = useLocation();
@@ -23,7 +25,7 @@ function ZipProcess() {
   const [selected, setselected] = useState(firstKey);
 
   const SetViewbutton = () => {
-    if (viewMore == true) {
+    if (viewMore === true) {
       setviewMore(false);
       console.log("hi");
       console.log(jsonData.original_images);
@@ -95,12 +97,23 @@ function ZipProcess() {
   return (
     <>
       {pageLoader ? (
-        <>
-          <Loader />
-        </>
+        <div className="loader-container">
+          <Loader
+            type="bubble-loop"
+            bgColor="blue"
+            color="black"
+            title="Processing Image"
+            size={100}
+          />
+        </div>
       ) : (
         <div className="mainContainer">
+          <div className="bkgimg">
+            <img src="/images/kv_pc.jpg" alt="" />
+          </div>
           <div className="leftNavRow">
+            <div className="headingLeft">Uploaded Images</div>
+
             {Object.keys(original_images).map((key) => (
               // Render each image using an img tag
               <ThumbImage
@@ -113,18 +126,30 @@ function ZipProcess() {
           </div>
 
           <div className="inputImageRow">
+            <div className="headingCenter">Input Image</div>
             <Image
               key={"oi_" + selected}
               input_image={original_images[selected]}
               image_details={undefined}
             />
             <div className="buttonsPrevNext">
-              <button onClick={setPreviousImage}>Previous</button>
-              <button onClick={setNextImage}>Next</button>
+              <IconButton onClick={setPreviousImage}>
+                <div className="buttonWithLabels">
+                  <ArrowBack />
+                  <div className="labelButtons">Previous</div>
+                </div>
+              </IconButton>
+              <IconButton onClick={setNextImage}>
+                <div className="buttonWithLabels">
+                  <div className="labelButtons">Next</div>
+                  <ArrowForward />
+                </div>
+              </IconButton>
             </div>
           </div>
 
           <div className="ProcessedImageRow">
+            <div className="headingCenter">Output Image</div>
             <div>
               <Image
                 key={"pi" + selected}
@@ -134,26 +159,32 @@ function ZipProcess() {
               {!!showimageDetails && (
                 <Tooltip
                   id="image-tooltip"
-                  place="bottom"
+                  place="left"
                   variant="info"
                   html={`Dimension : ${image_details.image_dimensions} <br>
-        Name : ${image_details.model_name}`}
+        Name : ${image_details.model_name} <br>
+        Type : ${image_details.model_type} <br>
+        Upload Date : ${image_details.model_upload_date}`}
                 />
               )}
             </div>
 
             <div className="buttonsPrevNext">
-              <button onClick={downloadProcessedImage}>Download</button>
-              <button onClick={showInfo}>Image Info</button>
+              <IconButton onClick={downloadProcessedImage}>
+                <div className="buttonWithLabels">
+                  
+                  <GetApp />
+                  <div className="labelButtons">Download Image</div>
+                </div>
+              </IconButton>
+              <IconButton onClick={showInfo}>
+              <div className="buttonWithLabels">
+              {/* <div className="labelButtons">Get Info</div> */}
+                <Info />
+                
+                </div>
+              </IconButton>
             </div>
-
-            {/* <button onClick={SetViewbutton}>View Details </button>
-                    {viewMore ?
-                        <div className="details">
-
-                        </div>
-                        : <></>
-                    } */}
           </div>
         </div>
       )}

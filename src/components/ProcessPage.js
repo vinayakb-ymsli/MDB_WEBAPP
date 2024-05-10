@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Loader from "react-js-loader";
 import "../styles/ProcessPage.css";
 import axios from "axios";
+import { IconButton } from "@material-ui/core";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import { CloudUpload, GetApp } from "@material-ui/icons";
 
 const ProcessPage = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -55,24 +58,43 @@ const ProcessPage = () => {
         <img src="/images/kv_pc.jpg" alt="" />
       </div>
       <div className="left">
-        <h2>Uploaded Image</h2>
+        <div className="headingCenter">Input Image</div>
         <div className="image-container">
           {uploadedImage && <img src={URL.createObjectURL(uploadedImage)} />}
         </div>
         <div className="buttonsContainer">
           {!isLoading && (
-            <input
-              type="file"
-              className="inputTag"
-              accept="image/*"
-              onChange={handleImageUpload}
-            />
+            <IconButton
+              component="label"
+              htmlFor="upload-image"
+              style={{ color: "#00033b" }}
+            >
+              <div className="buttonWithLabels">
+                <CloudUpload />
+                <input
+                  type="file"
+                  id="upload-image"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={handleImageUpload}
+                />
+                <div className="labelButtons">Choose Image</div>
+              </div>
+            </IconButton>
           )}
-          {!isLoading && <button onClick={processImage}>Process Image</button>}
+          {!isLoading && (
+            <IconButton onClick={processImage} style={{ color: "green" }}>
+              <div className="buttonWithLabels">
+                <div className="labelButtons">Process Image</div>
+                <ArrowForwardIcon />
+              </div>
+            </IconButton>
+          )}
         </div>
       </div>
       <div className="right">
-        <h2>Processed Image</h2>
+        <div className="headingCenter">Processed Image</div>
+        {/* <h3>Processed Image</h3> */}
         <div className="image-container">
           {loader ? (
             <Loader
@@ -86,11 +108,21 @@ const ProcessPage = () => {
             processedImage && (
               <div>
                 <img src={processedImage} alt="Processed" />
-                <button onClick={downloadProcessedImage}>Download</button>
+                {/* <button onClick={downloadProcessedImage}>Download</button> */}
               </div>
             )
           )}
         </div>
+        {processedImage && (
+          <div>
+          <IconButton onClick={downloadProcessedImage} style={{ color: "#00033b" }}>
+          <div className="buttonWithLabels">
+            <GetApp />
+            <div className="labelButtons">Download Image</div>
+            </div>
+          </IconButton>
+        </div>
+        )}
         <h3 style={{ color: "red" }}>{isError}</h3>
       </div>
     </div>
