@@ -16,6 +16,7 @@ import ZipProcess from "./components/ZipProcess";
 
 function App() {
   return (
+    <div className="wholeBody">
     <Router>
       <Navbar />
       <Routes>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/zipprocess" element={<ZipProcess />} />
       </Routes>
     </Router>
+    </div>
   );
 }
 

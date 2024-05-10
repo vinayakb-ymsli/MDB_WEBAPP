@@ -48,34 +48,39 @@ const Body = () => {
 
   return isLoading ? (
     <div
-    style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "600px",
-    }}
-  >
-    <Loader
-      type="bubble-loop"
-      bgColor="blue"
-      color="black"
-      title={"Processing Image"}
-      size={100}
-    />
-  </div>
-):(
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "600px",
+      }}
+    >
+      <Loader
+        type="bubble-loop"
+        bgColor="blue"
+        color="black"
+        title={"Processing Image"}
+        size={100}
+      />
+    </div>
+  ) : (
     <div className="mainContainer">
       <div className="bkgimg">
-        <img src="/images/kv_pc.jpg" alt="" />
+        {/* <img src="/images/kv_pc.jpg" alt="" /> */}
       </div>
 
       <div className="intropage">
-
         <div className="introtext">
-          <h1>CELL HANDLER™</h1>
-          <h6>The CELL HANDLER™ is an automated system for selecting and isolating spheroids/organoids or single cells individually.
-            The integration of sophisticated picking and imaging technology enables precise cell isolation that is unattainable by conventional methods.
-            The CELL HANDLER™ can enhance the efficiency of drug discovery and biomedical research through the expansion of options in cell-based screening, cell quality management and cell line development.</h6>
+          <h1 className="introHeading">CELL HANDLER™</h1>
+          <h6 className="introInfo">
+            The CELL HANDLER™ is an automated system for selecting and isolating
+            spheroids/organoids or single cells individually. The integration of
+            sophisticated picking and imaging technology enables precise cell
+            isolation that is unattainable by conventional methods. The CELL
+            HANDLER™ can enhance the efficiency of drug discovery and biomedical
+            research through the expansion of options in cell-based screening,
+            cell quality management and cell line development.
+          </h6>
 
           <div className="uploadBoxes">
             <div className="uploadbutton">
@@ -84,17 +89,28 @@ const Body = () => {
                 className="drop-container"
                 id="dropcontainer"
               >
-              <img src={upload} alt="upload" style={{width: "75px", height: "75px"}}/>
-              <span>Drag and Drop Your image here</span>
-                <input
-                  onChange={handleFileChange}
-                  type="file"
-                  id="images"
-                  accept="image/*"
-                  required
-                  title="Upload an image file"
-
-                />
+                <div className="uploadContainerDash">
+                  <div>
+                    <img
+                      src={upload}
+                      alt="upload"
+                      style={{ width: "65px", height: "65px" }}
+                    />
+                  </div>
+                  <div>Drag and Drop Your image here</div>
+                </div>
+                <div className="orText">OR</div>
+                
+                <div className="displayCaption">
+                  <input
+                    onChange={handleFileChange}
+                    type="file"
+                    id="images"
+                    accept="image/*"
+                    required
+                    title="Upload an image file"
+                  />
+                </div>
               </label>
             </div>
             <div className="uploadbutton">
@@ -103,8 +119,16 @@ const Body = () => {
                 className="drop-container"
                 id="dropcontainer"
               >
-              <img src={upload} alt="upload" style={{width:"75px", height:"75px"}}/>
-              <span>Drag and Drop Your zip file here</span>
+                <div className="uploadContainerDash">
+                  <img
+                    src={upload}
+                    alt="upload"
+                    style={{ width: "75px", height: "75px" }}
+                  />
+                  <span>Drag and Drop your zip file here</span>
+                </div>
+                <div className="orText">OR</div>
+                
                 <input
                   onChange={handleZipChange}
                   type="file"
@@ -115,15 +139,11 @@ const Body = () => {
               </label>
             </div>
           </div>
-
-
         </div>
 
         <div className="machineimg">
           <img src="/images/kv_main01.png" alt="" />
         </div>
-
-
       </div>
     </div>
   );

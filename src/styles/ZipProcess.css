@@ -35,10 +35,12 @@
   overflow: scroll;
   width: 42%;
   display: inline-table;
+  border-right: 1px solid #ccc;
 }
 
 .inputImageRow {
   width: 42%;
+  border-right: 1px solid #ccc;
 }
 
 .leftNavRow {

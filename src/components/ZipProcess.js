@@ -23,6 +23,7 @@ function ZipProcess() {
   // console.log(firstKey)
   const [selectedImage, setselectedImage] = useState(113);
   const [selected, setselected] = useState(firstKey);
+  const [showInfoTip, toggleInfo] = useState(false);
 
   const SetViewbutton = () => {
     if (viewMore === true) {
@@ -172,16 +173,25 @@ function ZipProcess() {
             <div className="buttonsPrevNext">
               <IconButton onClick={downloadProcessedImage}>
                 <div className="buttonWithLabels">
-                  
                   <GetApp />
                   <div className="labelButtons">Download Image</div>
                 </div>
               </IconButton>
               <IconButton onClick={showInfo}>
-              <div className="buttonWithLabels">
-              {/* <div className="labelButtons">Get Info</div> */}
-                <Info />
-                
+                <div className="buttonWithLabels">
+                  {/* <div className="labelButtons">Get Info</div> */}
+                  <Info />
+                  {!!showInfoTip && (
+                    <Tooltip
+                      id="image-tooltip"
+                      place="left"
+                      variant="info"
+                      html={`Dimension : ${image_details.image_dimensions} <br>
+        Name : ${image_details.model_name} <br>
+        Type : ${image_details.model_type} <br>
+        Upload Date : ${image_details.model_upload_date}`}
+                    />
+                  )}
                 </div>
               </IconButton>
             </div>
