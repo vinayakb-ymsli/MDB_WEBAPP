@@ -1,53 +1,52 @@
 .navbar {
   display: flex;
-  font-family:'Roboto', 'Verdana', 'Geneva', sans-serif;
+  font-family: "Roboto", "Verdana", "Geneva", sans-serif;
   justify-content: space-around;
   align-items: center;
   background-color: white;
   padding: 10px 20px;
-  height: 10vh;
+  height: 12vh;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.secondNav{
+.secondNav {
   display: flex;
-  font-family:'Roboto', 'Verdana', 'Geneva', sans-serif;
+  font-family: "Roboto", "Verdana", "Geneva", sans-serif;
   justify-content: space-around;
   align-items: center;
   background-color: rgb(0, 3, 59);
   padding: 10px 20px;
-  padding-bottom: 0;
+  /* padding-top:15px ;
+  padding-bottom: 15px; */
+  
   height: 5vh;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: aliceblue;
-
 }
-.logo{
-position: absolute;
-top: 2.5%;
-left: 80%;
+.logo {
+  position: absolute;
+  top: 2.5%;
+  left: 80%;
   max-width: 245px; /* Set the maximum width */
-max-height: 45px;
+  max-height: 45px;
 }
-.navbarContainer{
+.navbarContainer {
   height: 15vh;
 }
-.banner{
+.banner {
   min-height: 10vh;
   max-width: 100%;
 }
 .left-section {
   display: flex;
   align-items: center;
-  
 }
 
-.left-section h6{
+.left-section h6 {
   padding-top: 2.5%;
   display: flex;
   align-items: center;
   margin-left: 30px;
-
 }
 
 .left-section img {
@@ -56,20 +55,20 @@ max-height: 45px;
 }
 
 .left-section span {
-  font-size: 18px;
+  font-size: 16px;
   margin-left: 20px;
   font-weight: bold;
 }
 
 .right-section a {
   margin-left: 20px;
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: none;
-  color: rgb(255, 255, 255); 
+  color: rgb(255, 255, 255);
 }
 
 .right-section a:hover {
-  color: blue; 
+  color: blue;
 }
 @media (max-width: 1024px) {
   .left-section span {
@@ -87,7 +86,7 @@ max-height: 45px;
   position: absolute;
   background-color: #f1f1f1;
   min-width: 225px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 5px 7px;
   z-index: 1;
   border-radius: 4px;
@@ -107,7 +106,8 @@ max-height: 45px;
   transition: color 0.3s ease;
 }
 
-.dropbtn:hover, .dropbtn:focus {
+.dropbtn:hover,
+.dropbtn:focus {
   /* background-color: #3e8e41; */
   background-color: rgb(0, 3, 65);
 }
@@ -123,3 +123,30 @@ max-height: 45px;
 .dropdown-content a:hover {
   background-color: #ddd;
 }
+
+.icon-button {
+  /* background-color: none; */
+  background: none;
+  /* border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+  margin-left: 10px;
+  display: flex; 
+  align-items: center; */
+}
+
+/* .icon-button:focus {
+  outline: none;
+}
+
+.jp-link {
+  margin-left: 20px;
+  font-size: 16px;
+  text-decoration: none;
+  color: rgb(255, 255, 255); 
+}
+
+.jp-link:hover {
+  color: blue; 
+} */
