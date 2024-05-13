@@ -25,6 +25,7 @@ export default function Body() {
     }
     setIsLoading(true);
     setIsError("");
+
     console.log(selectedFile);
     try {
       const formData = new FormData();
@@ -42,6 +43,7 @@ export default function Body() {
       setIsLoading(false);
     }
   };
+  
 
   return isLoading ? (
     <div
