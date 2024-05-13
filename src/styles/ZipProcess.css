@@ -90,7 +90,7 @@
 .leftNavRow {
   display: flex;
   justify-content: center;
-  margin-top: 35px;
+  margin-top: 10px;
   overflow-x: scroll;
   width: 50%;
   height: auto;

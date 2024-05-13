@@ -121,6 +121,7 @@ const Navbar = ({setisBlurr}) => {
             <h6 className="dropbtn">Help</h6>
           </div>
         </div>
+        
         <div className="right-section">
           {/* Use buttons with icons */}
           <button className="icon-button" onClick={() => {}}>

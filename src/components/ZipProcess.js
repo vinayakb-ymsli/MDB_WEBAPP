@@ -232,7 +232,20 @@ function ZipProcess() {
             Project Name:{" "}
             <div className="project-name">{zipFileName.slice(0, -4)}</div>
           </div>
-
+          <div className="leftNavRow">
+            {/* <div className="headingLeft">Uploaded Images</div> */}
+            <div className="image-table">
+              {Object.keys(original_images).map((key) => (
+                <ThumbImage
+                  key={key}
+                  imageId={key}
+                  input_image={original_images[key]}
+                  setImage={setImage}
+                  isSelected={parseInt(key) === parseInt(selected)}
+                />
+              ))}
+            </div>
+          </div>
           <div className="buttonsPrevNext">
             <IconButton onClick={setPreviousImage}>
               <div className="buttonWithLabels">
@@ -320,20 +333,7 @@ function ZipProcess() {
               </div>
             </IconButton>
           </div>
-          <div className="leftNavRow">
-            {/* <div className="headingLeft">Uploaded Images</div> */}
-            <div className="image-table">
-              {Object.keys(original_images).map((key) => (
-                <ThumbImage
-                  key={key}
-                  imageId={key}
-                  input_image={original_images[key]}
-                  setImage={setImage}
-                  isSelected={parseInt(key) === parseInt(selected)}
-                />
-              ))}
-            </div>
-          </div>
+          
         </div>
       )}
     </>
