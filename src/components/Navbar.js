@@ -30,21 +30,10 @@ const Navbar = ({setisBlurr}) => {
     setdetails(clicked_details)
     settitle(clicked_title)
     setimage(clicked_image)
-}
+  }
 
   return (<>
     <div className="navbarContainer">
-      {/* <div className="navbar">
-        <div className="left-section">
-          <img src={img} alt="logo" />
-          <span>The Cell picking & imaging system. CELL HANDLER™</span>
-        </div>
-        <div className="right-section">
-          <a href="https://global.yamaha-motor.com/">Home</a>
-          <a href="https://global.yamaha-motor.com/news/">News</a>
-          <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
-        </div>
-      </div> */}
       <img className="banner" src="/images/Banner.png" />
       <div className="logo_bkg">
         <img className="logo" src="/images/yamaha.png" />
@@ -156,7 +145,8 @@ const Navbar = ({setisBlurr}) => {
     </div>
     }
     </div>
-    
+    </div>
+    </div>
     </>
   );
 };
