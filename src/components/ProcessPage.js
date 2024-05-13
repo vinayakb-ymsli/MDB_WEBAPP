@@ -5,9 +5,12 @@ import axios from "axios";
 import { IconButton } from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { CloudUpload, GetApp } from "@material-ui/icons";
+import { useLocation } from "react-router-dom";
 
 const ProcessPage = () => {
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const {state} = useLocation();
+  const image =state.data
+  const [uploadedImage, setUploadedImage] = useState(image);
   const [processedImage, setProcessedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loader, setLoader] = useState(false);

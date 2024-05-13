@@ -91,13 +91,13 @@
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  overflow-x: scroll;
-  width: 50%;
+  /* overflow-x: scroll; */
+  width: 30%;
   height: auto;
   padding: 10px;
   /* padding-bottom: 10px; */
-  margin-left: 24rem;
-  margin-top:5rem;
+  margin-left: 30rem;
+  margin-top:1rem;
 }
 .image-table{
   display: flex;
@@ -244,4 +244,11 @@
 .project{
   position: absolute;
   left: 25;
+}
+
+.info{
+  display: flex;
+  gap:1rem;
+  margin-top: 5rem;
+  justify-content: center;
 }

@@ -17,7 +17,7 @@ const Body = () => {
     const selectedFile = e.target.files[0];
     setUploadedImage(selectedFile);
     console.log(selectedFile);
-    navigate("/process", { state: { image: selectedFile } });
+    navigate("/process", { state: { data: selectedFile } });
   };
 
   const handleZipChange = async (e) => {

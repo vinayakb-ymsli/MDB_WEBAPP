@@ -18,6 +18,7 @@ function ZipProcess() {
   const zipFileName = state.zipFileName;
   const [pageLoader, setpageLoader] = useState(false);
   const [viewMore, setviewMore] = useState(false);
+  const [showInfoSlider,setInfoSlider]=useState(false);
   const [imageDetails, showimageDetails] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenImageType, setFullscreenImageType] = useState("input");
@@ -29,7 +30,7 @@ function ZipProcess() {
   // console.log(firstKey)
   const [selectedImage, setselectedImage] = useState(113);
   const [selected, setselected] = useState(firstKey);
-  const [showInfoTip, toggleInfo] = useState(false);
+  const [showInfoTip, toggleInfo] = useState(true);
 
   const toggleFullscreen = (type) => {
     setIsFullscreen(!isFullscreen);
@@ -320,6 +321,9 @@ function ZipProcess() {
                 sliderColor="white"
                 handleColor="rgb(0, 3, 59)"
                 handleBackgroundColor="white"
+                onClick={()=>{
+                  setInfoSlider(!showInfoSlider)
+                }}
               />
               <div className="image-name">
                 <div className="image-name"> {selected}.jpg</div>
@@ -333,7 +337,24 @@ function ZipProcess() {
               </div>
             </IconButton>
           </div>
-          
+          {!!showInfoTip && (
+            <Tooltip
+              id="image-tooltip"
+              place="left"
+              variant="info"
+              html={`Dimension : ${image_details.image_dimensions} <br>
+        Name : ${image_details.model_name} <br>
+        Type : ${image_details.model_type} <br>
+        Upload Date : ${image_details.model_upload_date}`}
+            />
+          )}
+          {!showInfoSlider &&(
+          <div className="info">
+            <div>Dimension: {image_details.image_dimensions}</div>
+            <div>Name: {image_details.model_name}</div>
+            <div>Type: {image_details.model_type}</div>
+            <div>Upload Date: {image_details.model_upload_date}</div>
+          </div>)}
         </div>
       )}
     </>
