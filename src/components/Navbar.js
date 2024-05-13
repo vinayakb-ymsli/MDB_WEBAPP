@@ -27,7 +27,7 @@ const Navbar = () => {
       <div className="secondNav">
         <div className="left-section">
           <div className="dropdown">
-            <h6 className="dropbtn">Home</h6>
+            <h6 className="dropbtn"><a href="/" style={{color:"white", textDecoration:"None"}}>Home</a></h6>
           </div>
           <div className="dropdown">
             <h6 className="dropbtn">Repository</h6>

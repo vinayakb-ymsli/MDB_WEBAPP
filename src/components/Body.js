@@ -22,6 +22,7 @@ const Body = () => {
 
   const handleZipChange = async (e) => {
     const selectedFile = e.target.files[0];
+    const zipFileName = selectedFile.name; // Get the name of the zip file
     if (selectedFile.type !== "application/x-zip-compressed") {
       alert("Please select a zip file.");
       return;
@@ -37,14 +38,14 @@ const Body = () => {
         formData
       );
       setIsLoading(false);
-      // navigate("/processBatch", { state: { data: response.data } });
-      navigate("/zipprocess", { state: { data: response.data } });
+      navigate("/zipprocess", { state: { data: response.data, zipFileName } }); // Pass zipFileName along with response.data
     } catch (error) {
       alert(error.message);
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   return isLoading ? (
     <div
