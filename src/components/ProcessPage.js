@@ -110,7 +110,7 @@ const ProcessPage = () => {
           ) : (
             processedImage && (
               <div>
-                <img src={processedImage} alt="Processed" style={{ width: '100%', height: 'auto' }} />
+                <img src={processedImage} alt="Processed"  />
                 {/* <button onClick={downloadProcessedImage}>Download</button> */}
               </div>
             )
