@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Navbar.css"; // Import CSS file for styling if needed
 import InfoPopup from "./InfoPopup";
-import { FaUser, FaSignInAlt } from "react-icons/fa";
 // import img from "../images/yamaha.png";
-
 
 const Navbar = ({setisBlurr}) => {
 
@@ -30,33 +28,44 @@ const Navbar = ({setisBlurr}) => {
     setdetails(clicked_details)
     settitle(clicked_title)
     setimage(clicked_image)
-  }
+}
 
   return (<>
     <div className="navbarContainer">
-      <img className="banner" src="/images/Banner.png" />
-      <div className="logo_bkg">
-        <img className="logo" src="/images/yamaha.png" />
-        {/* <img src={img} alt="logo" /> */}
-      </div>
-      <div className="secondNav">
+      {/* <div className="navbar">
         <div className="left-section">
-          <div className="dropdown">
-            <h6 className="dropbtn"><a href="/" style={{color:"white", textDecoration:"None"}}>Home</a></h6>
+          <img src={img} alt="logo" />
+          <span>The Cell picking & imaging system. CELL HANDLER™</span>
+        </div>
+        <div className="right-section">
+          <a href="https://global.yamaha-motor.com/">Home</a>
+          <a href="https://global.yamaha-motor.com/news/">News</a>
+          <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
+        </div>
+      </div> */}
+        <img className="banner" src="/images/Banner.png" />
+        <div className="logo_bkg">
+          <img className="logo" src="/images/yamaha.png" /> 
+          {/* <img src={img} alt="logo" /> */}
+        </div>
+      <div className="secondNav">
+      <div className="left-section">
+        <div className="dropdown">
+          <h6 className="dropbtn">Home</h6>
+        </div>
+        <div className="dropdown">
+          <h6 className="dropbtn">Repository</h6>
+          <div className="dropdown-content">
+            <a href="#">Analytics</a>
+            <a href="#">Structure</a>
+            <a href="#">History</a>
+            <a href="#">Add a Repository</a>
+            <a href="#">Delete a Repository</a>
+            <a href="#">Update a Repository</a>
+            <a href="#">Filter a Repository</a>
+            <a href="#">Search a Repository</a>
           </div>
-          <div className="dropdown">
-            <h6 className="dropbtn">Repository</h6>
-            <div className="dropdown-content">
-              <a href="#">Analytics</a>
-              <a href="#">Structure</a>
-              <a href="#">History</a>
-              <a href="#">Add a Repository</a>
-              <a href="#">Delete a Repository</a>
-              <a href="#">Update a Repository</a>
-              <a href="#">Filter a Repository</a>
-              <a href="#">Search a Repository</a>
-            </div>
-          </div>
+        </div>
 
         <div className="dropdown">
           <h6 className="dropbtn">Visualization</h6>
@@ -71,19 +80,19 @@ const Navbar = ({setisBlurr}) => {
             <a href="#" onClick={()=>openPopup( "The region of interest (often abbreviated ROI) is a sample within a data set identified for a particular purpose. The concept of a ROI is commonly used in many application areas. For example, in medical imaging, the boundaries of a tumor may be defined on an image or in a volume, for the purpose of measuring its size", 
             "/images/ROI.png",
             "ROI: Region Of Interest")}>Region of Interest comparison</a>
-
           </div>
+        </div>
 
-          <div className="dropdown">
-            <h6 className="dropbtn">Model</h6>
-            <div className="dropdown-content">
-              <a href="#">Algorithms</a>
-              <a href="#">Intution</a>
-              <a href="#">Improvement area</a>
-              <a href="#">Comparison with older models</a>
-              <a href="#">Versioning</a>
-            </div>
+        <div className="dropdown">
+          <h6 className="dropbtn">Model</h6>
+          <div className="dropdown-content">
+            <a href="#">Algorithms</a>
+            <a href="#">Intution</a>
+            <a href="#">Improvement area</a>
+            <a href="#">Comparison with older models</a>
+            <a href="#">Versioning</a>
           </div>
+        </div>
 
         <div className="dropdown">
           <h6 className="dropbtn">Metrics</h6>
@@ -103,22 +112,17 @@ const Navbar = ({setisBlurr}) => {
             <a href="#">Pixel based sensitivity curve</a>
             <a href="#">Pixel based specificity curve</a>
             <a href="#">Picking condition</a>
-
-          </div>
-
-          <div className="dropdown">
-            <h6 className="dropbtn">Help</h6>
           </div>
         </div>
+
+        <div className="dropdown">
+          <h6 className="dropbtn">Help</h6>
+        </div>
+        </div>
         <div className="right-section">
-          {/* Use buttons with icons */}
-          <button className="icon-button" onClick={() => {}}>
-            <FaUser /> Admin
-          </button>
-          <button className="icon-button" onClick={() => {}}>
-            <FaSignInAlt /> Login
-          </button>
-          <a className="jp-link" href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
+          <a href="https://global.yamaha-motor.com/">Admin</a>
+          <a href="https://global.yamaha-motor.com/news/">Login</a>
+          <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
         </div>
       </div>
       {popUp && 
@@ -145,8 +149,7 @@ const Navbar = ({setisBlurr}) => {
     </div>
     }
     </div>
-    </div>
-    </div>
+    
     </>
   );
 };
