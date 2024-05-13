@@ -21,6 +21,7 @@ function App() {
 
   const [isBlurr, setisBlurr] = useState(false)
   return (
+    <div className="wholeBody">
     <Router>
       <Navbar setisBlurr={setisBlurr}/>
       <div className={isBlurr?"bkg_blurr":""}>
@@ -32,6 +33,7 @@ function App() {
       </Routes>
       </div>
     </Router>
+    </div>
   );
 }
 

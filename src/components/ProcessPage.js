@@ -1,68 +1,37 @@
 import React, { useState } from "react";
 import Loader from "react-js-loader";
 import "../styles/ProcessPage.css";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { IconButton } from "@material-ui/core";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import { CloudUpload, GetApp } from "@material-ui/icons";
 
 const ProcessPage = () => {
-  const { state } = useLocation();
-  const uploadedImagePre = state.image;
-  const [uploadedImage, setUploadedImage] = useState(
-    URL.createObjectURL(uploadedImagePre)
-  );
-
+  const [uploadedImage, setUploadedImage] = useState(null);
   const [processedImage, setProcessedImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);  //changed from false to true
-  const [loader, setLoader] = useState(false);  //new state defined for loader
+  const [isLoading, setIsLoading] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [isError, setIsError] = useState("");
 
   const processImage = async () => {
-    // Assuming you have an API call to process the image
     setIsError("");
     setIsLoading(true);
     setLoader(true);
     try {
-      // Mock API call
       const formData = new FormData();
-      formData.append("image", state.image);
+      formData.append("image", uploadedImage);
 
-      // Send FormData using Axios
       const response = await axios.post(
         "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload",
         formData
       );
-      // .then((response) => {
-      //   setIsLoading(false);
-      //   console.log("Response:", response.data);
-      // })
-      // .catch((error) => {
-      //   // Handle error
-      //   setIsError(error)
-      //   console.error("Error:", error);
-      // });
 
-      // const response = await fetch("https://ty2e2cc7bt.ap-south-1.awsapprunner.com/upload",{
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //     image: formData
-      //   })
-      // })
-
-      // const result = await response.json();
-      console.log("result", response.data);
       const processedImage = `data:image/png;base64, ${response?.data?.image}`;
       setProcessedImage(processedImage);
-      // setTimeout(() => {
-      //   // Mock processed image URL
-      //   const processedImageUrl = "url_of_processed_image";
-      //   setProcessedImage(processedImageUrl);
-      //   setIsLoading(false);
-      // }, 2000); // Simulating a delay of 2 seconds
-      // };
     } catch (error) {
-      alert(error.message);
+      setIsError(error.message);
     } finally {
-      // setIsLoading(false);
+      setIsLoading(false);
       setLoader(false);
     }
   };
@@ -70,8 +39,17 @@ const ProcessPage = () => {
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     const imageUrl = URL.createObjectURL(file);
-    setUploadedImage(imageUrl);
+    setUploadedImage(file);
     setProcessedImage(null);
+  };
+
+  const downloadProcessedImage = () => {
+    if (processedImage) {
+      const link = document.createElement("a");
+      link.download = "processed_image.png";
+      link.href = processedImage;
+      link.click();
+    }
   };
 
   return (
@@ -80,24 +58,43 @@ const ProcessPage = () => {
         <img src="/images/kv_pc.jpg" alt="" />
       </div>
       <div className="left">
-        <h2>Uploaded Image</h2>
+        <div className="headingCenter">Input Image</div>
         <div className="image-container">
-          {uploadedImage && <img src={uploadedImage} />}
+          {uploadedImage && <img src={URL.createObjectURL(uploadedImage)} />}
         </div>
         <div className="buttonsContainer">
           {!isLoading && (
-            <input
-              type="file"
-              className="inputTag"
-              accept="image/*"
-              onChange={handleImageUpload}
-            />
+            <IconButton
+              component="label"
+              htmlFor="upload-image"
+              style={{ color: "#00033b" }}
+            >
+              <div className="buttonWithLabels">
+                <CloudUpload />
+                <input
+                  type="file"
+                  id="upload-image"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={handleImageUpload}
+                />
+                <div className="labelButtons">Choose Image</div>
+              </div>
+            </IconButton>
           )}
-          {!isLoading && <button onClick={processImage}>Process Image</button>}
+          {!isLoading && (
+            <IconButton onClick={processImage} style={{ color: "green" }}>
+              <div className="buttonWithLabels">
+                <div className="labelButtons">Process Image</div>
+                <ArrowForwardIcon />
+              </div>
+            </IconButton>
+          )}
         </div>
       </div>
       <div className="right">
-        <h2>Processed Image</h2>
+        <div className="headingCenter">Processed Image</div>
+        {/* <h3>Processed Image</h3> */}
         <div className="image-container">
           {loader ? (
             <Loader
@@ -108,10 +105,24 @@ const ProcessPage = () => {
               size={100}
             />
           ) : (
-            processedImage && <img src={processedImage} alt="Processed" />
+            processedImage && (
+              <div>
+                <img src={processedImage} alt="Processed" />
+                {/* <button onClick={downloadProcessedImage}>Download</button> */}
+              </div>
+            )
           )}
-          
         </div>
+        {processedImage && (
+          <div>
+          <IconButton onClick={downloadProcessedImage} style={{ color: "#00033b" }}>
+          <div className="buttonWithLabels">
+            <GetApp />
+            <div className="labelButtons">Download Image</div>
+            </div>
+          </IconButton>
+        </div>
+        )}
         <h3 style={{ color: "red" }}>{isError}</h3>
       </div>
     </div>
