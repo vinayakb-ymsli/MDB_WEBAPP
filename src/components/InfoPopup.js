@@ -17,9 +17,9 @@ function InfoPopup({title = "test graph", image = <img src="/images/kv_pc.jpg" a
     <div className="popup">
         <div className="infoContainer">
         <div className="title">
-            <h2>
+            <h1>
                 {title}
-            </h2>
+            </h1>
                 
         </div>
             <div className="details_box">

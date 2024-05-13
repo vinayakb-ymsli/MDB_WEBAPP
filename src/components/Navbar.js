@@ -3,7 +3,7 @@ import "../styles/Navbar.css"; // Import CSS file for styling if needed
 import InfoPopup from "./InfoPopup";
 // import img from "../images/yamaha.png";
 
-const Navbar = () => {
+const Navbar = ({setisBlurr}) => {
 
   const [popUp, setpopUp] = useState(false)
   const [image, setimage] = useState(false)
@@ -19,9 +19,11 @@ const Navbar = () => {
   function closePopup(){
       if( popUp == true){
           setpopUp(false)
+          setisBlurr(false)
       }
   }
   function openPopup(clicked_details, clicked_image, clicked_title){
+    setisBlurr(true)
     setpopUp(true)
     setdetails(clicked_details)
     settitle(clicked_title)
