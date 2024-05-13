@@ -72,7 +72,9 @@ const Navbar = ({setisBlurr}) => {
           <div className="dropdown-content">
             <a href="#">Input Images</a>
             <a href="#">Output Images</a>
-            <a href="#" onClick={handleFalsePositive}>False Positive comparison</a>
+            <a href="#" onClick={()=>openPopup( "A false positive in a machine learning model occurs when it mistakenly identifies a negative outcome as positive, leading to an incorrect prediction. It signifies a type of error where the model wrongly indicates the presence of a condition or event that is actually absent.", 
+            "/images/false_positive.png",
+            "False Positives")}>False Positive comparison</a>
             <a href="#" onClick={()=>openPopup( "Cell Segmentation is a task of splitting a microscopic image domain into segments, which represent individual instances of cells. It is a fundamental step in many biomedical studies, and it is regarded as a cornerstone of image-based cellular research. Cellular morphology is an indicator of a physiological state of the cell, and a well-segmented image can capture biologically relevant morphological information.", 
             "/images/CellSegmentation.png",
             "Number Of cell Segmented")} >Number of cells segmented</a>
@@ -98,7 +100,7 @@ const Navbar = ({setisBlurr}) => {
           <h6 className="dropbtn">Metrics</h6>
           <div className="dropdown-content">
             <a href="#" onClick={()=>openPopup( "The F1 score is a metric used in machine learning to evaluate the performance of classification models. It’s particularly useful when the classes are imbalanced. The F1 score is the harmonic mean of precision and recall, which are two critical measures in classification tasks:", 
-            "/images/Acuuracy.png",
+            "/images/accuracies.png",
             "Accuracy",
             )}>
               Accuracy</a>
