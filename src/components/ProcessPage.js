@@ -57,9 +57,9 @@ const ProcessPage = () => {
 
   return (
     <div className="main">
-      <div className="bkgimg">
+      {/* <div className="bkgimg">
         <img src="/images/kv_pc.jpg" alt="" />
-      </div>
+      </div> */}
       <div className="left">
         <div className="headingCenter">Input Image</div>
         <div className="image-container">
@@ -110,7 +110,7 @@ const ProcessPage = () => {
           ) : (
             processedImage && (
               <div>
-                <img src={processedImage} alt="Processed" />
+                <img src={processedImage} alt="Processed" style={{ width: '100%', height: 'auto' }} />
                 {/* <button onClick={downloadProcessedImage}>Download</button> */}
               </div>
             )

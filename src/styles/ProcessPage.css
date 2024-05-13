@@ -3,13 +3,20 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .main {
   display: flex;
   position: relative;
-  height: 85vh;
+  height: 80vh;
   /* padding-top: 2%; */
+  background: linear-gradient(
+    180deg,
+    rgb(206, 218, 238) 0%,
+    rgb(235, 239, 246) 25%,
+    rgb(255, 255, 255) 52%
+  );
 }
 .left,
 .right {
@@ -18,7 +25,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  margin-top: -5rem; 
+  padding-top: -5rem; 
+  /* z-index: -99; */
 }
 .left {
   border-right: 1px solid #ccc;
@@ -40,7 +48,7 @@ body {
   background-color: rgba(255, 255, 255, 0.5); /* Translucent white */
   margin-bottom: 10px;
   display: flex;
-  border: 2px solid #a5a5a5;
+  /* border: 2px solid #a5a5a5; */
   /* border: 3px dashed rgb(62, 56, 56); */
   align-items: center;
   justify-content: center;

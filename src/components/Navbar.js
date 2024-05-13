@@ -51,7 +51,7 @@ const Navbar = ({setisBlurr}) => {
       <div className="secondNav">
       <div className="left-section">
         <div className="dropdown">
-          <h6 className="dropbtn">Home</h6>
+          <h6 className="dropbtn"><a href="/" style={{textDecoration:"None", color:'white'}}>Home</a></h6>
         </div>
         <div className="dropdown">
           <h6 className="dropbtn">Repository</h6>

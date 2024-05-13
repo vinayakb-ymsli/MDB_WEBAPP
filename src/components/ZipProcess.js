@@ -18,7 +18,7 @@ function ZipProcess() {
   const zipFileName = state.zipFileName;
   const [pageLoader, setpageLoader] = useState(false);
   const [viewMore, setviewMore] = useState(false);
-  const [showInfoSlider,setInfoSlider]=useState(false);
+  const [showInfoSlider, setInfoSlider] = useState(false);
   const [imageDetails, showimageDetails] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenImageType, setFullscreenImageType] = useState("input");
@@ -45,7 +45,13 @@ function ZipProcess() {
       setviewMore(true);
     }
   };
+  const handleMouseEnter = () => {
+    setInfoSlider(false);
+  };
 
+  const handleMouseLeave = () => {
+    setInfoSlider(true);
+  };
   const setImage = (key) => {
     setselected(key);
     console.log(selected);
@@ -248,12 +254,15 @@ function ZipProcess() {
             </div>
           </div>
           <div className="buttonsPrevNext">
-            <IconButton onClick={setPreviousImage}>
+            <div className="buttonHolder">
               <div className="buttonWithLabels">
-                <ArrowBack />
-                <div className="labelButtons">Previous Image</div>
+                <IconButton onClick={setPreviousImage}>
+                  <ArrowBack style={{ color: "rgb(13, 25, 114)"}} />
+                </IconButton>
               </div>
-            </IconButton>
+              <div className="labelButtons">Previous <br></br> Image</div>
+            </div>
+
             {isFullscreen && (
               <div className="fullscreen-overlay">
                 <div className="fullscreen-image-container">
@@ -300,6 +309,8 @@ function ZipProcess() {
             <div
               className="slider-holder"
               style={{ width: 700, height: 450, position: "relative" }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               <div
                 className="fullscreenLeft"
@@ -321,21 +332,25 @@ function ZipProcess() {
                 sliderColor="white"
                 handleColor="rgb(0, 3, 59)"
                 handleBackgroundColor="white"
-                onClick={()=>{
-                  setInfoSlider(!showInfoSlider)
-                }}
               />
               <div className="image-name">
                 <div className="image-name"> {selected}.jpg</div>
               </div>
             </div>
-
-            <IconButton onClick={setNextImage}>
+            <div className="buttonHolder">
+              <div className="buttonWithLabels">
+              <IconButton onClick={setNextImage}>
+                  <ArrowForward style={{ color: "rgb(13, 25, 114)"}} />
+                </IconButton>
+              </div>
+              <div className="labelButtons">Next <br></br> Image</div>
+            </div>
+            {/* <IconButton onClick={setNextImage}>
               <div className="buttonWithLabels">
                 <div className="labelButtons">Next Image</div>
                 <ArrowForward />
               </div>
-            </IconButton>
+            </IconButton> */}
           </div>
           {!!showInfoTip && (
             <Tooltip
@@ -348,13 +363,14 @@ function ZipProcess() {
         Upload Date : ${image_details.model_upload_date}`}
             />
           )}
-          {!showInfoSlider &&(
-          <div className="info">
-            <div>Dimension: {image_details.image_dimensions}</div>
-            <div>Name: {image_details.model_name}</div>
-            <div>Type: {image_details.model_type}</div>
-            <div>Upload Date: {image_details.model_upload_date}</div>
-          </div>)}
+          {!showInfoSlider && (
+            <div className="info">
+              <div><strong>Dimension:</strong> {image_details.image_dimensions}</div>
+              <div><strong>Name:</strong> {image_details.model_name}</div>
+              <div><strong>Type:</strong> {image_details.model_type}</div>
+              <div><strong>Upload Date:</strong> {image_details.model_upload_date}</div>
+            </div>
+          )}
         </div>
       )}
     </>

@@ -1,40 +1,38 @@
-
-
 .mainContainer {
   height: 90vh;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .mainContainer {
   height: 90vh;
   position: relative; /* Ensure proper positioning of background image */
- 
 }
-.fullscreenLeft{
+.fullscreenLeft {
   position: absolute;
   z-index: 1;
-  background-color: rgba(265,265,265,0.5);
+  background-color: rgba(265, 265, 265, 0.5);
   /* opacity: 50%; */
   margin-top: 0.5rem;
   margin-left: 0.5rem;
   border-radius: 10%;
   cursor: pointer;
 }
-.fullscreenRight{
+.fullscreenRight {
   position: absolute;
-  right:0;
+  right: 0;
   z-index: 1;
-  background-color: rgba(265,265,265,0.5);
+  background-color: rgba(265, 265, 265, 0.5);
   /* opacity: 50%; */
   margin-top: 0.5rem;
   margin-right: 0.5rem;
   border-radius: 10%;
   cursor: pointer;
 }
-.slider{
+.slider {
   /* max-width: 50%; */
   /* width: 50vw; */
   width: 700;
@@ -45,7 +43,8 @@
   flex-direction: column;
   /* justify-content: center; */
   /* align-items: center; */
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding-left: 5rem;
   padding-top: 2rem;
   background: linear-gradient(
@@ -97,20 +96,19 @@
   padding: 10px;
   /* padding-bottom: 10px; */
   margin-left: 30rem;
-  margin-top:1rem;
+  margin-top: 1rem;
 }
-.image-table{
+.image-table {
   display: flex;
   justify-content: center;
 }
 
-.image-name{
+.image-name {
   display: flex;
   justify-content: center;
   font-weight: 600;
   margin-top: 5px;
 }
-
 
 .buttonsPrevNext {
   display: flex;
@@ -118,9 +116,9 @@
   margin-top: 2%;
 }
 .headingLeft {
-  color: #00033B;
+  color: #00033b;
   display: flex;
-  
+
   justify-content: center;
   margin-top: 10%;
   font-size: larger;
@@ -128,7 +126,7 @@
 }
 
 .headingCenter {
-  color: #00033B;
+  color: #00033b;
   display: flex;
   justify-content: center;
   margin-top: 15%;
@@ -142,14 +140,15 @@
   border: none;
 }
 
-
-.buttonWithLabels{
+.buttonWithLabels {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-.labelButtons{
+.labelButtons {
   font-size: large;
+  color: rgb(13, 25, 114);
+  text-align: center;
 }
 
 .fullscreen-overlay {
@@ -188,9 +187,8 @@
   border-radius: 5px;
   cursor: pointer;
   display: flex;
-  
 }
-.download-button{
+.download-button {
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -208,11 +206,11 @@
   justify-content: space-between;
 }
 
-.project-name{
+.project-name {
   background-color: white;
   color: rgb(13, 25, 114);
   font-weight: bolder;
-  padding-top:0.5rem;
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -220,35 +218,46 @@
   /* position: absolute; */
   /* min-width: fit-content; */
 }
-.project{
+.project {
   /* background-color: rgb(13, 25, 114); */
   font-weight: bolder;
   display: flex;
   max-width: fit-content;
   color: rgb(13, 25, 114);
   /* color: white; */
-  padding-top:0.5rem;
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 20px;
   display: flex;
   align-items: center;
-  gap:1rem;
+  gap: 1rem;
   position: relative;
 }
 
-.slider-holder{
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
-  scale: 1.04;}
-.project{
+.slider-holder {
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  scale: 1.04;
+  outline: 5px solid white;
+}
+.project {
   position: absolute;
   left: 25;
 }
 
-.info{
+.info {
   display: flex;
-  gap:1rem;
+  gap: 1rem;
   margin-top: 5rem;
   justify-content: center;
+}
+
+.buttonHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
