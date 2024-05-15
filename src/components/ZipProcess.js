@@ -14,17 +14,49 @@ import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 
 function ZipProcess() {
   const { state } = useLocation();
-  const { original_images, processed_images, image_details } = state.data;
-  const zipFileName = state.zipFileName;
+    try{
+      if ( state.data != null){
+        var zipFileName = state.zipFileName;
+        var { original_images, processed_images, image_details } = state.data;
+        var keys = Object.keys(processed_images);
+        var firstKey = keys[0];
+        sessionStorage.setItem('zipFileName', zipFileName);
+        sessionStorage.setItem('original_images', original_images);
+        sessionStorage.setItem('processed_images', processed_images);
+        sessionStorage.setItem('image_details', image_details);
+        sessionStorage.setItem('keys', keys);
+        sessionStorage.setItem('firstKey', firstKey);
+        console.log(processed_images);
+      }
+      else{
+        var zipFileName = sessionStorage.getItem('zipFileName')
+        var original_images = sessionStorage.getItem('original_images')
+        var processed_images = sessionStorage.getItem('zipFileNprocessed_imagesame')
+        var image_details = sessionStorage.getItem('image_details')
+        var keys = sessionStorage.setItem('keys', keys);
+        var firstKey = sessionStorage.setItem('firstKey', firstKey);
+      }
+    }
+  catch{
+    var zipFileName = sessionStorage.getItem('zipFileName')
+    var original_images = sessionStorage.getItem('original_images')
+    var processed_images = sessionStorage.getItem('processed_images')
+    var image_details = sessionStorage.getItem('image_details')
+    var keys = sessionStorage.getItem('keys', keys);
+    var firstKey = sessionStorage.getItem('firstKey', firstKey);
+  }
+
+  // const { original_images, processed_images, image_details } = data;
+  // const zipFileName = state.zipFileName;
   const [pageLoader, setpageLoader] = useState(false);
   const [viewMore, setviewMore] = useState(false);
   const [showInfoSlider, setInfoSlider] = useState(true);
   const [imageDetails, showimageDetails] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenImageType, setFullscreenImageType] = useState("input");
-  const keys = Object.keys(jsonData.processed_images);
-  const firstKey = keys[0];
-  console.clear();
+  // const keys = Object.keys(processed_images);
+  // const firstKey = keys[0];
+  // console.clear();
   // console.log(original_images);
 
   // console.log(firstKey)
