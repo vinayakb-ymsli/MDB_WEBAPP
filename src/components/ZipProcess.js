@@ -18,7 +18,7 @@ function ZipProcess() {
   const zipFileName = state.zipFileName;
   const [pageLoader, setpageLoader] = useState(false);
   const [viewMore, setviewMore] = useState(false);
-  const [showInfoSlider, setInfoSlider] = useState(false);
+  const [showInfoSlider, setInfoSlider] = useState(true);
   const [imageDetails, showimageDetails] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenImageType, setFullscreenImageType] = useState("input");
@@ -257,10 +257,12 @@ function ZipProcess() {
             <div className="buttonHolder">
               <div className="buttonWithLabels">
                 <IconButton onClick={setPreviousImage}>
-                  <ArrowBack style={{ color: "rgb(13, 25, 114)"}} />
+                  <ArrowBack style={{ color: "rgb(13, 25, 114)" }} />
                 </IconButton>
               </div>
-              <div className="labelButtons">Previous <br></br> Image</div>
+              <div className="labelButtons">
+                Previous <br></br> Image
+              </div>
             </div>
 
             {isFullscreen && (
@@ -339,11 +341,13 @@ function ZipProcess() {
             </div>
             <div className="buttonHolder">
               <div className="buttonWithLabels">
-              <IconButton onClick={setNextImage}>
-                  <ArrowForward style={{ color: "rgb(13, 25, 114)"}} />
+                <IconButton onClick={setNextImage}>
+                  <ArrowForward style={{ color: "rgb(13, 25, 114)" }} />
                 </IconButton>
               </div>
-              <div className="labelButtons">Next <br></br> Image</div>
+              <div className="labelButtons">
+                Next <br></br> Image
+              </div>
             </div>
             {/* <IconButton onClick={setNextImage}>
               <div className="buttonWithLabels">
@@ -352,7 +356,7 @@ function ZipProcess() {
               </div>
             </IconButton> */}
           </div>
-          {!!showInfoTip && (
+          {/* {!!showInfoTip && (
             <Tooltip
               id="image-tooltip"
               place="left"
@@ -362,13 +366,21 @@ function ZipProcess() {
         Type : ${image_details.model_type} <br>
         Upload Date : ${image_details.model_upload_date}`}
             />
-          )}
+          )} */}
           {!showInfoSlider && (
             <div className="info">
-              <div><strong>Dimension:</strong> {image_details.image_dimensions}</div>
-              <div><strong>Name:</strong> {image_details.model_name}</div>
-              <div><strong>Type:</strong> {image_details.model_type}</div>
-              <div><strong>Upload Date:</strong> {image_details.model_upload_date}</div>
+              <div>
+                <strong>Dimension:</strong> {image_details.image_dimensions}
+              </div>
+              <div>
+                <strong>Name:</strong> {image_details.model_name}
+              </div>
+              <div>
+                <strong>Type:</strong> {image_details.model_type}
+              </div>
+              <div>
+                <strong>Upload Date:</strong> {image_details.model_upload_date}
+              </div>
             </div>
           )}
         </div>
