@@ -112,3 +112,8 @@
     color: rgb(0, 0, 0);
 
 }
+
+.imageContainer button{
+  background: #0D1972;
+  font-weight: bold;
+}

@@ -28,7 +28,7 @@ function InfoPopup({title = "test graph", image = <img src="/images/kv_pc.jpg" a
         </div>
         <div className="imageContainer">
             {image}
-            <button onClick={closePopup}> close </button>
+            <button onClick={closePopup}>close</button>
   
         </div>
         {/* <div className="cancelButton">
