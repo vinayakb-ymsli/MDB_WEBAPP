@@ -1,0 +1,34 @@
+.buttonProcess {
+    display: flex;
+    /* align-items: center; */
+    gap: 1rem;
+    border: none;
+    background: linear-gradient(90deg, rgb(34, 42, 185), rgb(4, 9, 122));
+    cursor: pointer;
+    /* padding: 1; Added 'px' unit */
+    /* padding: ; */
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 9px;
+    padding-bottom: 10px;
+    color: white;
+    font-weight: bold;
+    justify-content: center; /* Removed duplicate property */
+    align-items: center;
+    border-radius: 10px;
+  }
+  
+  .buttonProcess:hover {
+    background: linear-gradient(90deg, rgb(4, 9, 122), rgb(34, 42, 185));
+    transition: background 0.3s ease-in-out; /* Added transition property */
+  }
+  
+  .buttonProcess:hover .iconProcess {
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out; /* Added transition property */
+  }
+  
+  .iconProcess{
+    padding:0;
+    margin: 0;
+  }

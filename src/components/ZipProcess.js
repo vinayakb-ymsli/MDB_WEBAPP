@@ -161,80 +161,6 @@ function ZipProcess() {
       ) : (
         // <div className="mainContainer">
         <div className="mainContainerOne">
-          {/* <div className="bkgimg">
-            <img src="/images/kv_pc.jpg" alt="" />
-          </div> */}
-
-          {/* <div className="inputImageRow">
-            <div className="headingCenter">Input Image</div>
-            <Image
-              key={"oi_" + selected}
-              input_image={original_images[selected]}
-              image_details={undefined}
-            />
-            <div className="buttonsPrevNext">
-              <IconButton onClick={setPreviousImage}>
-                <div className="buttonWithLabels">
-                  <ArrowBack />
-                  <div className="labelButtons">Previous</div>
-                </div>
-              </IconButton>
-              <IconButton onClick={setNextImage}>
-                <div className="buttonWithLabels">
-                  <div className="labelButtons">Next</div>
-                  <ArrowForward />
-                </div>
-              </IconButton>
-            </div>
-          </div> */}
-
-          {/* <div className="ProcessedImageRow">
-            <div className="headingCenter">Output Image</div>
-            <div>
-              <Image
-                key={"pi" + selected}
-                input_image={processed_images[parseInt(selected)]}
-                image_details={image_details}
-              />
-              {!!showimageDetails && (
-                <Tooltip
-                  id="image-tooltip"
-                  place="left"
-                  variant="info"
-                  html={`Dimension : ${image_details.image_dimensions} <br>
-        Name : ${image_details.model_name} <br>
-        Type : ${image_details.model_type} <br>
-        Upload Date : ${image_details.model_upload_date}`}
-                />
-              )}
-            </div>
-
-            <div className="buttonsPrevNext">
-              <IconButton onClick={downloadProcessedImage}>
-                <div className="buttonWithLabels">
-                  <GetApp />
-                  <div className="labelButtons">Download Image</div>
-                </div>
-              </IconButton>
-              <IconButton onClick={showInfo}>
-                <div className="buttonWithLabels">
-                  
-                  <Info />
-                  {!!showInfoTip && (
-                    <Tooltip
-                      id="image-tooltip"
-                      place="left"
-                      variant="info"
-                      html={`Dimension : ${image_details.image_dimensions} <br>
-        Name : ${image_details.model_name} <br>
-        Type : ${image_details.model_type} <br>
-        Upload Date : ${image_details.model_upload_date}`}
-                    />
-                  )}
-                </div>
-              </IconButton>
-            </div>
-          </div> */}
           <div className="project">
             Project Name:{" "}
             <div className="project-name">{zipFileName.slice(0, -4)}</div>
@@ -356,6 +282,16 @@ function ZipProcess() {
               </div>
             </IconButton> */}
           </div>
+          <div className="downloadZipPage">
+            <button onClick={() => {
+                      const imageData =processed_images[parseInt(selected)];
+                      const filename ="processed_image.png";
+                      downloadImage(imageData, filename);
+                    }} >
+              Download Processed Image <GetApp></GetApp>
+            </button>
+          </div>
+
           {/* {!!showInfoTip && (
             <Tooltip
               id="image-tooltip"
