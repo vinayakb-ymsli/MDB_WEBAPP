@@ -114,6 +114,7 @@ button {
   position: absolute;
   left: 3rem;
   top: 2rem;
+  justify-content: space-between;
 }
 
 .project-name {
@@ -234,4 +235,9 @@ button {
   gap:2rem;
   /* min-width: 20rem; */
   
+}
+.dropdownViewer{
+  position: absolute;
+  right: 3rem;
+  top: 2rem;
 }

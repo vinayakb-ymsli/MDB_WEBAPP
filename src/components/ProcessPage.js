@@ -160,6 +160,22 @@ const ProcessPage = () => {
           {uploadedImage ? uploadedImage.name : "No image selected"}
         </div>
       </div>
+      {processedImage && (
+        <div className="dropdownViewer">
+          <select
+            value={selectedOption}
+            onChange={(e) => handleOptionChange(e.target.value)}
+          >
+            <option value="slider">Slider</option>
+            <option value="input">Input</option>
+            <option value="processed">Processed</option>
+          </select>
+        </div>
+      )}
+
+      {/* <div className="dropdown-menu">
+        
+      </div> */}
       {/* <div className="bkgimg">
         <img src="/images/kv_pc.jpg" alt="" />
       </div> */}
@@ -240,6 +256,7 @@ const ProcessPage = () => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
+        
         {togglePreview ? (
           <div className="image-container">
             {uploadedImage && (
@@ -289,7 +306,7 @@ const ProcessPage = () => {
               </div>
             ) : (
               <>
-                <div
+              {(selectedOption=="slider")&& ( <><div
                   className="fullscreenLeft"
                   onClick={() => toggleFullscreen("input")}
                 >
@@ -301,6 +318,7 @@ const ProcessPage = () => {
                 >
                   <FullscreenIcon style={{ color: "white" }} />
                 </div>
+                
                 <ImageSlider
                   image1={processedImage}
                   image2={URL.createObjectURL(uploadedImage)}
@@ -310,6 +328,17 @@ const ProcessPage = () => {
                   handleColor="rgb(0, 3, 59)"
                   handleBackgroundColor="white"
                 />
+              </>)}
+              {(selectedOption=="input")&& ( <><img
+                    src={URL.createObjectURL(uploadedImage)}
+                    style={{ width: 700, height: 450 }}
+                  />
+              </>)}
+              {(selectedOption=="processed")&& ( <><img
+                    src={processedImage}
+                    style={{ width: 700, height: 450 }}
+                  />
+              </>)}
               </>
             )}
             {/* {isLoading && (
