@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/button.css"; // Import the CSS file
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
-const ProcessButton = ({ onClick }) => {
+const ProcessButton = ({ onClick, isProcessed }) => {
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -13,7 +13,7 @@ const ProcessButton = ({ onClick }) => {
     setHovered(false);
   };
 
-  return (
+  return isProcessed ? (
     <div
       className={`buttonProcess`}
       onClick={onClick}
@@ -41,6 +41,9 @@ const ProcessButton = ({ onClick }) => {
         </svg>
       </div>
     </div>
+  ) : (
+    // Return null or an empty element if isProcessed is false
+    null
   );
 };
 

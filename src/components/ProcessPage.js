@@ -351,7 +351,7 @@ const ProcessPage = () => {
       <div className="buttonsContainerSingle">
         {!isLoading && (
           <div className="firstRowButtons">
-            <ProcessButton onClick={processImage} />
+            <ProcessButton onClick={processImage} isProcessed={togglePreview} />
             {processedImage ? (
               <div>
                 <button onClick={downloadSingleProcessedImage}>
