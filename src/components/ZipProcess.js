@@ -32,6 +32,11 @@ function ZipProcess() {
   const [selected, setselected] = useState(firstKey);
   const [showInfoTip, toggleInfo] = useState(true);
 
+  const [selectedOption, setSelectedOption] = useState("slider");
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
+
   const toggleFullscreen = (type) => {
     setIsFullscreen(!isFullscreen);
     setFullscreenImageType(type);
@@ -165,6 +170,18 @@ function ZipProcess() {
             Project Name:{" "}
             <div className="project-name">{zipFileName.slice(0, -4)}</div>
           </div>
+          
+          {!pageLoader && (<div className="dropdownViewer">
+            <select
+              value={selectedOption}
+              onChange={(e) => handleOptionChange(e.target.value)}
+            >
+              <option value="slider">Slider</option>
+              <option value="input">Input</option>
+              <option value="processed">Processed</option>
+            </select>
+          </div>)}
+
           <div className="leftNavRow">
             {/* <div className="headingLeft">Uploaded Images</div> */}
             <div className="image-table">
@@ -234,7 +251,8 @@ function ZipProcess() {
                 </div>
               </div>
             )}
-            <div
+            <React.Fragment>
+            {(selectedOption=="slider")&& (<div
               className="slider-holder"
               style={{ width: 700, height: 450, position: "relative" }}
               onMouseEnter={handleMouseEnter}
@@ -264,7 +282,22 @@ function ZipProcess() {
               <div className="image-name">
                 <div className="image-name"> {selected}.jpg</div>
               </div>
-            </div>
+            </div>)}
+            {
+              (selectedOption=="input") && ( 
+                <>
+                  <img src={input_image}
+                  style={{ width: 700, height: 450 }}
+                  / >
+                </>)
+            }
+            {
+              (selectedOption=="processed") && ( 
+                <>
+                  <img src={processed_image} style={{ width: 700, height: 450 }} />
+                </>)
+            }
+            </React.Fragment>
             <div className="buttonHolder">
               <div className="buttonWithLabels">
                 <IconButton onClick={setNextImage}>
@@ -283,15 +316,16 @@ function ZipProcess() {
             </IconButton> */}
           </div>
           <div className="downloadZipPage">
-            <button onClick={() => {
-                      const imageData =processed_images[parseInt(selected)];
-                      const filename ="processed_image.png";
-                      downloadImage(imageData, filename);
-                    }} >
+            <button
+              onClick={() => {
+                const imageData = processed_images[parseInt(selected)];
+                const filename = "processed_image.png";
+                downloadImage(imageData, filename);
+              }}
+            >
               Download Processed Image <GetApp></GetApp>
             </button>
           </div>
-
           {/* {!!showInfoTip && (
             <Tooltip
               id="image-tooltip"
