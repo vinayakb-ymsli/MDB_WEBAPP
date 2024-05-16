@@ -72,6 +72,9 @@
   align-items: center;
   justify-content: center;
   height: 90vh; /* Adjust height as needed */
+  width: 100%;
+  background-color: whitesmoke;
+  z-index: 0;
 }
 
 .ProcessedImageRow {

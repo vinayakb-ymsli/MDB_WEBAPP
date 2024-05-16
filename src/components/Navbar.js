@@ -46,7 +46,10 @@ const Navbar = ({ setisBlurr }) => {
           <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
         </div>
       </div> */}
-        <div style={{position:"absolute", zIndex:"-1"}}><img className="banner" src="images/kv_pc.jpg" /></div>
+        <div style={{position:"absolute", zIndex:"-1"}}>
+          <img className="banner" 
+            src="images/kv_pc.jpg" /> 
+        </div>
         <div className="nav-body">
           <div className="nav-left-section">
             <span>CELL HANDLER™</span>

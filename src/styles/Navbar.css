@@ -36,6 +36,7 @@
 .banner {
   min-height: 10vh;
   max-width: 100%;
+  overflow: hidden;
   /* background-image: "images/kv_pc.jpg";
   background-repeat: no-repeat;
   background-size: cover; */
@@ -161,6 +162,7 @@
   /* height: 100%; */
   padding: 17px 20px;
   z-index: -999;
+  /* object-fit: contain; */
  }
 
  .nav-left-section {
