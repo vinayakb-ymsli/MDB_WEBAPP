@@ -6,14 +6,13 @@ import InfoPopup from "./InfoPopup";
 import { PiSelectionBackgroundFill } from "react-icons/pi";
 // import img from "../images/yamaha.png";
 
-const Navbar = ({ setisBlurr }) => {
-  const [popUp, setpopUp] = useState(false);
-  const [image, setimage] = useState(false);
-  const [details, setdetails] = useState(false);
-  const [title, settitle] = useState(false);
-  // let clicked_details = ""
-  // let clicked_title = ""
-  // let clicked_image = ""
+
+const Navbar = ({setisBlurr}) => {
+
+  const [popUp, setpopUp] = useState(false)
+  const [image, setimage] = useState(false)
+  const [details, setdetails] = useState(false)
+  const [title, settitle] = useState(false)
 
   const handleFalsePositive = () => {
     console.log("False Positive");
@@ -31,7 +30,6 @@ const Navbar = ({ setisBlurr }) => {
     settitle(clicked_title);
     setimage(clicked_image);
   }
-
   return (
     <>
       <div className="navbarContainer">
@@ -49,6 +47,7 @@ const Navbar = ({ setisBlurr }) => {
         <div style={{position:"absolute", zIndex:"-1"}}>
           <img className="banner" 
             src="images/kv_pc.jpg" /> 
+
         </div>
         <div className="nav-body">
           <div className="nav-left-section">

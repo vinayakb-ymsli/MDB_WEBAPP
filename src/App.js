@@ -29,7 +29,7 @@ function App() {
         <Route path="/" element={<Body />} />
         <Route path="/process" element={<ProcessPage />} />
         <Route path="/zipprocess" element={<ZipProcess />} />
-        <Route path="/InfoPopup" element={<InfoPopup />} />
+        {/* <Route path="/InfoPopup" element={<InfoPopup />} /> */}
       </Routes>
       </div>
     </Router>

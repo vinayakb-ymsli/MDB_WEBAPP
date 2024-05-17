@@ -14,7 +14,20 @@ import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 
 const ProcessPage = () => {
   const { state } = useLocation();
-  const image = state.data;
+  try{
+    if (state.data == null){
+      var image = sessionStorage.getItem('image');
+    }
+    else{
+      var image = state.data;
+      sessionStorage.setItem('image', image);
+    }
+  }
+  catch{
+    var image = null
+  }
+
+  
   const [uploadedImage, setUploadedImage] = useState(image);
   const [processedImage, setProcessedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

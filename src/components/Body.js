@@ -16,7 +16,6 @@ const Body = () => {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setUploadedImage(selectedFile);
-    console.log(selectedFile);
     navigate("/process", { state: { data: selectedFile } });
   };
 
