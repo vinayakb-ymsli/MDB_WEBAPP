@@ -1,5 +1,5 @@
 .mainContainer {
-  height: 90vh;
+  height: 83vh;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -8,7 +8,7 @@
 }
 
 .mainContainer {
-  height: 90vh;
+  height: 83vh;
   position: relative; /* Ensure proper positioning of background image */
 }
 .fullscreenLeft {
@@ -38,7 +38,7 @@
   width: 700;
 }
 .mainContainerOne {
-  height: 90vh;
+  height: 83vh;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
