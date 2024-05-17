@@ -24,7 +24,7 @@
   color: aliceblue;
 }
 .logo {
-  position: absolute;
+  /* position: absolute; */
   top: 2.5%;
   left: 80%;
   max-width: 245px; /* Set the maximum width */
@@ -36,6 +36,10 @@
 .banner {
   min-height: 10vh;
   max-width: 100%;
+  overflow: hidden;
+  /* background-image: "images/kv_pc.jpg";
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 .left-section {
   display: flex;
@@ -150,3 +154,37 @@
 .jp-link:hover {
   color: blue; 
 } */
+ .nav-body {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  width: 100%;
+  /* height: 100%; */
+  padding: 17px 20px;
+  z-index: -999;
+  /* object-fit: contain; */
+ }
+
+ .nav-left-section {
+  display: flex;
+  /* justify-content: center; */
+  align-items: end;
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  margin-left: 40px;
+ }
+
+ .nav-right-section {
+  /* display: flex; */
+  margin-right: 40px;
+ }
+
+ .nav-left-section-subscript{
+  font-size: 20px;
+  font-weight: normal;
+  color: white;
+  margin-left: 15px;
+  padding-bottom: 5px;
+ }

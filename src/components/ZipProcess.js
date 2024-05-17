@@ -64,6 +64,11 @@ function ZipProcess() {
   const [selected, setselected] = useState(firstKey);
   const [showInfoTip, toggleInfo] = useState(true);
 
+  const [selectedOption, setSelectedOption] = useState("slider");
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
+
   const toggleFullscreen = (type) => {
     setIsFullscreen(!isFullscreen);
     setFullscreenImageType(type);
@@ -193,84 +198,22 @@ function ZipProcess() {
       ) : (
         // <div className="mainContainer">
         <div className="mainContainerOne">
-          {/* <div className="bkgimg">
-            <img src="/images/kv_pc.jpg" alt="" />
-          </div> */}
-
-          {/* <div className="inputImageRow">
-            <div className="headingCenter">Input Image</div>
-            <Image
-              key={"oi_" + selected}
-              input_image={original_images[selected]}
-              image_details={undefined}
-            />
-            <div className="buttonsPrevNext">
-              <IconButton onClick={setPreviousImage}>
-                <div className="buttonWithLabels">
-                  <ArrowBack />
-                  <div className="labelButtons">Previous</div>
-                </div>
-              </IconButton>
-              <IconButton onClick={setNextImage}>
-                <div className="buttonWithLabels">
-                  <div className="labelButtons">Next</div>
-                  <ArrowForward />
-                </div>
-              </IconButton>
-            </div>
-          </div> */}
-
-          {/* <div className="ProcessedImageRow">
-            <div className="headingCenter">Output Image</div>
-            <div>
-              <Image
-                key={"pi" + selected}
-                input_image={processed_images[parseInt(selected)]}
-                image_details={image_details}
-              />
-              {!!showimageDetails && (
-                <Tooltip
-                  id="image-tooltip"
-                  place="left"
-                  variant="info"
-                  html={`Dimension : ${image_details.image_dimensions} <br>
-        Name : ${image_details.model_name} <br>
-        Type : ${image_details.model_type} <br>
-        Upload Date : ${image_details.model_upload_date}`}
-                />
-              )}
-            </div>
-
-            <div className="buttonsPrevNext">
-              <IconButton onClick={downloadProcessedImage}>
-                <div className="buttonWithLabels">
-                  <GetApp />
-                  <div className="labelButtons">Download Image</div>
-                </div>
-              </IconButton>
-              <IconButton onClick={showInfo}>
-                <div className="buttonWithLabels">
-                  
-                  <Info />
-                  {!!showInfoTip && (
-                    <Tooltip
-                      id="image-tooltip"
-                      place="left"
-                      variant="info"
-                      html={`Dimension : ${image_details.image_dimensions} <br>
-        Name : ${image_details.model_name} <br>
-        Type : ${image_details.model_type} <br>
-        Upload Date : ${image_details.model_upload_date}`}
-                    />
-                  )}
-                </div>
-              </IconButton>
-            </div>
-          </div> */}
           <div className="project">
             Project Name:{" "}
             <div className="project-name">{zipFileName.slice(0, -4)}</div>
           </div>
+          
+          {!pageLoader && (<div className="dropdownViewer">
+            <select
+              value={selectedOption}
+              onChange={(e) => handleOptionChange(e.target.value)}
+            >
+              <option value="slider">Slider</option>
+              <option value="input">Input</option>
+              <option value="processed">Processed</option>
+            </select>
+          </div>)}
+
           <div className="leftNavRow">
             {/* <div className="headingLeft">Uploaded Images</div> */}
             <div className="image-table">
@@ -340,7 +283,8 @@ function ZipProcess() {
                 </div>
               </div>
             )}
-            <div
+            <React.Fragment>
+            {(selectedOption=="slider")&& (<div
               className="slider-holder"
               style={{ width: 700, height: 450, position: "relative" }}
               onMouseEnter={handleMouseEnter}
@@ -370,7 +314,22 @@ function ZipProcess() {
               <div className="image-name">
                 <div className="image-name"> {selected}.jpg</div>
               </div>
-            </div>
+            </div>)}
+            {
+              (selectedOption=="input") && ( 
+                <>
+                  <img src={input_image}
+                  style={{ width: 700, height: 450 }}
+                  / >
+                </>)
+            }
+            {
+              (selectedOption=="processed") && ( 
+                <>
+                  <img src={processed_image} style={{ width: 700, height: 450 }} />
+                </>)
+            }
+            </React.Fragment>
             <div className="buttonHolder">
               <div className="buttonWithLabels">
                 <IconButton onClick={setNextImage}>
@@ -387,6 +346,17 @@ function ZipProcess() {
                 <ArrowForward />
               </div>
             </IconButton> */}
+          </div>
+          <div className="downloadZipPage">
+            <button
+              onClick={() => {
+                const imageData = processed_images[parseInt(selected)];
+                const filename = "processed_image.png";
+                downloadImage(imageData, filename);
+              }}
+            >
+              Download Processed Image <GetApp></GetApp>
+            </button>
           </div>
           {/* {!!showInfoTip && (
             <Tooltip

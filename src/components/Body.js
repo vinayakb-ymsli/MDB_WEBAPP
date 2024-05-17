@@ -53,6 +53,8 @@ const Body = () => {
         alignItems: "center",
         justifyContent: "center",
         height: "600px",
+        width: "100%",
+        backgroundColor: "white"
       }}
     >
       <Loader

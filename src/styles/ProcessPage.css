@@ -31,7 +31,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  padding-top: -5rem; 
+  padding-top: -5rem;
   /* z-index: -99; */
 }
 .left {
@@ -41,9 +41,11 @@ body {
   border-left: 1px solid #ccc;
 }
 
-.buttonsContainer {
+.buttonsContainerSingle {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  margin-top: 2rem;
+  gap:1rem;
 }
 .image-container {
   /* width: 80%; Adjust as needed */
@@ -85,22 +87,13 @@ button {
 }
 
 .headingCenter {
-   color: #00033b; 
-   display: flex; 
-   justify-content: center; 
-   
-   /* margin-bottom: 5%; */
-   font-size: x-large; 
-   font-weight: bold; 
-}
-
-.buttonWithLabels{
+  color: #00033b;
   display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.labelButtons{
-  font-size: large;
+  justify-content: center;
+
+  /* margin-bottom: 5%; */
+  font-size: x-large;
+  font-weight: bold;
 }
 
 .project {
@@ -120,7 +113,8 @@ button {
   gap: 1rem;
   position: absolute;
   left: 3rem;
-  top:2rem;
+  top: 2rem;
+  justify-content: space-between;
 }
 
 .project-name {
@@ -136,10 +130,114 @@ button {
   /* min-width: fit-content; */
 }
 
-.slider-holder {
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+.slider-holder-single {
+  box-shadow: rgba(149, 157, 165, 0.7) 0px 8px 24px;
   scale: 1.04;
   outline: 5px solid white;
   margin-top: 3rem;
+}
+
+.buttonWithLabels {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  /* transition: background 0.3s ease; */
+}
+
+.labelButtons {
+  font-size: large;
+}
+
+.buttonWithLabels::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  color: white;
+  transition: left 0.3s ease;
+  /* z-index: -99; */
+}
+
+.buttonWithLabels.hovered::after {
+  left: 0;
+}
+
+.overlayButton {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* margin: auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(17, 17, 26, 0.5);
+  transition: background-color 0.3s ease-in-out;
+}
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 1000; higher z-index to ensure it's on top of other elements */
+  backdrop-filter: blur(5px);
+}
+
+.fullscreen-over {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9000; 
+  backdrop-filter: blur(5px);
+}
+
+.fullscreen-image-contain{
+  position: relative;
+}
+
+.fullscreen-image-contain img {
+  max-width: 90vw; /* adjust as needed */
+  max-height: 90vh; /* adjust as needed */
+  border: 2px solid #fff; /* white border */
+  border-radius: 5px;
+}
+.loaderHolder{
+  /* display: flex; */
+  /* margin-top: 50%; */
+  margin-left: 40%;
+  margin-top: 30%;
+}
+
+.firstRowButtons{
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  /* padding-left: 1rem; */
+  gap:2rem;
+  /* min-width: 20rem; */
+  
+}
+.dropdownViewer{
+  position: absolute;
+  right: 3rem;
+  top: 2rem;
 }
