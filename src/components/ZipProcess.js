@@ -199,11 +199,11 @@ function ZipProcess() {
         // <div className="mainContainer">
         <div className="mainContainerOne">
           <div className="project">
-            Project Name:{" "}
+            File name:{" "}
             <div className="project-name">{zipFileName.slice(0, -4)}</div>
           </div>
           
-          {!pageLoader && (<div className="dropdownViewer">
+          {/* {!pageLoader && (<div className="dropdownViewer">
             <select
               value={selectedOption}
               onChange={(e) => handleOptionChange(e.target.value)}
@@ -212,7 +212,74 @@ function ZipProcess() {
               <option value="input">Input</option>
               <option value="processed">Processed</option>
             </select>
-          </div>)}
+          </div>)} */}
+
+          {/* {!pageLoader && (
+            <div className="radioButtonViewer">
+              <label>
+                <input 
+                  type="radio"
+                  value="slider"
+                  checked={selectedOption === "slider"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Slider
+              </label>
+              <label>
+                <input 
+                  type="radio"
+                  value="input"
+                  checked={selectedOption === "input"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Input
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="processed"
+                  checked={selectedOption === "processed"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Processed
+              </label>
+            </div>
+          )} */}
+
+          {!pageLoader && (
+            <div className="toggles">
+              <label className="toggles-label">
+                <input 
+                  className="toggles-input"
+                  type="radio"
+                  value="slider"
+                  checked={selectedOption === "slider"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Slider
+              </label>
+              <label className="toggles-label">
+                <input 
+                  className="toggles-input"
+                  type="radio"
+                  value="input"
+                  checked={selectedOption === "input"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Input
+              </label>
+              <label className="toggles-label">
+                <input
+                  className="toggles-input"
+                  type="radio"
+                  value="processed"
+                  checked={selectedOption === "processed"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Processed
+              </label>
+            </div>
+          )}
 
           <div className="leftNavRow">
             {/* <div className="headingLeft">Uploaded Images</div> */}
@@ -286,7 +353,7 @@ function ZipProcess() {
             <React.Fragment>
             {(selectedOption=="slider")&& (<div
               className="slider-holder"
-              style={{ width: 700, height: 450, position: "relative" }}
+              style={{ width: 700, height: 400, position: "relative" }}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
@@ -319,14 +386,14 @@ function ZipProcess() {
               (selectedOption=="input") && ( 
                 <>
                   <img src={input_image}
-                  style={{ width: 700, height: 450 }}
+                  style={{ width: 700, height: 400 }}
                   / >
                 </>)
             }
             {
               (selectedOption=="processed") && ( 
                 <>
-                  <img src={processed_image} style={{ width: 700, height: 450 }} />
+                  <img src={processed_image} style={{ width: 700, height: 400 }} />
                 </>)
             }
             </React.Fragment>

@@ -1,13 +1,14 @@
 .mainContainer {
-  height: 90vh;
+  height: 83vh;
   /* background: rgb(2,0,36); */
   /* background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%); */
-  background: linear-gradient(
+  /* background: linear-gradient(
     180deg,
     rgb(206, 218, 238) 0%,
     rgb(235, 239, 246) 25%,
     rgb(255, 255, 255) 52%
-  );
+  ); */
+  background-color: #fff; 
  overflow: hidden;
 }
 .upload {
@@ -62,12 +63,12 @@
 
 .machineimg img {
   height: 50vh;
-  margin-bottom: 100px;
+  /* margin-bottom: 0px; */
 }
 
 .machineimg {
   margin-left: 5%;
-  margin-right: 5%;
+  margin-right: 7%;
 }
 
 .descriptor {
@@ -159,7 +160,7 @@ input[type="file"]::file-selector-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 12px;
   margin: 10px;
 }
 

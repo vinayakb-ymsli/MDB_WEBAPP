@@ -265,9 +265,9 @@ const ProcessPage = () => {
       </div> */}
       <div
         className="slider-holder-single"
-        style={{ width: 700, height: 450 }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        style={{ width: 700, height: 390 }}
+        // onMouseEnter={handleMouseEnter}
+        // onMouseLeave={handleMouseLeave}
       >
         
         {togglePreview ? (
@@ -275,8 +275,8 @@ const ProcessPage = () => {
             {uploadedImage && (
               <div>
                 <div
-                  onMouseEnter={handleMouseEnterInput}
-                  onMouseLeave={handleMouseLeaveInput}
+                  // onMouseEnter={handleMouseEnterInput}
+                  // onMouseLeave={handleMouseLeaveInput}
                 >
                   <div
                     className="fullscreenLeft"
@@ -286,7 +286,7 @@ const ProcessPage = () => {
                   </div>
                   <img
                     src={URL.createObjectURL(uploadedImage)}
-                    style={{ width: 700, height: 450 }}
+                    style={{ width: 700, height: 390 }}
                   />
                 </div>
               </div>
@@ -344,12 +344,12 @@ const ProcessPage = () => {
               </>)}
               {(selectedOption=="input")&& ( <><img
                     src={URL.createObjectURL(uploadedImage)}
-                    style={{ width: 700, height: 450 }}
+                    style={{ width: 700, height: 390 }}
                   />
               </>)}
               {(selectedOption=="processed")&& ( <><img
                     src={processedImage}
-                    style={{ width: 700, height: 450 }}
+                    style={{ width: 700, height: 390 }}
                   />
               </>)}
               </>
