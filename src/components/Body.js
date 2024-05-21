@@ -85,7 +85,8 @@ const Body = () => {
           </h6>
 
           <div className="uploadBoxes">
-            <div className="uploadbutton">
+            <div className="uploadbutton"
+                  style={{marginRight: "0px"}}>
               <label
                 htmlFor="images"
                 className="drop-container"
@@ -115,7 +116,8 @@ const Body = () => {
                 </div>
               </label>
             </div>
-            <div className="uploadbutton">
+            <div className="uploadbutton"
+                  style={{marginLeft: "0px"}}>
               <label
                 htmlFor="zip"
                 className="drop-container"

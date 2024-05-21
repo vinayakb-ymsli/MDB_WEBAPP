@@ -174,17 +174,39 @@ const ProcessPage = () => {
         </div>
       </div>
       {processedImage && (
-        <div className="dropdownViewer">
-          <select
-            value={selectedOption}
-            onChange={(e) => handleOptionChange(e.target.value)}
-          >
-            <option value="slider">Slider</option>
-            <option value="input">Input</option>
-            <option value="processed">Processed</option>
-          </select>
-        </div>
-      )}
+            <div className="toggles">
+              <label className="toggles-label">
+                <input 
+                  className="toggles-input"
+                  type="radio"
+                  value="slider"
+                  checked={selectedOption === "slider"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Slider
+              </label>
+              <label className="toggles-label">
+                <input 
+                  className="toggles-input"
+                  type="radio"
+                  value="input"
+                  checked={selectedOption === "input"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Input
+              </label>
+              <label className="toggles-label">
+                <input
+                  className="toggles-input"
+                  type="radio"
+                  value="processed"
+                  checked={selectedOption === "processed"}
+                  onChange={(e) => handleOptionChange(e.target.value)}
+                />
+                Processed
+              </label>
+            </div>
+          )}
 
       {/* <div className="dropdown-menu">
         
