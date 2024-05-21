@@ -13,6 +13,7 @@ const Navbar = ({setisBlurr}) => {
   const [image, setimage] = useState(false)
   const [details, setdetails] = useState(false)
   const [title, settitle] = useState(false)
+  const [zoomed, setzoomed] = useState(false)
 
   const handleFalsePositive = () => {
     console.log("False Positive");
@@ -29,6 +30,10 @@ const Navbar = ({setisBlurr}) => {
     setdetails(clicked_details);
     settitle(clicked_title);
     setimage(clicked_image);
+  }
+  function handleZoom(){
+    setzoomed(!zoomed)
+    console.log("Zoom")
   }
   return (
     <>
@@ -179,14 +184,14 @@ const Navbar = ({setisBlurr}) => {
         </div>
         {popUp && (
           <div className="popup">
-            <div className="infoContainer">
+            <div className={zoomed?"infoContainer-Zoomedin":"infoContainer"}>
               <div className="title">
                 <h2>{title}</h2>
               </div>
               <div className="details_box">{details}</div>
             </div>
-            <div className="imageContainer">
-              <img src={image} alt="" />
+            <div className={zoomed?"imageContainer-zoomedin":"imageContainer"}>
+              <img onClick = {handleZoom} src={image} alt="" />
               <button onClick={closePopup}>Close</button>
             </div>
             {/* <div className="cancelButton">
