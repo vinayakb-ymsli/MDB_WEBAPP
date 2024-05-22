@@ -34,7 +34,7 @@
   height: 15vh;
 }
 .banner {
-  min-height: 10vh;
+  min-height: 12vh;
   max-width: 100%;
   overflow: hidden;
   /* background-image: "images/kv_pc.jpg";
@@ -177,8 +177,11 @@
  }
 
  .nav-right-section {
-  /* display: flex; */
-  margin-right: 40px;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  margin-left: 80%;
+  /* margin-right: 40px; */
  }
 
  .nav-left-section-subscript{
