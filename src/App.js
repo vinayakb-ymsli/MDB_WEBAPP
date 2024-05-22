@@ -14,7 +14,7 @@ import ZipProcess from "./components/ZipProcess";
 import InfoPopup from "./components/InfoPopup";
 import './App.css'
 
-// import Modal from react-Modal ;
+// import Modal from react-Modal test ;
 
 
 function App() {
