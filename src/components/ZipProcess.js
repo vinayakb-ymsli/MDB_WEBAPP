@@ -14,39 +14,51 @@ import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 
 function ZipProcess() {
   const { state } = useLocation();
-    try{
-      if ( state.data != null){
-        var zipFileName = state.zipFileName;
-        var { original_images, processed_images, image_details } = state.data;
-        var keys = Object.keys(processed_images);
-        var firstKey = keys[0];
-        sessionStorage.setItem('zipFileName', zipFileName);
-        sessionStorage.setItem('original_images', original_images);
-        sessionStorage.setItem('processed_images', processed_images);
-        sessionStorage.setItem('image_details', image_details);
-        sessionStorage.setItem('keys', keys);
-        sessionStorage.setItem('firstKey', firstKey);
-        console.log(processed_images);
-      }
-      else{
-        var zipFileName = sessionStorage.getItem('zipFileName')
-        var original_images = sessionStorage.getItem('original_images')
-        var processed_images = sessionStorage.getItem('zipFileNprocessed_imagesame')
-        var image_details = sessionStorage.getItem('image_details')
-        var keys = sessionStorage.setItem('keys', keys);
-        var firstKey = sessionStorage.setItem('firstKey', firstKey);
-      }
-    }
-  catch{
-    var zipFileName = sessionStorage.getItem('zipFileName')
-    var original_images = sessionStorage.getItem('original_images')
-    var processed_images = sessionStorage.getItem('processed_images')
-    var image_details = sessionStorage.getItem('image_details')
-    var keys = sessionStorage.getItem('keys', keys);
-    var firstKey = sessionStorage.getItem('firstKey', firstKey);
+  //   try{
+  //     if ( state.data != null){
+  //       var zipFileName = state.zipFileName;
+  //       var { original_images, processed_images, image_details } = state.data;
+  //       var keys = Object.keys(processed_images);
+  //       var firstKey = keys[0];
+  //       sessionStorage.setItem('zipFileName', zipFileName);
+  //       sessionStorage.setItem('original_images', JSON.stringify(original_images));
+  //       sessionStorage.setItem('processed_images', JSON.stringify(processed_images));
+  //       sessionStorage.setItem('image_details', JSON.stringify(image_details));
+  //       sessionStorage.setItem('keys', JSON.stringify(keys));
+  //       sessionStorage.setItem('firstKey', firstKey);
+  //     }
+  //     else{
+  //       var zipFileName = sessionStorage.getItem('zipFileName')
+  //       var original_images = sessionStorage.getItem('original_images')
+  //       var processed_images = JSON.parse(sessionStorage.getItem('processed_images'))
+  //       var image_details = JSON.parse(sessionStorage.getItem('image_details'))
+  //       var keys = sessionStorage.getItem('keys', keys);
+  //       var firstKey = sessionStorage.getItem('firstKey', firstKey);
+  //     }
+  //   }
+  // catch{
+  //   var zipFileName = sessionStorage.getItem('zipFileName')
+  //   var original_images = sessionStorage.getItem('original_images')
+  //   var processed_images = JSON.parse(sessionStorage.getItem('processed_images'))
+  //   var image_details = JSON.parse(sessionStorage.getItem('image_details'))
+  //   var keys = sessionStorage.getItem('keys', toString((keys)));
+  //   var firstKey = sessionStorage.getItem('firstKey', toString(firstKey));
+  //   console.log("not working")
+  //   console.log(keys)
+  // }
+  try{
+    var data = state.data;
+    var data = JSON.stringify(data)
+    var zipFileName = state.zipFileName;
+    sessionStorage.setItem('zipFileName', zipFileName);
+    sessionStorage.setItem('data', data);
   }
+  catch{
+    var data = sessionStorage.getItem('data',(data));
+    var zipFileName = sessionStorage.getItem('zipFileName');
+  } 
 
-  // const { original_images, processed_images, image_details } = data;
+  var { original_images, processed_images, image_details } = JSON.parse(data);
   // const zipFileName = state.zipFileName;
   const [pageLoader, setpageLoader] = useState(false);
   const [viewMore, setviewMore] = useState(false);
@@ -54,14 +66,17 @@ function ZipProcess() {
   const [imageDetails, showimageDetails] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenImageType, setFullscreenImageType] = useState("input");
-  // const keys = Object.keys(processed_images);
-  // const firstKey = keys[0];
-  // console.clear();
-  // console.log(original_images);
+  debugger;
+  console.log(processed_images);
+  const keys = Object.keys(processed_images);
+  const firstKey = keys[0];
+  console.clear();
+  console.log(processed_images);
 
   // console.log(firstKey)
-  const [selectedImage, setselectedImage] = useState(113);
+  // const [selectedImage, setselectedImage] = useState(113);
   const [selected, setselected] = useState(firstKey);
+  console.log(selected)
   const [showInfoTip, toggleInfo] = useState(true);
 
   const [selectedOption, setSelectedOption] = useState("slider");

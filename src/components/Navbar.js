@@ -13,6 +13,7 @@ const Navbar = ({setisBlurr}) => {
   const [image, setimage] = useState(false)
   const [details, setdetails] = useState(false)
   const [title, settitle] = useState(false)
+  const [zoomed, setzoomed] = useState(false)
 
   const handleFalsePositive = () => {
     console.log("False Positive");
@@ -30,6 +31,10 @@ const Navbar = ({setisBlurr}) => {
     settitle(clicked_title);
     setimage(clicked_image);
   }
+  function handleZoom(){
+    setzoomed(!zoomed)
+    console.log("Zoom")
+  }
   return (
     <>
       <div className="navbarContainer">
@@ -46,14 +51,14 @@ const Navbar = ({setisBlurr}) => {
       </div> */}
         <div style={{position:"absolute", zIndex:"-1"}}>
           <img className="banner" 
-            src="images/kv_pc.jpg" /> 
+            src="images/Banner.png" /> 
 
         </div>
         <div className="nav-body">
-          <div className="nav-left-section">
+          {/* <div className="nav-left-section">
             <span>CELL HANDLER™</span>
             <span className="nav-left-section-subscript">Cell picking and Imaging System</span>
-          </div>
+          </div> */}
           <div className="nav-right-section">
             <img className="logo" src="/images/yamaha.png" />
             {/* <img src={img} alt="logo" /> */}
@@ -179,14 +184,14 @@ const Navbar = ({setisBlurr}) => {
         </div>
         {popUp && (
           <div className="popup">
-            <div className="infoContainer">
+            <div className={zoomed?"infoContainer-Zoomedin":"infoContainer"}>
               <div className="title">
                 <h2>{title}</h2>
               </div>
               <div className="details_box">{details}</div>
             </div>
-            <div className="imageContainer">
-              <img src={image} alt="" />
+            <div className={zoomed?"imageContainer-zoomedin":"imageContainer"}>
+              <img onClick = {handleZoom} src={image} alt="" />
               <button onClick={closePopup}>Close</button>
             </div>
             {/* <div className="cancelButton">
