@@ -6,14 +6,12 @@ import InfoPopup from "./InfoPopup";
 import { PiSelectionBackgroundFill } from "react-icons/pi";
 // import img from "../images/yamaha.png";
 
-
-const Navbar = ({setisBlurr}) => {
-
-  const [popUp, setpopUp] = useState(false)
-  const [image, setimage] = useState(false)
-  const [details, setdetails] = useState(false)
-  const [title, settitle] = useState(false)
-  const [zoomed, setzoomed] = useState(false)
+const Navbar = ({ setisBlurr }) => {
+  const [popUp, setpopUp] = useState(false);
+  const [image, setimage] = useState(false);
+  const [details, setdetails] = useState(false);
+  const [title, settitle] = useState(false);
+  const [zoomed, setzoomed] = useState(false);
 
   const handleFalsePositive = () => {
     console.log("False Positive");
@@ -31,9 +29,9 @@ const Navbar = ({setisBlurr}) => {
     settitle(clicked_title);
     setimage(clicked_image);
   }
-  function handleZoom(){
-    setzoomed(!zoomed)
-    console.log("Zoom")
+  function handleZoom() {
+    setzoomed(!zoomed);
+    console.log("Zoom");
   }
   return (
     <>
@@ -49,20 +47,18 @@ const Navbar = ({setisBlurr}) => {
           <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
         </div>
       </div> */}
-        <div style={{position:"absolute", zIndex:"-1"}}>
-          <img className="banner" 
-            src="images/Banner.png" /> 
-
+        <div style={{position:"relative" }}>
+          <img className="banner" src="images/Banner.png" />
+          <div className="nav-logo">
+            <img className="logo" src="/images/yamaha.png" />
+            {/* <img src={img} alt="logo" /> */}
+          </div>
         </div>
         <div className="nav-body">
           {/* <div className="nav-left-section">
             <span>CELL HANDLER™</span>
             <span className="nav-left-section-subscript">Cell picking and Imaging System</span>
           </div> */}
-          <div className="nav-right-section">
-            <img className="logo" src="/images/yamaha.png" />
-            {/* <img src={img} alt="logo" /> */}
-          </div>
         </div>
         <div className="secondNav">
           <div className="left-section">
@@ -177,21 +173,29 @@ const Navbar = ({setisBlurr}) => {
           </div>
 
           <div className="right-section">
-            <a href="https://global.yamaha-motor.com/"><FaUser /> Admin</a>
-            <a href="https://global.yamaha-motor.com/news/"><FaSignInAlt/> Login</a>
+            <a href="https://global.yamaha-motor.com/">
+              <FaUser /> Admin
+            </a>
+            <a href="/login">
+              <FaSignInAlt /> Login
+            </a>
             <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
           </div>
         </div>
         {popUp && (
           <div className="popup">
-            <div className={zoomed?"infoContainer-Zoomedin":"infoContainer"}>
+            <div
+              className={zoomed ? "infoContainer-Zoomedin" : "infoContainer"}
+            >
               <div className="title">
                 <h2>{title}</h2>
               </div>
               <div className="details_box">{details}</div>
             </div>
-            <div className={zoomed?"imageContainer-zoomedin":"imageContainer"}>
-              <img onClick = {handleZoom} src={image} alt="" />
+            <div
+              className={zoomed ? "imageContainer-zoomedin" : "imageContainer"}
+            >
+              <img onClick={handleZoom} src={image} alt="" />
               <button onClick={closePopup}>Close</button>
             </div>
             {/* <div className="cancelButton">
