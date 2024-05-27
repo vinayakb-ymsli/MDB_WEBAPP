@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Body.css";
+import "../styles/Body.css";
 import { useNavigate } from "react-router-dom";
 import JSZip from "jszip";
 import upload from "../images/upload.png";

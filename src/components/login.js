@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import "../styles/auth.css";
+import { IoMdPerson } from "react-icons/io";
+import { FaLock } from "react-icons/fa6";
+import NotificationPopup from "./NotificationPopup";
 
 // Login component
 const LoginPage = () => {
@@ -8,6 +11,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const handleLogin = () => {
     // Implement your login logic here
@@ -31,6 +35,10 @@ const LoginPage = () => {
     // Implement logic to send reset password email
     // For now, let's just log the email
     console.log("Reset password email sent to:", email);
+    setShowNotification(true);
+  };
+  const closeNotification = () => {
+    setShowNotification(false);
   };
 
   return (
@@ -49,34 +57,56 @@ const LoginPage = () => {
 
         <div className="login-section">
           <div className="auth-container">
-            <h2>{showForgotPassword ? "Forgot Password" : "Login"}</h2>
+            <div className="heading-form-login">
+              {showForgotPassword ? "Forgot Password" : "Login Here"}
+            </div>
             {!showForgotPassword ? (
               <form>
                 {/* Email and Password input fields */}
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div class="input-wrapper">
+                  <div class="input-container">
+                    <div class="icon">
+                      <IoMdPerson
+                        style={{
+                          color: "rgb(13, 25, 114)",
+                          fontSize: "larger",
+                        }}
+                      />
+                    </div>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      style={{ border: "none", margin: "0" }}
+                      className="input-log"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                </div>
 
-                {/* Login button */}
-                <button
-                  style={{ backgroundColor: "rgb(13, 25, 114)" }}
-                  type="button"
-                  onClick={handleLogin}
-                >
-                  Login
-                </button>
+                <div class="input-wrapper">
+                  <div class="input-container">
+                    <div class="icon">
+                      <FaLock
+                        style={{
+                          color: "rgb(13, 25, 114)",
+                          fontSize: "larger",
+                        }}
+                      />
+                    </div>
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      className="input-log"
+                      style={{ border: "none", margin: "0" }}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                </div>
 
                 {/* Forgot Password link */}
-                <div style={{ marginTop: "8px" }}>
+                <div className="forgot">
                   <span
                     onClick={handleForgotPasswordClick}
                     style={{
@@ -88,20 +118,51 @@ const LoginPage = () => {
                     Forgot Password?
                   </span>
                 </div>
+
+                {/* Login button */}
+                <button
+                  style={{
+                    backgroundColor: "rgb(13, 25, 114)",
+                    width: "100%",
+                    fontWeight: "bold",
+                    letterSpacing: "2px",
+                  }}
+                  type="button"
+                  onClick={handleLogin}
+                >
+                  LOGIN
+                </button>
               </form>
             ) : (
               <div>
                 <form>
                   {/* Email input field for password reset */}
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                  <div class="input-wrapper">
+                    <div class="input-container">
+                      <div class="icon">
+                        <IoMdPerson
+                          style={{
+                            color: "rgb(13, 25, 114)",
+                            fontSize: "larger",
+                          }}
+                        />
+                      </div>
+                      <input
+                        style={{ border: "none", margin: "0" }}
+                        type="email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />{" "}
+                    </div>
+                  </div>
                   {/* Reset Password button */}
                   <button
-                    style={{ backgroundColor: "rgb(13, 25, 114)" }}
+                    style={{
+                      backgroundColor: "rgb(13, 25, 114)",
+                      width: "100%",
+                      fontWeight: "bold",
+                    }}
                     type="button"
                     onClick={handleResetPassword}
                   >
@@ -114,7 +175,8 @@ const LoginPage = () => {
                     onClick={handleForgotPasswordClick}
                     style={{
                       color: "rgb(13, 25, 114)",
-                      textDecoration: "underline", cursor:"pointer"
+                      textDecoration: "underline",
+                      cursor: "pointer",
                     }}
                   >
                     Login
@@ -145,6 +207,13 @@ const LoginPage = () => {
       <div className="machineimg">
         <img src="/images/kv_main01.png" alt="" />
       </div>
+      {showNotification && (
+        <NotificationPopup
+          message="Reset email sent to your email address."
+          duration={3000}
+          onClose={closeNotification}
+        />
+      )}
     </div>
   );
 };

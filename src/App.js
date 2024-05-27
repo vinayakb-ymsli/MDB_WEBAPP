@@ -14,6 +14,7 @@ import ZipProcess from "./components/ZipProcess";
 import InfoPopup from "./components/InfoPopup";
 import LoginPage from "./components/login";
 import RegisterPage from "./components/register";
+import Projects from "./components/projects";
 import './App.css'
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} /> 
             <Route path="/register" element={<RegisterPage />} /> 
             <Route path="*" element={<Navigate to="/" />} /> {/* Redirect any unmatched route to the home page */}
+            <Route path="/projects" element={<Projects />} /> 
           </Routes>
         </div>
       </Router>

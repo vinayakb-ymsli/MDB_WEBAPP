@@ -39,8 +39,8 @@
   margin-bottom: 10%;
   /* margin-top: 8%; */
 }
-.login-section{
-    margin-top: 2rem;
+.login-section {
+  margin-top: 2rem;
 }
 .input-intro h6 {
   color: rgb(0, 0, 0);
@@ -122,4 +122,45 @@
   height: 50vh;
   margin-left: 5%;
   margin-right: 7%;
+}
+
+.input-wrapper {
+  border: 1px solid #ccc; /* Border for the outer div */
+  padding: 5px; /* Padding for the outer div */
+  display: flex; /* Ensure the wrapper uses flexbox */
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.input-container {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  width: 100%; /* Make sure it takes the full width */
+}
+
+.icon {
+  margin-right: 6px; /* Space between icon and input */
+  border-right: 2px solid rgb(13, 25, 114);
+  padding-right: 5px;
+  padding-left: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-log {
+  flex: 1; /* Take up remaining space */
+  border: none; /* Remove border from input */
+  outline: none; /* Remove outline for better aesthetics */
+}
+.forgot{
+  display: flex;
+  justify-content: right;
+  margin-bottom: 10px;
+}
+.heading-form-login{
+  font-size:1.5rem;
+  font-weight: bold;
+  color: rgb(13, 25, 114);
+  margin-bottom: 0.8rem;
 }
