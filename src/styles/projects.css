@@ -5,16 +5,14 @@
   /* background-color: #f2f2f2; */
  /* margin-top: 3rem; */
 }
-.sidebar-wrapper{
-  /* background-color: #f2f2f2; */
-  border-right: 2px solid black;
-  margin-top: 1rem;
-}
+
 .projects-wrapper {
   margin-top: 3rem;
-  /* margin-left: 5rem; */
+  margin-left: 1rem;
   background-color: #ffffff;
   /* padding-top: 3rem; */
+  overflow-x: hidden;
+  padding-bottom: 10px;
 }
 
 .projects-head {
@@ -29,6 +27,9 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
+  /* min-width: 100vw; */
+  overflow: hidden;
 }
 
 .project-button {
@@ -45,6 +46,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  width: 100%;
+  min-width: 100vw;
+  padding-right: 12rem;
 }
 
 .folder-item {
@@ -98,8 +102,8 @@
 }
 .search-bar-wrapper {
   border: 1px solid #ccc;
-  width: 100%;
-  max-width: 500px;
+  /* width: 100%; */
+  min-width: 500px;
   display: flex;
   align-items: center;
   padding-right: 1rem;
@@ -130,15 +134,85 @@
 .breadcrums-project-holder {
   display: flex;
   align-items: center;
+  width: 100%;
   /* justify-content: center; */
 }
 .breadcrumbs-project-page {
   display: flex;
   align-items: center;
   cursor: pointer;
+ 
   /* justify-content: center; */
 }
 .left-section-projects {
   width: 100%;
+}
+
+
+/* Basic styles for the sidebar */
+.sidebar-wrapper {
+  width: 150px;
+  /* background-color: #f8f9fa; */
+  padding-left: 10px;
+  padding-top: 30px;
+  font-family: Arial, sans-serif;
+  /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); */
+  /* overflow-y: scroll; */
+  
+}
+
+.sidebar-wrapper h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  /* height: 100vh;
+  display: flex;
+  justify-content: start; */
+}
+
+.sidebar-wrapper ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-wrapper li {
+  margin-bottom: 10px;
+}
+
+.client-sidebar, .project-sidebar {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  /* border-right: 2px solid rgba(0, 3, 59,0.1); */
+}
+.sidebar-wrapper{
+  /* background-color: #f2f2f2; */
+  border-right: 2px solid rgba(0, 3, 59,0.1);
+  /* margin-top: 1rem; */
+  height: 100vh;
+  overflow: hidden;
+  min-width: 200px;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+.projects-sidebar{
+  /* padding-left: 40px; */
+}
+.projects-sidebar, .models {
+  margin-top: 10px;
+  margin-left: 18px;
+}
+.models{
+  margin-left: 20px;
+}
+.model {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
 }
 

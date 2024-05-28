@@ -5,7 +5,7 @@ import { RxCrossCircled } from "react-icons/rx";
 // import a from "next/link";
 import "../styles/Projectform.css";
 
-const CreateProjectForm = () => {
+const CreateProjectForm = ({nameB}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     projectName: "",
@@ -30,7 +30,7 @@ const CreateProjectForm = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)} className="button-project-form">
-        Create New Project <AiFillPlusCircle className="text-xl" />
+       Create {nameB} <AiFillPlusCircle className="text-xl" />
       </button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <form onSubmit={handleSubmit}>

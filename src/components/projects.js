@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../styles/projects.css";
-import { FaUserAlt, FaFolderOpen, FaArrowLeft } from "react-icons/fa";
+import {
+  FaUserAlt,
+  FaFolderOpen,
+  FaArrowLeft,
+  FaFileAlt,
+  FaUser,
+} from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 import { RiSearchLine } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
@@ -14,6 +20,25 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [breadcrumbTrail, setBreadcrumbTrail] = useState(["Home", "Clients"]);
+  const [expandedClient, setExpandedClient] = useState(null);
+  const [expandedProject, setExpandedProject] = useState(null);
+  const [nameButton, setNameButton] = useState("Clients");
+
+  useEffect(() => {
+    updateNameButton();
+    console.log(nameButton)
+  }, [breadcrumbTrail]);
+
+  const updateNameButton = () => {
+    const length = breadcrumbTrail.length;
+    if (length === 2) {
+      setNameButton("Clients");
+    } else if (length === 3) {
+      setNameButton("Projects");
+    } else if (length === 4) {
+      setNameButton("Models");
+    }
+  };
 
   const handleClientClick = (client) => {
     setSelectedClient(client);
@@ -145,10 +170,64 @@ const Projects = () => {
       ));
     }
   };
+  const toggleClient = (clientName) => {
+    setExpandedClient(expandedClient === clientName ? null : clientName);
+    setExpandedProject(null); // Close all projects when a new client is clicked
+  };
+
+  // Toggle the expanded state of a project
+  const toggleProject = (projectName) => {
+    setExpandedProject(expandedProject === projectName ? null : projectName);
+  };
+  const renderSidebar = () => {
+    return (
+      <div className="sidebar-wrapper">
+        <h5>Explorer</h5>
+        <ul>
+          {clients.map((client) => (
+            <li key={client.clientName}>
+              <div
+                className="client-sidebar"
+                onClick={() => toggleClient(client.clientName)}
+              >
+                <FaFolderOpen className="icon" />
+                {client.clientName}
+              </div>
+              {expandedClient === client.clientName && (
+                <ul className="projects-sidebar">
+                  {client.projects.map((project) => (
+                    <li key={project.projectName}>
+                      <div
+                        className="project-sidebar"
+                        onClick={() => toggleProject(project.projectName)}
+                      >
+                        <FaFolderOpen className="icon" />
+                        {project.projectName}
+                      </div>
+                      {expandedProject === project.projectName && (
+                        <ul className="models">
+                          {project.models.map((model) => (
+                            <li key={model} className="model">
+                              <FaFileAlt className="icon" />
+                              {model}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
   return (
     <div className="projects-page-layout">
-      <div className="sidebar-wrapper">fva</div>
+      <div className="sidebar-wrapper">{renderSidebar()}</div>
       <div className="projects-wrapper">
         <div className="header-project">
           <div className="left-section-projects">
@@ -173,7 +252,7 @@ const Projects = () => {
           </div>
           <div className="right-project-header">
             <div className="project-button">
-              <CreateProjectForm />
+              <CreateProjectForm nameB={nameButton} />
             </div>
           </div>
         </div>
