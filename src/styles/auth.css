@@ -83,7 +83,7 @@
 
 .auth-container input[type="email"],
 .auth-container input[type="password"] {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -132,10 +132,11 @@
   margin-bottom: 10px;
 }
 
-.input-container {
+.inputcontainerLogin {
   display: flex; /* Use flexbox for layout */
   align-items: center; /* Center items vertically */
   width: 100%; /* Make sure it takes the full width */
+  /* padding: 10px; */
 }
 
 .icon {
@@ -148,7 +149,7 @@
   align-items: center;
 }
 
-.input-log {
+.inputLogin {
   flex: 1; /* Take up remaining space */
   border: none; /* Remove border from input */
   outline: none; /* Remove outline for better aesthetics */

@@ -64,7 +64,7 @@ const LoginPage = () => {
               <form>
                 {/* Email and Password input fields */}
                 <div class="input-wrapper">
-                  <div class="input-container">
+                  <div class="inputcontainerLogin">
                     <div class="icon">
                       <IoMdPerson
                         style={{
@@ -77,7 +77,7 @@ const LoginPage = () => {
                       type="email"
                       placeholder="Email"
                       style={{ border: "none", margin: "0" }}
-                      className="input-log"
+                      className="inputLogin"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -85,7 +85,7 @@ const LoginPage = () => {
                 </div>
 
                 <div class="input-wrapper">
-                  <div class="input-container">
+                  <div class="inputcontainerLogin">
                     <div class="icon">
                       <FaLock
                         style={{
@@ -97,7 +97,7 @@ const LoginPage = () => {
                     <input
                       type="password"
                       placeholder="Password"
-                      className="input-log"
+                      className="inputLogin"
                       style={{ border: "none", margin: "0" }}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -138,7 +138,7 @@ const LoginPage = () => {
                 <form>
                   {/* Email input field for password reset */}
                   <div class="input-wrapper">
-                    <div class="input-container">
+                    <div class="inputcontainerLogin">
                       <div class="icon">
                         <IoMdPerson
                           style={{

@@ -34,7 +34,7 @@ const RegisterPage = () => {
             <div className="heading-form-login">Register here</div>
             <form>
               <div class="input-wrapper">
-                <div class="input-container">
+                <div class="inputcontainerLogin">
                   <div class="icon">
                     <IoMdPerson
                       style={{
@@ -47,14 +47,14 @@ const RegisterPage = () => {
                     type="email"
                     placeholder="Email"
                     style={{ border: "none", margin: "0" }}
-                    className="input-log"
+                    className="inputLogin"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
               <div class="input-wrapper">
-                <div class="input-container">
+                <div class="inputcontainerLogin">
                   <div class="icon">
                     <FaLock
                       style={{
