@@ -1,9 +1,8 @@
 import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
-import { CiFileOn } from "react-icons/ci";
-import { BsUpload } from "react-icons/bs";
-import { TbFileAnalytics } from "react-icons/tb";
+import { FaUserAlt, FaFolderOpen } from "react-icons/fa";
+import { RiFolder3Line } from "react-icons/ri";
 import "../styles/Breadcrumbs.css";
 
 const BreadcrumbComponent = ({ activeStep }) => {
@@ -17,27 +16,25 @@ const BreadcrumbComponent = ({ activeStep }) => {
 
       <IoIosArrowForward className="breadcrumb-separator" />
 
-      <a href="/">
+      <a href="/clients">
         <div className={`breadcrumb-item ${activeStep === 2 ? "active" : ""}`}>
-          <CiFileOn /> Projects
+          <FaUserAlt /> Clients
         </div>
       </a>
 
       <IoIosArrowForward className="breadcrumb-separator" />
 
-      <a href="/upload">
+      <a href="/projects">
         <div className={`breadcrumb-item ${activeStep === 3 ? "active" : ""}`}>
-          <BsUpload /> File Upload
+          <FaFolderOpen /> Projects
         </div>
       </a>
 
       <IoIosArrowForward className="breadcrumb-separator" />
 
-      <a href="/report">
-        <div className={`breadcrumb-item ${activeStep === 4 ? "active" : ""}`}>
-          <TbFileAnalytics /> Generate Report
-        </div>
-      </a>
+      <div className={`breadcrumb-item ${activeStep === 4 ? "active" : ""}`}>
+        <RiFolder3Line /> Models
+      </div>
     </div>
   );
 };

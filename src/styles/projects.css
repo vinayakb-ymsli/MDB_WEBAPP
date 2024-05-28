@@ -1,63 +1,144 @@
-.projects-wrapper{
-    margin-top: 3rem;
-    margin-left: 5rem;
-}
-.projects-head{
-    /* margin-top: %; */
-    color: rgb(13, 25, 114);
-    font-size: 1.75rem;
-    /* padding-left: 30%; */
-    /* padding-bottom: 3%; */
-    font-weight: bolder;
-    margin-bottom: 0;
-  }
-  .header-project{
-    display: flex;
-    justify-content: space-between;
-  }
-  .project-button{
-    
-    margin-right:5rem;
-    
-  }
+.projects-page-layout{
+  display: flex;
+  flex-direction: row;
  
-  
-  .header-project {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+  /* background-color: #f2f2f2; */
+ /* margin-top: 3rem; */
+}
+.sidebar-wrapper{
+  /* background-color: #f2f2f2; */
+  border-right: 2px solid black;
+  margin-top: 1rem;
+}
+.projects-wrapper {
+  margin-top: 3rem;
+  /* margin-left: 5rem; */
+  background-color: #ffffff;
+  /* padding-top: 3rem; */
+}
 
-  
-  .project-button svg {
-    margin-left: 10px;
-  }
-  
-  .folders-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .folder-item {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    width: 200px;
-  }
-  
-  .folder-icon {
-    font-size: 24px;
-    margin-right: 10px;
-    color:rgb(13, 25, 114) ;
-  }
-  
-  .folder-name {
-    font-size: 18px;
-  }
-  
+.projects-head {
+  color: rgb(13, 25, 114);
+  font-size: 1.75rem;
+  font-weight: bolder;
+  margin-bottom: 0;
+}
+
+.header-project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.project-button {
+  margin-right: 1rem;
+  width: 100%;
+  min-width: 250px;
+}
+
+.project-button svg {
+  margin-left: 10px;
+}
+
+.folders-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 200px;
+}
+
+.folder-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: rgb(13, 25, 114);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 200px;
+  /* gap:1rem; */
+}
+.back-icon {
+  font-size: 20px;
+  margin-right: 10px;
+  color: rgb(13, 25, 114); /* Adjust color if necessary */
+  font-weight: bold;
+}
+.folder-name {
+  font-size: 18px;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+  /* font-weight: 500; */
+}
+
+.search-bar {
+  /* margin-bottom: 20px; */
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  margin-right: 1rem;
+}
+.search-bar-wrapper {
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+  border-radius: 5px;
+}
+.input-search-projects {
+  padding: 10px;
+  width: 100%;
+  max-width: 500px;
+  border: none;
+  outline: none;
+}
+.right-project-header {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  /* width: 100%; */
+  right: 0;
+  /* justify-content: right; */
+  /* align-items: end; */
+}
+
+.breadcrumbs-project-page {
+  display: flex;
+  /* flex-direction: row; */
+  align-items: center;
+}
+.breadcrums-project-holder {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+.breadcrumbs-project-page {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  /* justify-content: center; */
+}
+.left-section-projects {
+  width: 100%;
+}
+

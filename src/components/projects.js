@@ -1,32 +1,184 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/projects.css";
-import { FaFolderOpen } from "react-icons/fa";
-import { FaPlusCircle } from "react-icons/fa";
-import BreadcrumbComponent from "./Breadcrumbs";
+import { FaUserAlt, FaFolderOpen, FaArrowLeft } from "react-icons/fa";
+import { IoHomeOutline } from "react-icons/io5";
+import { RiSearchLine } from "react-icons/ri";
+import { IoIosArrowForward } from "react-icons/io";
+import { RiFolder3Line } from "react-icons/ri";
+import { IoReturnUpBackSharp } from "react-icons/io5";
 import CreateProjectForm from "./Projectform";
+import clients from "./ClientList"; // Import the clients array
 
 const Projects = () => {
-  const folderNames = ["Project A", "Project B", "Project C", "Project D"];
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [breadcrumbTrail, setBreadcrumbTrail] = useState(["Home", "Clients"]);
+
+  const handleClientClick = (client) => {
+    setSelectedClient(client);
+    setSelectedProject(null); // Reset project when client changes
+    setBreadcrumbTrail(["Home", "Clients", client.clientName]);
+  };
+
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setBreadcrumbTrail((prevTrail) => [...prevTrail, project.projectName]);
+  };
+
+  const handleBackClick = () => {
+    if (selectedProject) {
+      setSelectedProject(null); // Go back to client view
+      setBreadcrumbTrail((prevTrail) => prevTrail.slice(0, -1));
+    } else if (selectedClient) {
+      setSelectedClient(null); // Go back to main client view
+      setBreadcrumbTrail(["Home", "Clients"]);
+    }
+  };
+
+  const handleBreadcrumbClick = (index) => {
+    if (index === 0) {
+      setSelectedClient(null);
+      setSelectedProject(null);
+      setBreadcrumbTrail(["Home"]);
+    } else if (index === 1) {
+      setSelectedClient(null);
+      setSelectedProject(null);
+      setBreadcrumbTrail(["Home", "Clients"]);
+    } else if (index === 2 && selectedClient) {
+      setSelectedProject(null);
+      setBreadcrumbTrail(["Home", "Clients", selectedClient.clientName]);
+    }
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const renderBreadcrumb = () => {
+    const iconMapping = {
+      Home: { icon: IoHomeOutline, label: "Home" },
+      Clients: { icon: FaUserAlt, label: "Clients" },
+      Projects: { icon: FaFolderOpen, label: "Projects" },
+      Models: { icon: RiFolder3Line, label: "Models" },
+    };
+
+    return breadcrumbTrail.map((item, index) => {
+      const { icon: Icon, label } = iconMapping[item] || {};
+      return (
+        <div
+          key={index}
+          className="breadcrumbs-project-page"
+          onClick={() => handleBreadcrumbClick(index)}
+        >
+          {index !== 0 && <IoIosArrowForward />}
+          {Icon && (
+            <div style={{ marginRight: "5px", paddingBottom: "3px" }}>
+              <Icon style={{ color: "rgb(13, 25, 114)" }} />
+            </div>
+          )}{" "}
+          {/* Render icon if available */}
+          {label || item}{" "}
+          {/* Render label if available, otherwise render item */}
+        </div>
+      );
+    });
+  };
+  const renderFolders = () => {
+    let filteredItems;
+
+    if (selectedClient) {
+      if (selectedProject) {
+        filteredItems = selectedProject.models.filter((model) =>
+          model.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        return (
+          <>
+            <div className="back-button" onClick={handleBackClick}>
+              <IoReturnUpBackSharp className="back-icon" />
+              <span className="folder-name">Back</span>
+            </div>
+            {filteredItems.map((model, index) => (
+              <div key={index} className="folder-item">
+                <RiFolder3Line className="folder-icon" />
+                <span className="folder-name">{model}</span>
+              </div>
+            ))}
+          </>
+        );
+      } else {
+        filteredItems = selectedClient.projects.filter((project) =>
+          project.projectName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        return (
+          <>
+            <div className="folder-item" onClick={handleBackClick}>
+              <IoReturnUpBackSharp className="back-icon" />
+              <span className="folder-name">Back</span>
+            </div>
+            {filteredItems.map((project, index) => (
+              <div
+                key={index}
+                className="folder-item"
+                onClick={() => handleProjectClick(project)}
+              >
+                <FaFolderOpen className="folder-icon" />
+                <span className="folder-name">{project.projectName}</span>
+              </div>
+            ))}
+          </>
+        );
+      }
+    } else {
+      filteredItems = clients.filter((client) =>
+        client.clientName.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      return filteredItems.map((client, index) => (
+        <div
+          key={index}
+          className="folder-item"
+          onClick={() => handleClientClick(client)}
+        >
+          <FaFolderOpen className="folder-icon" />
+          <span className="folder-name">{client.clientName}</span>
+        </div>
+      ));
+    }
+  };
+
   return (
-    <div className="projects-wrapper">
-      <div className="header-project">
-        <div>
-          <span className="projects-head">Projects</span>
-          <BreadcrumbComponent activeStep={2} />
+    <div className="projects-page-layout">
+      <div className="sidebar-wrapper">fva</div>
+      <div className="projects-wrapper">
+        <div className="header-project">
+          <div className="left-section-projects">
+            <span className="projects-head">Clients</span>
+            <div className="breadcrums-project-holder">
+              {renderBreadcrumb()}
+            </div>
+
+            {/* <BreadcrumbComponent activeStep={1} /> */}
+          </div>
+          <div className="search-bar">
+            <div className="search-bar-wrapper">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                className="input-search-projects"
+                onChange={handleSearchChange}
+              />
+              <RiSearchLine />
+            </div>
+          </div>
+          <div className="right-project-header">
+            <div className="project-button">
+              <CreateProjectForm />
+            </div>
+          </div>
         </div>
 
-        <div className="project-button">
-         
-          <CreateProjectForm />
-        </div>
-      </div>
-      <div className="folders-container">
-        {folderNames.map((folder, index) => (
-          <div key={index} className="folder-item">
-            <FaFolderOpen className="folder-icon" />
-            <span className="folder-name">{folder}</span>
-          </div>
-        ))}
+        <div className="folders-container">{renderFolders()}</div>
       </div>
     </div>
   );

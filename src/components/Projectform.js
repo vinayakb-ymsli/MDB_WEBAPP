@@ -29,7 +29,7 @@ const CreateProjectForm = () => {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className="button">
+      <button onClick={() => setIsOpen(true)} className="button-project-form">
         Create New Project <AiFillPlusCircle className="text-xl" />
       </button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
