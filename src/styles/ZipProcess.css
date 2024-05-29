@@ -13,7 +13,7 @@ main.mainContainer {
 
 .fullscreenLeft {
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   background-color: rgba(265, 265, 265, 0.5);
   /* opacity: 50%; */
   margin-top: 0.5rem;
@@ -24,7 +24,7 @@ main.mainContainer {
 .fullscreenRight {
   position: absolute;
   right: 0;
-  z-index: 1;
+  z-index: 100;
   background-color: rgba(265, 265, 265, 0.5);
   /* opacity: 50%; */
   margin-top: 0.5rem;

@@ -6,7 +6,8 @@ import InfoPopup from "./InfoPopup";
 import { PiSelectionBackgroundFill } from "react-icons/pi";
 // import img from "../images/yamaha.png";
 
-const Navbar = ({ setisBlurr }) => {
+const 
+Navbar = ({ setisBlurr }) => {
   const [popUp, setpopUp] = useState(false);
   const [image, setimage] = useState(false);
   const [details, setdetails] = useState(false);
@@ -76,9 +77,9 @@ const Navbar = ({ setisBlurr }) => {
                 <a href="#">Structure</a>
                 <a href="#">History</a>
                 <a href="/projects">View Clients</a>
-                <a href="#">Add Client</a>
-                <a href="#">View Projects</a>
-                <a href="#">Add Project</a>
+                <a href="/projects/addclient">Add Client</a>
+                <a href="/projects">View Projects</a>
+                <a href="/projects/addproject">Add Project</a>
                 <a href="#">Search a Repository</a>
               </div>
             </div>

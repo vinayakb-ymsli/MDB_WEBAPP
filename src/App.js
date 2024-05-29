@@ -33,6 +33,8 @@ function App() {
             <Route path="/register" element={<RegisterPage />} /> 
             <Route path="*" element={<Navigate to="/" />} /> {/* Redirect any unmatched route to the home page */}
             <Route path="/projects" element={<Projects />} /> 
+            <Route path="/projects/addclient" element={<Projects toggleForm={true} typeForm="client" />} />
+            <Route path="/projects/addproject" element={<Projects toggleForm={true} typeForm="client" />} />
           </Routes>
         </div>
       </Router>

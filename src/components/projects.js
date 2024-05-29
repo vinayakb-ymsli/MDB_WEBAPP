@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
 import "../styles/projects.css";
+
 import {
   FaUserAlt,
   FaFolderOpen,
@@ -15,7 +16,7 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import CreateProjectForm from "./Projectform";
 import clients from "./ClientList"; // Import the clients array
 
-const Projects = () => {
+const Projects = ({toggleForm,typeForm}) => {
   const [selectedClient, setSelectedClient] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -228,6 +229,7 @@ const Projects = () => {
   return (
     <div className="projects-page-layout">
       <div className="sidebar-wrapper">{renderSidebar()}</div>
+      <div className="border"><hr></hr></div>
       <div className="projects-wrapper">
         <div className="header-project">
           <div className="left-section-projects">
@@ -252,7 +254,7 @@ const Projects = () => {
           </div>
           <div className="right-project-header">
             <div className="project-button">
-              <CreateProjectForm nameB={nameButton} />
+              <CreateProjectForm nameB={nameButton} toggleForm={toggleForm} typeForm={typeForm}  />
             </div>
           </div>
         </div>

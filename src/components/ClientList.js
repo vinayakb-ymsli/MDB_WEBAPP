@@ -1,104 +1,105 @@
 const clients = [
-    {
-      clientName: "Client A",
+  {
+      clientName: "Google",
       projects: [
-        { projectName: "Project Alpha", models: ["Model A1", "Model A2", "Model A3"] },
-        { projectName: "Project Beta", models: ["Model B1", "Model B2"] },
-        { projectName: "Project Gamma", models: ["Model G1", "Model G2", "Model G3", "Model G4"] },
-        { projectName: "Project Delta", models: ["Model D1", "Model D2"] },
-        { projectName: "Project Epsilon", models: ["Model E1", "Model E2", "Model E3"] }
+          { projectName: "Google Maps", models: ["Maps API", "Street View", "Geocoding API"] },
+          { projectName: "Google Search", models: ["Search Algorithm", "AdWords", "PageRank"] },
+          { projectName: "Google Cloud", models: ["Compute Engine", "App Engine", "Kubernetes Engine", "BigQuery"] },
+          { projectName: "YouTube", models: ["Video Streaming", "Recommendation Engine"] },
+          { projectName: "Google Photos", models: ["Image Recognition", "Photo Sharing", "Backup and Sync"] }
       ]
-    },
-    {
-      clientName: "Client B",
+  },
+  {
+      clientName: "Amazon",
       projects: [
-        { projectName: "Project Zeta", models: ["Model Z1", "Model Z2"] },
-        { projectName: "Project Eta", models: ["Model Eta1", "Model Eta2", "Model Eta3"] },
-        { projectName: "Project Theta", models: ["Model T1", "Model T2"] },
-        { projectName: "Project Iota", models: ["Model I1", "Model I2", "Model I3", "Model I4"] },
-        { projectName: "Project Kappa", models: ["Model K1", "Model K2"] }
+          { projectName: "Amazon Web Services", models: ["EC2", "S3"] },
+          { projectName: "Amazon Prime", models: ["Prime Video", "Prime Music", "Prime Delivery"] },
+          { projectName: "Alexa", models: ["Voice Recognition", "Smart Home Integration"] },
+          { projectName: "Amazon Kindle", models: ["E-Book Reader", "Kindle Store"] },
+          { projectName: "Amazon Fresh", models: ["Online Grocery", "Delivery Service"] }
       ]
-    },
-    {
-      clientName: "Client C",
+  },
+  {
+      clientName: "Microsoft",
       projects: [
-        { projectName: "Project Lambda", models: ["Model L1", "Model L2", "Model L3"] },
-        { projectName: "Project Mu", models: ["Model M1", "Model M2"] },
-        { projectName: "Project Nu", models: ["Model N1", "Model N2", "Model N3", "Model N4"] },
-        { projectName: "Project Xi", models: ["Model X1", "Model X2", "Model X3"] },
-        { projectName: "Project Omicron", models: ["Model O1", "Model O2"] }
+          { projectName: "Microsoft Office", models: ["Word", "Excel", "PowerPoint"] },
+          { projectName: "Azure", models: ["Virtual Machines", "Azure AI"] },
+          { projectName: "Windows", models: ["Windows 10", "Windows Server", "Windows Update"] },
+          { projectName: "Xbox", models: ["Xbox Live", "Game Pass", "Console Development"] },
+          { projectName: "LinkedIn", models: ["Recruiter", "Sales Navigator"] }
       ]
-    },
-    {
-      clientName: "Client D",
+  },
+  {
+      clientName: "Apple",
       projects: [
-        { projectName: "Project Pi", models: ["Model P1", "Model P2", "Model P3"] },
-        { projectName: "Project Rho", models: ["Model R1", "Model R2"] },
-        { projectName: "Project Sigma", models: ["Model S1", "Model S2", "Model S3"] },
-        { projectName: "Project Tau", models: ["Model T1", "Model T2", "Model T3", "Model T4"] },
-        { projectName: "Project Upsilon", models: ["Model U1", "Model U2"] }
+          { projectName: "iPhone", models: ["iPhone 13", "iPhone 13 Pro", "iPhone SE"] },
+          { projectName: "MacBook", models: ["MacBook Air", "MacBook Pro"] },
+          { projectName: "iCloud", models: ["iCloud Storage", "iCloud Drive"] },
+          { projectName: "Apple Watch", models: ["Apple Watch Series 7", "Apple Watch SE", "WatchOS"] },
+          { projectName: "Apple Music", models: ["Streaming Service", "Music Library"] }
       ]
-    },
-    {
-      clientName: "Client E",
+  },
+  {
+      clientName: "Facebook",
       projects: [
-        { projectName: "Project Phi", models: ["Model P1", "Model P2"] },
-        { projectName: "Project Chi", models: ["Model C1", "Model C2", "Model C3"] },
-        { projectName: "Project Psi", models: ["Model Ps1", "Model Ps2", "Model Ps3"] },
-        { projectName: "Project Omega", models: ["Model O1", "Model O2"] },
-        { projectName: "Project AlphaBeta", models: ["Model AB1", "Model AB2", "Model AB3", "Model AB4"] }
+          { projectName: "Facebook App", models: ["News Feed", "Messenger"] },
+          { projectName: "Instagram", models: ["Stories", "IGTV", "Reels"] },
+          { projectName: "WhatsApp", models: ["Messaging", "WhatsApp Web"] },
+          { projectName: "Oculus", models: ["Rift", "Quest"] },
+          { projectName: "Facebook Ads", models: ["Ad Manager", "Audience Insights"] }
       ]
-    },
-    {
-      clientName: "Client F",
+  },
+  {
+      clientName: "Netflix",
       projects: [
-        { projectName: "Project One", models: ["Model 1A", "Model 1B", "Model 1C"] },
-        { projectName: "Project Two", models: ["Model 2A", "Model 2B"] },
-        { projectName: "Project Three", models: ["Model 3A", "Model 3B", "Model 3C"] },
-        { projectName: "Project Four", models: ["Model 4A", "Model 4B", "Model 4C", "Model 4D"] },
-        { projectName: "Project Five", models: ["Model 5A", "Model 5B"] }
+          { projectName: "Streaming Service", models: ["Content Library", "Recommendation Algorithm", "User Interface"] },
+          { projectName: "Originals", models: ["Stranger Things", "The Crown"] },
+          { projectName: "Mobile App", models: ["Android App", "iOS App"] },
+          { projectName: "Content Delivery Network", models: ["Open Connect", "Cache Servers"] },
+          { projectName: "Analytics", models: ["Viewer Statistics", "Content Performance"] }
       ]
-    },
-    {
-      clientName: "Client G",
+  },
+  {
+      clientName: "Tesla",
       projects: [
-        { projectName: "Project Red", models: ["Model R1", "Model R2"] },
-        { projectName: "Project Blue", models: ["Model B1", "Model B2", "Model B3"] },
-        { projectName: "Project Green", models: ["Model G1", "Model G2", "Model G3"] },
-        { projectName: "Project Yellow", models: ["Model Y1", "Model Y2", "Model Y3", "Model Y4"] },
-        { projectName: "Project Purple", models: ["Model P1", "Model P2"] }
+          { projectName: "Model S", models: ["Battery Pack", "Autopilot"] },
+          { projectName: "Model 3", models: ["Long Range", "Performance"] },
+          { projectName: "Model X", models: ["Falcon Wing Doors", "Ludicrous Mode"] },
+          { projectName: "Model Y", models: ["Standard Range", "Dual Motor"] },
+          { projectName: "Cybertruck", models: ["Tri Motor", "Self-Driving"] }
       ]
-    },
-    {
-      clientName: "Client H",
+  },
+  {
+      clientName: "Uber",
       projects: [
-        { projectName: "Project North", models: ["Model N1", "Model N2", "Model N3"] },
-        { projectName: "Project South", models: ["Model S1", "Model S2"] },
-        { projectName: "Project East", models: ["Model E1", "Model E2", "Model E3"] },
-        { projectName: "Project West", models: ["Model W1", "Model W2", "Model W3", "Model W4"] },
-        { projectName: "Project Central", models: ["Model C1", "Model C2"] }
+          { projectName: "Uber Rides", models: ["Ride Matching", "Surge Pricing", "Driver App"] },
+          { projectName: "Uber Eats", models: ["Restaurant Integration", "Delivery Tracking"] },
+          { projectName: "Uber Freight", models: ["Load Matching", "Carrier Platform"] },
+          { projectName: "Uber Elevate", models: ["Air Taxi", "Vertiports"] },
+          { projectName: "Uber AI", models: ["AI Research", "Self-Driving Cars"] }
       ]
-    },
-    {
-      clientName: "Client I",
+  },
+  {
+      clientName: "Spotify",
       projects: [
-        { projectName: "Project Sunrise", models: ["Model S1", "Model S2", "Model S3"] },
-        { projectName: "Project Sunset", models: ["Model S1", "Model S2"] },
-        { projectName: "Project Midnight", models: ["Model M1", "Model M2", "Model M3"] },
-        { projectName: "Project Dawn", models: ["Model D1", "Model D2", "Model D3", "Model D4"] },
-        { projectName: "Project Dusk", models: ["Model D1", "Model D2"] }
+          { projectName: "Music Streaming", models: ["Streaming Engine", "Recommendation System"] },
+          { projectName: "Podcasts", models: ["Podcast Directory", "Podcast Analytics"] },
+          { projectName: "Spotify for Artists", models: ["Artist Dashboard", "Fan Insights"] },
+          { projectName: "Advertising", models: ["Ad Studio", "Ad Personalization"] },
+          { projectName: "Discover Weekly", models: ["Playlist Generation", "User Data Analysis"] }
       ]
-    },
-    {
-      clientName: "Client J",
+  },
+  {
+      clientName: "Samsung",
       projects: [
-        { projectName: "Project AlphaOmega", models: ["Model AO1", "Model AO2"] },
-        { projectName: "Project BetaGamma", models: ["Model BG1", "Model BG2", "Model BG3"] },
-        { projectName: "Project DeltaEpsilon", models: ["Model DE1", "Model DE2", "Model DE3"] },
-        { projectName: "Project ZetaEta", models: ["Model ZE1", "Model ZE2", "Model ZE3", "Model ZE4"] },
-        { projectName: "Project ThetaIota", models: ["Model TI1", "Model TI2"] }
+          { projectName: "Galaxy Phones", models: ["Galaxy S21", "Galaxy Note20"] },
+          { projectName: "Samsung TV", models: ["QLED TV", "Smart TV"] },
+          { projectName: "Home Appliances", models: ["Family Hub Refrigerator", "Smart Washer"] },
+          { projectName: "Wearables", models: ["Galaxy Watch", "Galaxy Buds"] },
+          { projectName: "Semiconductors", models: ["Memory Chips", "Processors"] }
       ]
-    }
-  ]; 
+  }
+];
+
 
   export default clients;

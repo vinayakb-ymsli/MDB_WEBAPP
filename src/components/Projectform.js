@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Modal from "./Modal";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { RxCrossCircled } from "react-icons/rx";
-// import a from "next/link";
 import "../styles/Projectform.css";
 
-const CreateProjectForm = ({nameB}) => {
+const CreateProjectForm = ({nameB,toggleForm,typeForm}) => {
+  
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     projectName: "",
     projectType: "",
     projectCompanyName: "",
   });
+
+  useEffect(() => {
+    if (toggleForm==true){
+      setIsOpen(true)
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -32,6 +38,7 @@ const CreateProjectForm = ({nameB}) => {
       <button onClick={() => setIsOpen(true)} className="button-project-form">
        Create {nameB} <AiFillPlusCircle className="text-xl" />
       </button>
+      
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <form onSubmit={handleSubmit}>
           <div className="form-wrapper">

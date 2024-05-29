@@ -382,6 +382,7 @@ button {
   border-top: 1px solid #E5E8EC;
   display: none;
   position: absolute;
+  z-index: 300;
   width: 300px;
   border-radius: 0px 0px 10px 10px;
   /* box-shadow: 0 10px 25px rgba(0,0,0,.1); */
@@ -411,8 +412,8 @@ button {
 }
 
 .process-page-icon {
-  font-size: 13px;
-  color: #91A5BE;
+  /* font-size: 13px; */
+  /* color: #91A5BE; */
   transform: rotate(0deg);
   transition: all .2s ease-in-out;
 }
