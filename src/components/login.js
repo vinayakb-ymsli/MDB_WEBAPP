@@ -36,6 +36,7 @@ const LoginPage = () => {
     // For now, let's just log the email
     console.log("Reset password email sent to:", email);
     setShowNotification(true);
+    setShowForgotPassword(false)
   };
   const closeNotification = () => {
     setShowNotification(false);

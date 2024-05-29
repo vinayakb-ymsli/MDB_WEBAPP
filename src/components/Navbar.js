@@ -75,10 +75,10 @@ const Navbar = ({ setisBlurr }) => {
                 <a href="#">Analytics</a>
                 <a href="#">Structure</a>
                 <a href="#">History</a>
-                <a href="/projects">Add a Repository</a>
-                <a href="#">Delete a Repository</a>
-                <a href="#">Update a Repository</a>
-                <a href="#">Filter a Repository</a>
+                <a href="/projects">View Clients</a>
+                <a href="#">Add Client</a>
+                <a href="#">View Projects</a>
+                <a href="#">Add Project</a>
                 <a href="#">Search a Repository</a>
               </div>
             </div>

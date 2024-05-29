@@ -14,20 +14,33 @@ import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 
 const ProcessPage = () => {
   const { state } = useLocation();
-  try{
-    if (state.data == null){
-      var image = sessionStorage.getItem('image');
-    }
-    else{
+  try {
+    if (state.data == null) {
+      var image = sessionStorage.getItem("image");
+    } else {
       var image = state.data;
-      sessionStorage.setItem('image', image);
+      sessionStorage.setItem("image", image);
     }
+  } catch {
+    var image = null;
   }
-  catch{
-    var image = null
-  }
+  const modelsList = [
+    { id: 0, label: "Istanbul, TR (AHL)" },
+    { id: 1, label: "Paris, FR (CDG)" },
+  ];
+  const [isProcessPageOpen, setProcessPageOpen] = useState(false);
+  const [processPageItems, setProcessPageItems] = useState(modelsList);
+  const [selectedProcessPageItem, setSelectedProcessPageItem] = useState(null);
 
-  
+  const toggleProcessPageDropdown = () =>
+    setProcessPageOpen(!isProcessPageOpen);
+
+  const handleProcessPageItemClick = (id) => {
+    selectedProcessPageItem === id
+      ? setSelectedProcessPageItem(null)
+      : setSelectedProcessPageItem(id);
+    setProcessPageOpen(!isProcessPageOpen);
+  };
   const [uploadedImage, setUploadedImage] = useState(image);
   const [processedImage, setProcessedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -167,46 +180,91 @@ const ProcessPage = () => {
           </div>
         </div>
       )}
-      <div className="project">
+      <div className="project-process">
         Image Name:{" "}
-        <div className="project-name">
+        <div className="project-name-process">
           {uploadedImage ? uploadedImage.name : "No image selected"}
         </div>
-      </div>
-      {processedImage && (
-            <div className="toggles">
-              <label className="toggles-label">
-                <input 
-                  className="toggles-input"
-                  type="radio"
-                  value="slider"
-                  checked={selectedOption === "slider"}
-                  onChange={(e) => handleOptionChange(e.target.value)}
-                />
-                Slider
-              </label>
-              <label className="toggles-label">
-                <input 
-                  className="toggles-input"
-                  type="radio"
-                  value="input"
-                  checked={selectedOption === "input"}
-                  onChange={(e) => handleOptionChange(e.target.value)}
-                />
-                Input
-              </label>
-              <label className="toggles-label">
-                <input
-                  className="toggles-input"
-                  type="radio"
-                  value="processed"
-                  checked={selectedOption === "processed"}
-                  onChange={(e) => handleOptionChange(e.target.value)}
-                />
-                Processed
-              </label>
+        {(!isLoading && togglePreview)  && (
+         <div className="process-page-dropdown-wrapper">
+          <div className="process-page-dropdown">
+            <div
+              className="process-page-dropdown-header"
+              onClick={toggleProcessPageDropdown}
+            >
+              {selectedProcessPageItem !== null
+                ? processPageItems.find(
+                    (item) => item.id === selectedProcessPageItem
+                  ).label
+                : "Select your model"}
+              <i
+                className={`fa fa-chevron-right process-page-icon ${
+                  isProcessPageOpen && "process-page-open"
+                }`}
+              ></i>
             </div>
-          )}
+            <div
+              className={`process-page-dropdown-body ${
+                isProcessPageOpen && "process-page-open"
+              }`}
+            >
+              {processPageItems.map((item) => (
+                <div
+                  className="process-page-dropdown-item"
+                  onClick={() => handleProcessPageItemClick(item.id)}
+                  key={item.id}
+                >
+                  <span
+                    className={`process-page-dropdown-item-dot ${
+                      item.id === selectedProcessPageItem &&
+                      "process-page-selected"
+                    }`}
+                  >
+                    •{" "}
+                  </span>
+                  {item.label}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>)}
+        
+      </div>
+
+      {processedImage && (
+        <div className="toggles">
+          <label className="toggles-label">
+            <input
+              className="toggles-input"
+              type="radio"
+              value="slider"
+              checked={selectedOption === "slider"}
+              onChange={(e) => handleOptionChange(e.target.value)}
+            />
+            Slider
+          </label>
+          <label className="toggles-label">
+            <input
+              className="toggles-input"
+              type="radio"
+              value="input"
+              checked={selectedOption === "input"}
+              onChange={(e) => handleOptionChange(e.target.value)}
+            />
+            Input
+          </label>
+          <label className="toggles-label">
+            <input
+              className="toggles-input"
+              type="radio"
+              value="processed"
+              checked={selectedOption === "processed"}
+              onChange={(e) => handleOptionChange(e.target.value)}
+            />
+            Processed
+          </label>
+        </div>
+      )}
 
       {/* <div className="dropdown-menu">
         
@@ -291,14 +349,13 @@ const ProcessPage = () => {
         // onMouseEnter={handleMouseEnter}
         // onMouseLeave={handleMouseLeave}
       >
-        
         {togglePreview ? (
           <div className="image-container">
             {uploadedImage && (
               <div>
                 <div
-                  // onMouseEnter={handleMouseEnterInput}
-                  // onMouseLeave={handleMouseLeaveInput}
+                // onMouseEnter={handleMouseEnterInput}
+                // onMouseLeave={handleMouseLeaveInput}
                 >
                   <div
                     className="fullscreenLeft"
@@ -341,39 +398,48 @@ const ProcessPage = () => {
               </div>
             ) : (
               <>
-              {(selectedOption=="slider")&& ( <><div
-                  className="fullscreenLeft"
-                  onClick={() => toggleFullscreen("input")}
-                >
-                  <FullscreenIcon style={{ color: "black" }} />
-                </div>
-                <div
-                  className="fullscreenRight"
-                  onClick={() => toggleFullscreen("processed")}
-                >
-                  <FullscreenIcon style={{ color: "white" }} />
-                </div>
-                
-                <ImageSlider
-                  image1={processedImage}
-                  image2={URL.createObjectURL(uploadedImage)}
-                  leftLabelText={"Input Image"}
-                  rightLabelText={"Processed Image"}
-                  sliderColor="white"
-                  handleColor="rgb(0, 3, 59)"
-                  handleBackgroundColor="white"
-                />
-              </>)}
-              {(selectedOption=="input")&& ( <><img
-                    src={URL.createObjectURL(uploadedImage)}
-                    style={{ width: 700, height: 390 }}
-                  />
-              </>)}
-              {(selectedOption=="processed")&& ( <><img
-                    src={processedImage}
-                    style={{ width: 700, height: 390 }}
-                  />
-              </>)}
+                {selectedOption == "slider" && (
+                  <>
+                    <div
+                      className="fullscreenLeft"
+                      onClick={() => toggleFullscreen("input")}
+                    >
+                      <FullscreenIcon style={{ color: "black" }} />
+                    </div>
+                    <div
+                      className="fullscreenRight"
+                      onClick={() => toggleFullscreen("processed")}
+                    >
+                      <FullscreenIcon style={{ color: "white" }} />
+                    </div>
+
+                    <ImageSlider
+                      image1={processedImage}
+                      image2={URL.createObjectURL(uploadedImage)}
+                      leftLabelText={"Input Image"}
+                      rightLabelText={"Processed Image"}
+                      sliderColor="white"
+                      handleColor="rgb(0, 3, 59)"
+                      handleBackgroundColor="white"
+                    />
+                  </>
+                )}
+                {selectedOption == "input" && (
+                  <>
+                    <img
+                      src={URL.createObjectURL(uploadedImage)}
+                      style={{ width: 700, height: 390 }}
+                    />
+                  </>
+                )}
+                {selectedOption == "processed" && (
+                  <>
+                    <img
+                      src={processedImage}
+                      style={{ width: 700, height: 390 }}
+                    />
+                  </>
+                )}
               </>
             )}
             {/* {isLoading && (
