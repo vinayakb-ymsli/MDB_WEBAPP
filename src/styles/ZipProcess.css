@@ -57,7 +57,7 @@ main.mainContainer {
     rgb(255, 255, 255) 52%
   );
   position: relative;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 }
 .bkgimg img {
   position: absolute;

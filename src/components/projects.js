@@ -254,7 +254,7 @@ const Projects = ({toggleForm,typeForm}) => {
           </div>
           <div className="right-project-header">
             <div className="project-button">
-              <CreateProjectForm nameB={nameButton} toggleForm={toggleForm} typeForm={typeForm}  />
+              <CreateProjectForm nameB={nameButton} toggleForm={toggleForm} typeForm={nameButton}  />
             </div>
           </div>
         </div>

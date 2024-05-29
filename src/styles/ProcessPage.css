@@ -9,7 +9,7 @@ body {
 .main {
   display: flex;
   /* position: relative; */
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   height: 74vh;
   padding-top: 5rem;
   display: flex;

@@ -66,6 +66,10 @@
   align-items: center;
   gap: 1rem;
 }
+.head-nav-left a{
+  text-decoration: none;
+  color: white;
+}
 .head-nav-heading{
   font-size: xx-large;
   font-weight: 700;

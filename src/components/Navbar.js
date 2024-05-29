@@ -48,20 +48,23 @@ const Navbar = ({ setisBlurr }) => {
         </div>
       </div> */}
         <div className="head-nav">
-          <div className="banner">
-            
-          </div>
+          <div className="banner"></div>
           <div className="head-nav-content">
-              <div className="head-nav-left"><span className="head-nav-heading">CELL HANDLER™</span><span className="head-nav-sub-heading">Cell Picking & Imaging System</span></div>
-              <div >
-                <img className="logo" src="/images/yamaha.png" />
-              </div>
+            <div className="head-nav-left">
+              <a href="/">
+              <span className="head-nav-heading">CELL HANDLER™</span>
+              </a>
+              <span className="head-nav-sub-heading">
+                Cell Picking & Imaging System
+              </span>
             </div>
+            <div>
+              <img className="logo" src="/images/yamaha.png" />
+            </div>
+          </div>
         </div>
 
-        <div className="nav-body">
-        
-        </div>
+        <div className="nav-body"></div>
         <div className="secondNav">
           <div className="left-section">
             <div className="dropdown">
@@ -81,6 +84,8 @@ const Navbar = ({ setisBlurr }) => {
                 <a href="/projects/addclient">Add Client</a>
                 <a href="/projects">View Projects</a>
                 <a href="/projects/addproject">Add Project</a>
+                <a href="/projects">View Models</a>
+                <a href="/projects/addmodel">Add Model</a>
                 <a href="#">Search a Repository</a>
               </div>
             </div>

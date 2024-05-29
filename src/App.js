@@ -2,7 +2,8 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Redirect, Navigate
+  Redirect,
+  Navigate,
 } from "react-router-dom";
 
 import "./App.css";
@@ -15,7 +16,7 @@ import InfoPopup from "./components/InfoPopup";
 import LoginPage from "./components/login";
 import RegisterPage from "./components/register";
 import Projects from "./components/projects";
-import './App.css'
+import "./App.css";
 
 function App() {
   const [isBlurr, setisBlurr] = useState(false);
@@ -29,12 +30,23 @@ function App() {
             <Route path="/" element={<Body />} />
             <Route path="/process" element={<ProcessPage />} />
             <Route path="/zipprocess" element={<ZipProcess />} />
-            <Route path="/login" element={<LoginPage />} /> 
-            <Route path="/register" element={<RegisterPage />} /> 
-            <Route path="*" element={<Navigate to="/" />} /> {/* Redirect any unmatched route to the home page */}
-            <Route path="/projects" element={<Projects />} /> 
-            <Route path="/projects/addclient" element={<Projects toggleForm={true} typeForm="client" />} />
-            <Route path="/projects/addproject" element={<Projects toggleForm={true} typeForm="client" />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="*" element={<Navigate to="/" />} />{" "}
+            {/* Redirect any unmatched route to the home page */}
+            <Route path="/projects" element={<Projects />} />
+            <Route
+              path="/projects/addclient"
+              element={<Projects toggleForm={true} typeForm="client" />}
+            />
+            <Route
+              path="/projects/addproject"
+              element={<Projects toggleForm={true} typeForm="project" />}
+            />
+            <Route
+              path="/projects/addmodel"
+              element={<Projects toggleForm={true} typeForm="model" />}
+            />
           </Routes>
         </div>
       </Router>
