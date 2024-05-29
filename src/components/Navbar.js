@@ -6,8 +6,7 @@ import InfoPopup from "./InfoPopup";
 import { PiSelectionBackgroundFill } from "react-icons/pi";
 // import img from "../images/yamaha.png";
 
-const 
-Navbar = ({ setisBlurr }) => {
+const Navbar = ({ setisBlurr }) => {
   const [popUp, setpopUp] = useState(false);
   const [image, setimage] = useState(false);
   const [details, setdetails] = useState(false);
@@ -48,18 +47,20 @@ Navbar = ({ setisBlurr }) => {
           <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
         </div>
       </div> */}
-        <div style={{position:"relative" }}>
-          <img className="banner" src="images/Banner.png" />
-          <div className="nav-logo">
-            <img className="logo" src="/images/yamaha.png" />
-            {/* <img src={img} alt="logo" /> */}
+        <div className="head-nav">
+          <div className="banner">
+            
           </div>
+          <div className="head-nav-content">
+              <div className="head-nav-left"><span className="head-nav-heading">CELL HANDLER™</span><span className="head-nav-sub-heading">Cell Picking & Imaging System</span></div>
+              <div >
+                <img className="logo" src="/images/yamaha.png" />
+              </div>
+            </div>
         </div>
+
         <div className="nav-body">
-          {/* <div className="nav-left-section">
-            <span>CELL HANDLER™</span>
-            <span className="nav-left-section-subscript">Cell picking and Imaging System</span>
-          </div> */}
+        
         </div>
         <div className="secondNav">
           <div className="left-section">

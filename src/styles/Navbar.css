@@ -41,14 +41,56 @@
   display: flex;
   flex-direction: column;
 }
-.banner {
-  min-height: 12vh;
-  max-width: 100%;
-  overflow: hidden;
-  /* background-image: "images/kv_pc.jpg";
-  background-repeat: no-repeat;
-  background-size: cover; */
+.head-nav {
+  height: 12vh;
+  position: relative;
+  background-color: rgb(0, 3, 65);
+  /* display: flex; */
 }
+.head-nav-content{
+  position: absolute;
+  top:23%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  /* padding-top: auto;
+  padding-bottom: auto; */
+  padding-left: 4rem;
+  padding-right: 4rem;
+  align-items: center;
+  /* justify-content: center; */
+}
+.head-nav-left{
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.head-nav-heading{
+  font-size: xx-large;
+  font-weight: 700;
+  /* font-family: 'Arial Narrow Bold', sans-serif; */
+}
+.head-nav-sub-heading{
+  padding-top: 5px;
+  font-weight: 500;
+}
+.banner {
+  height: 100%;
+  width: 100%;
+  background-image: url("/public/images/kv_pc.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.5;
+  z-index: -2;
+  /* position: relative; */
+}
+
+.head-nav-content{
+  z-index: 2;
+}
+
 .left-section {
   display: flex;
   align-items: center;
