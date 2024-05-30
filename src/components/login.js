@@ -1,30 +1,51 @@
 import React, { createContext, useContext, useState } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import "../styles/auth.css";
 import { IoMdPerson } from "react-icons/io";
 import { FaLock } from "react-icons/fa6";
 import NotificationPopup from "./NotificationPopup";
+import { useAuth } from "./Authcontext";
 
 // Login component
 const LoginPage = () => {
+  const {setIsLoggedIn,isLoggedIn} =useAuth();
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedInLocal, setisLoggedInLocal] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // New state for error message
+  const cred ={
+    user:"ravi",pass:"123"
+  };
 
   const handleLogin = () => {
     // Implement your login logic here
     // For simplicity, let's just check if email and password are not empty
-    if (email && password) {
-      setIsLoggedIn(true);
+    if (email==cred.user && password==cred.pass) {
+      setisLoggedInLocal(true);
+      console.log(email,password)
+      console.log(login)
+      console.log(isLoggedIn)
+      setIsLoggedIn(true)
+      login(email,password)
+      navigate("/");
+    }
+    else{
+      setErrorMessage("Invalid username or password");
+      console.log("Invalid id pass")
+      console.log(isLoggedIn)
+      login(email,password)
+      setIsLoggedIn(false)
     }
   };
 
-  if (isLoggedIn) {
-    // Redirect to dashboard if already logged in
-    return <Navigate to="/dashboard" />;
-  }
+  // if (isLoggedInLocal) {
+  //   // Redirect to dashboard if already logged in
+  //   return <Navigate to="/dashboard" />;
+  // }
 
   const handleForgotPasswordClick = () => {
     // Show the forgot password fields
@@ -40,6 +61,9 @@ const LoginPage = () => {
   };
   const closeNotification = () => {
     setShowNotification(false);
+  };
+  const closeWrongPassword =() =>{
+    setErrorMessage(null)
   };
 
   return (
@@ -61,6 +85,11 @@ const LoginPage = () => {
             <div className="heading-form-login">
               {showForgotPassword ? "Forgot Password" : "Login Here"}
             </div>
+            {errorMessage && <div className="error-message"><NotificationPopup
+          message={errorMessage}
+          duration={3000}
+          onClose={closeWrongPassword}
+        /></div>}
             {!showForgotPassword ? (
               <form>
                 {/* Email and Password input fields */}
