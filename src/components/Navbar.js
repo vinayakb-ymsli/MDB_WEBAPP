@@ -13,7 +13,7 @@ const Navbar = ({ setisBlurr }) => {
   const [details, setdetails] = useState(false);
   const [title, settitle] = useState(false);
   const [zoomed, setzoomed] = useState(false);
-  const {isLoggedIn}=useAuth();
+  const {isLoggedIn,logout}=useAuth();
   const handleFalsePositive = () => {
     console.log("False Positive");
   };
@@ -185,7 +185,8 @@ const Navbar = ({ setisBlurr }) => {
               <FaUser /> Admin
             </a>
             <a href="/login">
-              <FaSignInAlt /> Login
+              {isLoggedIn ? (<span onClick={logout}>Logout {<FaSignInAlt />}</span> ): (<>{<FaSignInAlt />} Login</>)}
+              
             </a>
             <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
           </div>

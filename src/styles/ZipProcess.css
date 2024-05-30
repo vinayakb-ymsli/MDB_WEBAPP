@@ -250,10 +250,10 @@ main.mainContainer {
   box-shadow: rgba(149, 157, 165, 0.7) 0px 8px 24px;
   outline: 5px solid white;
 }
-.project {
+/* .project {
   position: absolute;
   left: 25;
-}
+} */
 
 .info {
   display: flex;
@@ -373,4 +373,31 @@ main.mainContainer {
 	/* &:nth-of-type(3) {
 		margin: 7px
 	} */
+}
+.before-process-header{
+  display: flex;
+}
+.before-process-leftNavRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Horizontally center the contents */
+  align-items: center;
+  text-align: center;
+  margin-top: 29px;
+  margin-bottom: 29px;
+  padding: 4px;
+  gap:1rem;
+}
+.before-process-image-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 80%;
+}
+.before-process-button{
+  display: flex;
+  justify-content: center;
+  /* min-width: 100%; */
+  /* max-width: 25%; */
 }

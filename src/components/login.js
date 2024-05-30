@@ -28,7 +28,9 @@ const LoginPage = () => {
     if (email == cred.user && password == cred.pass) {
       try {
         await login(email, password); // Wait for the login function to complete
+        console.log("logged in")
         navigate("/"); // Navigate after login has finished
+        window.location.reload();
       } catch (error) {
         // Handle any errors that occur during login
         setErrorMessage("Login failed. Please try again.");
