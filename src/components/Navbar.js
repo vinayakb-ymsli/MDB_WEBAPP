@@ -4,6 +4,7 @@ import { FaUser, FaSignInAlt, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import InfoPopup from "./InfoPopup";
 import { PiSelectionBackgroundFill } from "react-icons/pi";
+import { useAuth } from "./Authcontext";
 // import img from "../images/yamaha.png";
 
 const Navbar = ({ setisBlurr }) => {
@@ -12,7 +13,7 @@ const Navbar = ({ setisBlurr }) => {
   const [details, setdetails] = useState(false);
   const [title, settitle] = useState(false);
   const [zoomed, setzoomed] = useState(false);
-
+  const {isLoggedIn}=useAuth();
   const handleFalsePositive = () => {
     console.log("False Positive");
   };
