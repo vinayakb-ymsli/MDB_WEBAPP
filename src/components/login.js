@@ -17,35 +17,24 @@ const LoginPage = () => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [errorMessage, setErrorMessage] = useState(""); // New state for error message
-  const cred = {
-    user: "ravi",
-    pass: "123",
-  };
+ 
 
   const handleLogin = async () => {
-    // Implement your login logic here
-    // For simplicity, let's just check if email and password are not empty
-    if (email == cred.user && password == cred.pass) {
-      try {
-        await login(email, password); // Wait for the login function to complete
+    
+    await login(email, password);
+    if (isLoggedIn) {
+      
         console.log("logged in")
         navigate("/"); // Navigate after login has finished
         window.location.reload();
-      } catch (error) {
-        // Handle any errors that occur during login
-        setErrorMessage("Login failed. Please try again.");
-        // setIsLoggedIn(false);
-      }
+      
     } else {
       setErrorMessage("Invalid username or password");
-      login(email, password);
+      
     }
   };
 
-  // if (isLoggedInLocal) {
-  //   // Redirect to dashboard if already logged in
-  //   return <Navigate to="/dashboard" />;
-  // }
+
 
   const handleForgotPasswordClick = () => {
     // Show the forgot password fields

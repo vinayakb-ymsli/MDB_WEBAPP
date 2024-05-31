@@ -377,16 +377,49 @@ main.mainContainer {
 .before-process-header{
   display: flex;
 }
+.file-name-wrapper{
+  display: block;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
 .before-process-leftNavRow {
+  
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Horizontally center the contents */
-  align-items: center;
-  text-align: center;
-  margin-top: 29px;
+  /* justify-content: center; Horizontally center the contents */
+  /* align-items: center;
+  text-align: center; */
+  margin-top: 50px;
   margin-bottom: 29px;
-  padding: 4px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding: 2rem;
   gap:1rem;
+  background-color: white;
+  border-radius: 20px;
+  /* max-width: 50%; */
+  box-shadow:  rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.name-holder{
+  display: flex;
+  padding: 2rem;
+  /* background-color: rgb(34, 42, 185); */
+  border: 1.6px dashed rgb(227, 227, 227);
+  border-radius: 20px;
+  /* color: white; */
+  
+  flex-direction: column;
+  gap:1rem;
+  justify-content: center;
+  align-items: center;
+  color: rgb(13, 25, 114);
+  font-weight: 600;
+
+}
+.zip-file-icon{
+  font-size: xxx-large;
+  color: rgb(13, 25, 114);
 }
 .before-process-image-table {
   display: flex;

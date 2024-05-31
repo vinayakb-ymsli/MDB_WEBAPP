@@ -30,14 +30,14 @@ const Body = () => {
     setIsError("");
     console.log(selectedFile);
     try {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-      const response = await axios.post(
-        "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload_zip",
-        formData
-      );
+      // const formData = new FormData();
+      // formData.append("file", selectedFile);
+      // const response = await axios.post(
+      //   "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload_zip",
+      //   formData
+      // );
       setIsLoading(false);
-      navigate("/zipprocess", { state: { data: response.data, zipFileName } }); // Pass zipFileName along with response.data
+      navigate("/zipprocess", { state: { data: selectedFile, zipFileName } }); // Pass zipFileName along with response.data
     } catch (error) {
       alert(error.message);
     } finally {

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/ZipProcess.css";
 import ThumbImage from "./ThumbImage";
-import Loader from "./Loader";
+import Loader from "react-js-loader";
 import { useLocation } from "react-router-dom";
 import Image from "./Image";
 import jsonData from "./test.json";
@@ -14,44 +14,89 @@ import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import axios from "axios";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import ProcessButton from "./ProcessButton";
+import { AiOutlineFileZip } from "react-icons/ai";
 
 function ZipProcess() {
+  const [res_data, setResData] = useState(null);
+  const [selected, setselected] = useState(0);
   const { state } = useLocation();
-  try {
-    var data = state.data;
-    var data = JSON.stringify(data);
-    var zipFileName = state.zipFileName;
-    sessionStorage.setItem("zipFileName", zipFileName);
-    sessionStorage.setItem("data", data);
-  } catch {
-    var data = sessionStorage.getItem("data", data);
-    var zipFileName = sessionStorage.getItem("zipFileName");
-  }
-
-  var { original_images, processed_images, image_details } = JSON.parse(data);
-  // const zipFileName = state.zipFileName;
+  const inputFile = state.data;
+  const zipFileName=inputFile.name
+  const [preLoader, setPreLoader] = useState(false);
+  const [original_images, setOriginalImages] = useState({});
+  const [processed_images, setProcessedImages] = useState({});
+  const [image_details, setImageDetails] = useState({});
+  const [keys, setKeys] = useState([]);
+  const [input_image, setInputImage] = useState("");
+  const [processed_image, setProcessedImage] = useState("");
   const [pageLoader, setpageLoader] = useState(false);
   const [viewMore, setviewMore] = useState(false);
   const [showInfoSlider, setInfoSlider] = useState(true);
   const [imageDetails, showimageDetails] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenImageType, setFullscreenImageType] = useState("input");
-  debugger;
-  console.log(processed_images);
-  const keys = Object.keys(processed_images);
-  const firstKey = keys[0];
-  console.clear();
-  console.log(processed_images);
-
-  // console.log(firstKey)
-  // const [selectedImage, setselectedImage] = useState(113);
-  const [selected, setselected] = useState(firstKey);
-  console.log(selected);
   const [showInfoTip, toggleInfo] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState("");
-
   const [selectedOption, setSelectedOption] = useState("slider");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setPreLoader(true);
+        const selectedFile = inputFile;
+        const zipFileName = selectedFile.name;
+
+        if (selectedFile.type !== "application/x-zip-compressed") {
+          alert("Please select a zip file.");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+        const response = await axios.post(
+          "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload_zip",
+          formData
+        );
+
+        sessionStorage.setItem("zipFileName", zipFileName);
+        sessionStorage.setItem("data", JSON.stringify(response.data));
+        setResData(response.data);
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        setPreLoader(false);
+      }
+    };
+
+    if (inputFile) {
+      fetchData();
+    }
+  }, [inputFile]);
+
+  useEffect(() => {
+    if (res_data) {
+      const originalImages = res_data.original_images;
+      const processedImages = res_data.processed_images;
+      const imageDetails = res_data.image_details;
+      const keys = Object.keys(processedImages);
+      const firstKey = keys[0];
+      
+      setOriginalImages(originalImages);
+      setProcessedImages(processedImages);
+      setImageDetails(imageDetails);
+      setKeys(keys);
+      setselected(firstKey);
+      
+      setInputImage(`data:image/png;base64, ${originalImages[firstKey]}`);
+      setProcessedImage(`data:image/png;base64, ${processedImages[firstKey]}`);
+    }
+  }, [res_data]);
+
+  const handleZipChange = () => {
+    setIsLoading(true);
+  };
+
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
@@ -60,15 +105,7 @@ function ZipProcess() {
     setIsFullscreen(!isFullscreen);
     setFullscreenImageType(type);
   };
-  const SetViewbutton = () => {
-    if (viewMore === true) {
-      setviewMore(false);
-      console.log("hi");
-      console.log(jsonData.original_images);
-    } else {
-      setviewMore(true);
-    }
-  };
+
   const handleMouseEnter = () => {
     setInfoSlider(false);
   };
@@ -76,88 +113,46 @@ function ZipProcess() {
   const handleMouseLeave = () => {
     setInfoSlider(true);
   };
+
   const setImage = (key) => {
     setselected(key);
-    console.log(selected);
+    setInputImage(`data:image/png;base64, ${original_images[key]}`);
+    setProcessedImage(`data:image/png;base64, ${processed_images[key]}`);
   };
 
   const setPreviousImage = () => {
-    console.log(selected);
     const index = keys.indexOf(selected);
-    console.log(index);
     if (index > 0) {
       setselected(keys[index - 1]);
+      setImage(keys[index - 1]);
     }
   };
 
   const setNextImage = () => {
-    console.log(selected);
     const index = keys.indexOf(selected);
-    console.log(index);
     if (index < keys.length - 1) {
       setselected(keys[index + 1]);
+      setImage(keys[index + 1]);
     }
   };
-  const downloadImage = (imageData, filename) => {
-    // Remove the prefix to get the base64 string only
-    const base64String = imageData.replace("data:image/png;base64,", "");
 
-    // Convert base64 to binary
+  const downloadImage = (imageData, filename) => {
+    const base64String = imageData.replace("data:image/png;base64,", "");
     const byteCharacters = atob(base64String);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
     const byteArray = new Uint8Array(byteNumbers);
-
-    // Create Blob object
     const blob = new Blob([byteArray], { type: "image/png" });
-
-    // Create a temporary URL for the Blob
     const imageUrl = URL.createObjectURL(blob);
-
-    // Create a link element and initiate download
     const link = document.createElement("a");
     link.download = `${filename.slice(0, -4)}_${selected}.png`;
     link.href = imageUrl;
     link.click();
-
-    // Clean up by revoking the temporary URL
     URL.revokeObjectURL(imageUrl);
   };
 
-  let input_image = `data:image/png;base64, ${
-    original_images[parseInt(selected)]
-  }`;
-  let processed_image = `data:image/png;base64, ${
-    processed_images[parseInt(selected)]
-  }`;
-
-  const handleZipChange = async (e) => {
-    const selectedFile = e.target.files[0];
-    const zipFileName = selectedFile.name; // Get the name of the zip file
-    if (selectedFile.type !== "application/x-zip-compressed") {
-      alert("Please select a zip file.");
-      return;
-    }
-    setIsLoading(true);
-    setIsError("");
-    console.log(selectedFile);
-    try {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-      const response = await axios.post(
-        "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload_zip",
-        formData
-      );
-      setIsLoading(false);
-      // navigate("/zipprocess", { state: { data: response.data, zipFileName } }); // Pass zipFileName along with response.data
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
   const modelsList = [
     { id: 0, label: "Tensorflow" },
     { id: 1, label: "PyTorch" },
@@ -174,8 +169,7 @@ function ZipProcess() {
   const [selectedProjectsItem, setSelectedProjectsItem] = useState(null);
 
   const toggleProjectsDropdown = () => setProjectsOpen(!isProjectsOpen);
-  const toggleProcessPageDropdown = () =>
-    setProcessPageOpen(!isProcessPageOpen);
+  const toggleProcessPageDropdown = () => setProcessPageOpen(!isProcessPageOpen);
 
   const handleProcessPageItemClick = (id) => {
     selectedProcessPageItem === id
@@ -190,17 +184,13 @@ function ZipProcess() {
       : setSelectedProjectsItem(id);
     setProjectsOpen(!isProjectsOpen);
   };
-  const toggleIsLoading=()=>{
-    setIsLoading(!isLoading);
-  }
   return (
     <>
       {!isLoading ? (
         <div className="mainContainerOne">
           <div className="before-process-header">
             <div className="project">
-              File name:{" "}
-              <div className="project-name">{zipFileName.slice(0, -4)}</div>
+              File name: <div className="project-name">{zipFileName}</div>
             </div>
             <div className="parameter-wrapper">
               Select Project:{" "}
@@ -212,11 +202,11 @@ function ZipProcess() {
                   >
                     {selectedProjectsItem !== null
                       ? `
-                      ${
-                        projectsItems.find(
-                          (item) => item.id === selectedProjectsItem
-                        ).label
-                      }`
+                    ${
+                      projectsItems.find(
+                        (item) => item.id === selectedProjectsItem
+                      ).label
+                    }`
                       : "Select your parameters"}
                     <MdOutlineKeyboardArrowRight
                       className={`process-page-icon ${
@@ -296,29 +286,34 @@ function ZipProcess() {
               </div>
             </div>
           </div>
-
-          <div className="before-process-leftNavRow ">
-            {/* <div className="headingLeft">Uploaded Images</div> */}
-            <div className="before-process-image-table">
-              {Object.keys(original_images).map((key) => (
-                <ThumbImage
-                  key={key}
-                  imageId={key}
-                  input_image={original_images[key]}
-                  setImage={setImage}
-                  isSelected={parseInt(key) === parseInt(selected)}
-                />
-              ))}
+          <div className="file-name-wrapper">
+            <div className="before-process-leftNavRow ">
+              {/* <div className="headingLeft">Uploaded Images</div> */}
+              {/* ZipFile Slected */}
+              <div className="name-holder">
+                <AiOutlineFileZip className="zip-file-icon" />{" "}
+                <div>{zipFileName}</div>
+              </div>
+              Please select your paramters
             </div>
-            Preview of zipped Images
+            <div className="before-process-button">
+              <ProcessButton onClick={handleZipChange} isProcessed={true} />
+            </div>
           </div>
-          <div className="before-process-button" ><ProcessButton onClick={toggleIsLoading} isProcessed={true} /></div>
-          
         </div>
       ) : (
         <>
-          {pageLoader ? (
-            <div className="loader-container">
+          {preLoader ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "600px",
+                width: "100%",
+                backgroundColor: "white",
+              }}
+            >
               <Loader
                 type="bubble-loop"
                 bgColor="blue"
@@ -331,8 +326,7 @@ function ZipProcess() {
             // <div className="mainContainer">
             <div className="mainContainerOne">
               <div className="project">
-                File name:{" "}
-                <div className="project-name">{zipFileName.slice(0, -4)}</div>
+                File name: <div className="project-name">{zipFileName}</div>
               </div>
 
               {/* {!pageLoader && (<div className="dropdownViewer">
@@ -416,15 +410,17 @@ function ZipProcess() {
               <div className="leftNavRow">
                 {/* <div className="headingLeft">Uploaded Images</div> */}
                 <div className="image-table">
-                  {Object.keys(original_images).map((key) => (
-                    <ThumbImage
-                      key={key}
-                      imageId={key}
-                      input_image={original_images[key]}
-                      setImage={setImage}
-                      isSelected={parseInt(key) === parseInt(selected)}
-                    />
-                  ))}
+                  {console.log(original_images)}
+                  {original_images &&
+                    Object.keys(original_images).map((key) => (
+                      <ThumbImage
+                        key={key}
+                        imageId={key}
+                        input_image={original_images[key]}
+                        setImage={setImage}
+                        isSelected={parseInt(key) === parseInt(selected)}
+                      />
+                    ))}
                 </div>
               </div>
               <div className="buttonsPrevNext">
