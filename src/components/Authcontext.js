@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import request from 'superagent';
 
 const AuthContext = createContext();
 
@@ -13,21 +14,42 @@ export const AuthProvider = ({ children }) => {
   }, [isLoggedIn]);
 
   const login = async (username, password) => {
-    try {
-      const response = await axios.post(
-        "https://ejmnmassds.ap-south-1.awsapprunner.com/login",
-        { username, password }
-      );
+    setIsLoggedIn(true)
+    let token = ""
+    let response =""
+      const data=JSON.stringify({
+        "username": username,
+        "password": password
+    })
 
-      if (response.data) {
-        setIsLoggedIn(true);
-      } else {
-        throw new Error("Authentication failed");
-      }
-    } catch (error) {
-      console.error("Error authenticating:", error);
-      throw error;
-    }
+      // const response = await axios.post( 
+      //   "http://127.0.0.1:8000/login",
+      //   { username, password }
+      // );
+      // const response = await axios.get(
+      //   "http://127.0.0.1:8000/contents", 
+      //   data,{
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     }
+      //   }
+      // );
+      response = await request
+      .post('http://127.0.0.1:8000/login')
+      .send(data)
+      .set('Content-Type', 'application/json')
+      .then(response => console.log(response.body))
+      .then(token=response.body)
+      .catch(err => console.log(err))
+      .then();
+      
+  //     if (token) {
+  //       setIsLoggedIn(true);
+  //       console.log(token)
+  //     } else {
+  //       throw new Error("Authentication failed");
+  //     }
+
   };
 
   const logout = () => {
