@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       setIsLoggedIn(true);
       console.log("Already logged in with token:", token);
+      if (callback) callback(true);
       return;
     }
 
