@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Loader from "react-js-loader";
 import "../styles/ProcessPage.css";
 import axios from "axios";
@@ -11,6 +11,7 @@ import ProcessButton from "./ProcessButton";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import request from "superagent";
 
 const ProcessPage = () => {
   const { state } = useLocation();
@@ -38,10 +39,11 @@ const ProcessPage = () => {
     { id: 0, label: "YMSLI" },
     { id: 1, label: "Google" },
   ];
+  const [clients, setClients] = useState([]);
 
   const [isProcessPageOpen, setProcessPageOpen] = useState(false);
-  const [isProjectsOpen, setProjectsOpen] = useState(false); 
-  const [isClientsOpen, setClientsOpen] = useState(false); 
+  const [isProjectsOpen, setProjectsOpen] = useState(false);
+  const [isClientsOpen, setClientsOpen] = useState(false);
   const [processPageItems, setProcessPageItems] = useState(modelsList);
   const [projectsItems, setProjectItems] = useState(projectsList);
   const [clientItems, setClientItems] = useState(clientsList);
@@ -54,12 +56,11 @@ const ProcessPage = () => {
   const toggleProcessPageDropdown = () =>
     setProcessPageOpen(!isProcessPageOpen);
 
-
   const handleClientItemClick = (id) => {
     selectedClientItem === id
       ? setSelectedClientItem(null)
       : setSelectedClientItem(id);
-      setClientsOpen(!isClientsOpen);
+    setClientsOpen(!isClientsOpen);
   };
 
   const handleProcessPageItemClick = (id) => {
@@ -75,6 +76,82 @@ const ProcessPage = () => {
       : setSelectedProjectsItem(id);
     setProjectsOpen(!isProjectsOpen);
   };
+  // -------------------------------------------
+  async function fetchClientData() {
+    try {
+      const response = await request
+        .get("https://ejmnmassds.ap-south-1.awsapprunner.com/contents")
+        .set("Content-Type", "application/json")
+        .query({
+          folder_name: "",
+        });
+
+      const data = response.body;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+    // return data
+  }
+
+  function parseClientData(data) {
+    const clients = {};
+
+    data.forEach((path) => {
+      const parts = path.split("/").filter((part) => part);
+
+      // if (parts.length === 1) {
+      //   // Skip root directories (e.g., "Model_files/")
+      //   return;
+      // }
+
+      const [clientName, projectName, modelName] = parts;
+
+      if (!clients[clientName]) {
+        clients[clientName] = {};
+      }
+
+      if (projectName) {
+        if (!clients[clientName][projectName]) {
+          clients[clientName][projectName] = new Set();
+        }
+
+        if (modelName) {
+          clients[clientName][projectName].add(modelName);
+        }
+      }
+    });
+
+    const result = Object.keys(clients).map((clientName) => ({
+      clientName,
+      projects: Object.keys(clients[clientName]).map((projectName) => ({
+        projectName,
+        models: Array.from(clients[clientName][projectName]),
+      })),
+    }));
+
+    console.log(result);
+    setClients(result);
+  }
+
+  async function fetchClients() {
+    const data = await fetchClientData();
+    const clients = parseClientData(data);
+    console.log(clients);
+    // return clients;
+  }
+
+  useEffect(() => {
+    // Fetch data from API when component mounts for the first time
+    fetchClients();
+  }, []);
+
+  useEffect(() => {
+    // Store clients data in local storage
+    localStorage.setItem("clients", JSON.stringify(clients));
+  }, [clients]);
 
   const [uploadedImage, setUploadedImage] = useState(image);
   const [processedImage, setProcessedImage] = useState(null);
@@ -184,6 +261,43 @@ const ProcessPage = () => {
     setSelectedOption(option);
   };
 
+  useEffect(() => {
+    // Retrieve clients array from local storage
+    const storedClients = JSON.parse(localStorage.getItem("clients"));
+    if (storedClients) {
+      setClients(storedClients);
+    }
+  }, []);
+  // const [clients, setClients] = useState([]);
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedModel, setSelectedModel] = useState(null);
+
+  // Function to handle client selection
+  const handleClientSelection = (clientName) => {
+    setSelectedClient(clientName);
+    setSelectedProject(null); // Reset selected project
+    setSelectedModel(null); // Reset selected model
+  };
+
+  // Function to handle project selection
+  const handleProjectSelection = (projectName) => {
+    setSelectedProject(projectName);
+    setSelectedModel(null); // Reset selected model
+  };
+
+  // Function to handle model selection
+  const handleModelSelection = (modelName) => {
+    setSelectedModel(modelName);
+  };
+
+  useEffect(() => {
+    // Retrieve clients array from local storage
+    const storedClients = JSON.parse(localStorage.getItem("clients"));
+    if (storedClients) {
+      setClients(storedClients);
+    }
+  }, []);
   return (
     <div className="main">
       {isFullscreen && (
@@ -224,146 +338,96 @@ const ProcessPage = () => {
         <div className="project-name-process">
           {uploadedImage ? uploadedImage.name : "No image selected"}
         </div>
-        {!isLoading && togglePreview && (
-          <div className="parameter-wrapper">
-            Select Client:{" "}
-            <div className="process-page-dropdown-wrapper">
-              <div className="process-page-dropdown">
-                <div
-                  className="process-page-dropdown-header"
-                  onClick={toggleClientsDropdown}
-                >
-                  {selectedClientItem !== null 
-                    ? `${
-                      clientItems.find(
-                        (item) => item.id === selectedClientItem
-                      ).label
-                    }`
-                    : "Select your parameters"}
-                  <MdOutlineKeyboardArrowRight
-                    className={`process-page-icon ${
-                      isClientsOpen && "process-page-open"
-                    }`}
-                  ></MdOutlineKeyboardArrowRight>
-                </div>
-                <div
-                  className={`process-page-dropdown-body ${
-                    isClientsOpen && "process-page-open"
-                  }`}
-                >
-                  {clientItems.map((item) => (
-                    <div
-                      className="process-page-dropdown-item"
-                      onClick={() => handleClientItemClick(item.id)}
-                      key={item.id}
-                    >
-                      <span
-                        className={`process-page-dropdown-item-dot ${
-                          item.id === selectedClientItem &&
-                          "process-page-selected"
-                        }`}
-                      >
-                        •{" "}
-                      </span>
-                      {item.label}
-                    </div>
-                  ))}
-                </div>
-              </div>
+        Select Client:{" "}
+        <div className="process-page-dropdown-wrapper">
+          <div className="process-page-dropdown">
+            <div className="process-page-dropdown-header">
+              <select
+                value={selectedClient}
+                onChange={(e) => handleClientSelection(e.target.value)}
+                className="process-page-dropdown-select"
+              >
+                <option value="">Select Client</option>
+                {clients.map((client) => (
+                  <option key={client.clientName} value={client.clientName}>
+                    {client.clientName}
+                  </option>
+                ))}
+              </select>
+              {/* <MdOutlineKeyboardArrowRight
+                className={`process-page-icon ${
+                  selectedClient ? "process-page-open" : ""
+                }`}
+              ></MdOutlineKeyboardArrowRight> */}
             </div>
+          </div>
+        </div>
+        {selectedClient && (
+          <div className="parameter-wrapper">
             Select Project:{" "}
             <div className="process-page-dropdown-wrapper">
               <div className="process-page-dropdown">
-                <div
-                  className="process-page-dropdown-header"
-                  onClick={toggleProjectsDropdown}
-                >
-                  {
-                  selectedProjectsItem !== null
-                    ? `
-                      ${
-                        projectsItems.find(
-                          (item) => item.id === selectedProjectsItem
-                        ).label
-                      }`
-                    : "Select your parameters"}
-                  <MdOutlineKeyboardArrowRight
+                <div className="process-page-dropdown-header">
+                  <select
+                    value={selectedProject}
+                    onChange={(e) => handleProjectSelection(e.target.value)}
+                    className="process-page-dropdown-select"
+                  >
+                    <option value="">Select Project</option>
+                    {clients
+                      .find((client) => client.clientName === selectedClient)
+                      .projects.map((project) => (
+                        <option
+                          key={project.projectName}
+                          value={project.projectName}
+                        >
+                          {project.projectName}
+                        </option>
+                      ))}
+                  </select>
+                  {/* <MdOutlineKeyboardArrowRight
                     className={`process-page-icon ${
-                      isProjectsOpen && "process-page-open"
+                      selectedProject ? "process-page-open" : ""
                     }`}
-                  ></MdOutlineKeyboardArrowRight>
-                </div>
-                <div
-                  className={`process-page-dropdown-body ${
-                    isProjectsOpen && "process-page-open"
-                  }`}
-                >
-                  {projectsItems.map((item) => (
-                    <div
-                      className="process-page-dropdown-item"
-                      onClick={() => handleProjectsItemClick(item.id)}
-                      key={item.id}
-                    >
-                      <span
-                        className={`process-page-dropdown-item-dot ${
-                          item.id === selectedProjectsItem &&
-                          "process-page-selected"
-                        }`}
-                      >
-                        •{" "}
-                      </span>
-                      {item.label}
-                    </div>
-                  ))}
+                  ></MdOutlineKeyboardArrowRight> */}
                 </div>
               </div>
             </div>
-            Select Model:{" "}
-            <div className="process-page-dropdown-wrapper">
-              <div className="process-page-dropdown">
-                <div
-                  className="process-page-dropdown-header"
-                  onClick={toggleProcessPageDropdown}
-                >
-                  {selectedProcessPageItem !== null 
-                    ? `${
-                      processPageItems.find(
-                        (item) => item.id === selectedProcessPageItem
-                      ).label
-                    }`
-                    : "Select your parameters"}
-                  <MdOutlineKeyboardArrowRight
-                    className={`process-page-icon ${
-                      isProcessPageOpen && "process-page-open"
-                    }`}
-                  ></MdOutlineKeyboardArrowRight>
-                </div>
-                <div
-                  className={`process-page-dropdown-body ${
-                    isProcessPageOpen && "process-page-open"
-                  }`}
-                >
-                  {processPageItems.map((item) => (
-                    <div
-                      className="process-page-dropdown-item"
-                      onClick={() => handleProcessPageItemClick(item.id)}
-                      key={item.id}
-                    >
-                      <span
-                        className={`process-page-dropdown-item-dot ${
-                          item.id === selectedProcessPageItem &&
-                          "process-page-selected"
-                        }`}
+            {selectedProject && (
+              <div className="parameter-wrapper">
+                Select Model:{" "}
+                <div className="process-page-dropdown-wrapper">
+                  <div className="process-page-dropdown">
+                    <div className="process-page-dropdown-header">
+                      <select
+                        value={selectedModel}
+                        onChange={(e) => handleModelSelection(e.target.value)}
+                        className="process-page-dropdown-select"
                       >
-                        •{" "}
-                      </span>
-                      {item.label}
+                        <option value="">Select Model</option>
+                        {clients
+                          .find(
+                            (client) => client.clientName === selectedClient
+                          )
+                          .projects.find(
+                            (project) => project.projectName === selectedProject
+                          )
+                          .models.map((model) => (
+                            <option key={model} value={model}>
+                              {model}
+                            </option>
+                          ))}
+                      </select>
+                      {/* <MdOutlineKeyboardArrowRight
+                        className={`process-page-icon ${
+                          selectedModel ? "process-page-open" : ""
+                        }`}
+                      ></MdOutlineKeyboardArrowRight> */}
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            
+            )}
           </div>
         )}
       </div>

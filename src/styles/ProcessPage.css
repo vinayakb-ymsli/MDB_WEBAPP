@@ -421,3 +421,11 @@ button {
 .process-page-icon.process-page-open {
   transform: rotate(90deg);
 }
+.process-page-dropdown-wrapper select{
+  width: 100%;
+  outline: none;
+  border: none;
+  color: rgb(13, 25, 114);
+  font-weight: bold;
+  cursor: pointer;
+}
