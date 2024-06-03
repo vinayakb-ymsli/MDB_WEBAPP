@@ -34,18 +34,33 @@ const ProcessPage = () => {
     { id: 0, label: "Project 1" },
     { id: 1, label: "Project 2" },
   ];
+  const clientsList = [
+    { id: 0, label: "YMSLI" },
+    { id: 1, label: "Google" },
+  ];
 
   const [isProcessPageOpen, setProcessPageOpen] = useState(false);
   const [isProjectsOpen, setProjectsOpen] = useState(false); 
+  const [isClientsOpen, setClientsOpen] = useState(false); 
   const [processPageItems, setProcessPageItems] = useState(modelsList);
   const [projectsItems, setProjectItems] = useState(projectsList);
+  const [clientItems, setClientItems] = useState(clientsList);
+  const [selectedClientItem, setSelectedClientItem] = useState(null);
   const [selectedProcessPageItem, setSelectedProcessPageItem] = useState(null);
   const [selectedProjectsItem, setSelectedProjectsItem] = useState(null);
 
-  
+  const toggleClientsDropdown = () => setClientsOpen(!isClientsOpen);
   const toggleProjectsDropdown = () => setProjectsOpen(!isProjectsOpen);
   const toggleProcessPageDropdown = () =>
     setProcessPageOpen(!isProcessPageOpen);
+
+
+  const handleClientItemClick = (id) => {
+    selectedClientItem === id
+      ? setSelectedClientItem(null)
+      : setSelectedClientItem(id);
+      setClientsOpen(!isClientsOpen);
+  };
 
   const handleProcessPageItemClick = (id) => {
     selectedProcessPageItem === id
@@ -211,6 +226,51 @@ const ProcessPage = () => {
         </div>
         {!isLoading && togglePreview && (
           <div className="parameter-wrapper">
+            Select Client:{" "}
+            <div className="process-page-dropdown-wrapper">
+              <div className="process-page-dropdown">
+                <div
+                  className="process-page-dropdown-header"
+                  onClick={toggleClientsDropdown}
+                >
+                  {selectedClientItem !== null 
+                    ? `${
+                      clientItems.find(
+                        (item) => item.id === selectedClientItem
+                      ).label
+                    }`
+                    : "Select your parameters"}
+                  <MdOutlineKeyboardArrowRight
+                    className={`process-page-icon ${
+                      isClientsOpen && "process-page-open"
+                    }`}
+                  ></MdOutlineKeyboardArrowRight>
+                </div>
+                <div
+                  className={`process-page-dropdown-body ${
+                    isClientsOpen && "process-page-open"
+                  }`}
+                >
+                  {clientItems.map((item) => (
+                    <div
+                      className="process-page-dropdown-item"
+                      onClick={() => handleClientItemClick(item.id)}
+                      key={item.id}
+                    >
+                      <span
+                        className={`process-page-dropdown-item-dot ${
+                          item.id === selectedClientItem &&
+                          "process-page-selected"
+                        }`}
+                      >
+                        •{" "}
+                      </span>
+                      {item.label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
             Select Project:{" "}
             <div className="process-page-dropdown-wrapper">
               <div className="process-page-dropdown">
@@ -303,6 +363,7 @@ const ProcessPage = () => {
                 </div>
               </div>
             </div>
+            
           </div>
         )}
       </div>

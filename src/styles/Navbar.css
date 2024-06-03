@@ -136,7 +136,7 @@
 
 .dropdown {
   position: relative;
-  display: inline-block;
+  display: inline-block;  
 }
 
 .dropdown-content {
@@ -163,6 +163,8 @@
   border: none;
   cursor: pointer;
   transition: color 0.3s ease;
+  display: flex;
+  justify-content: center;
 }
 
 .dropbtn:hover,

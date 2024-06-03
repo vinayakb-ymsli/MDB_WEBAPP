@@ -362,7 +362,7 @@ button {
   font-weight: 550;
 }
 .process-page-dropdown {
-  width: 300px;
+  width: 250px;
   border-radius:10px 10px 10px 10px;
   /* box-shadow: 0 10px 25px rgba(0,0,0,.1); */
   background-color: rgb(255, 255, 255);
@@ -383,7 +383,7 @@ button {
   display: none;
   position: absolute;
   z-index: 300;
-  width: 300px;
+  width: 250px;
   border-radius: 0px 0px 10px 10px;
   /* box-shadow: 0 10px 25px rgba(0,0,0,.1); */
   background-color: white;

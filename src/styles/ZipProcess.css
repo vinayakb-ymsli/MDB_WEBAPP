@@ -7,7 +7,7 @@ main.mainContainer {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif; */
   font-family: "Roboto", "Verdana", "Geneva", sans-serif;  
   position: relative; /* Ensure proper positioning of background image */
-  
+  overflow: hidden;
 }
 
 
@@ -38,7 +38,8 @@ main.mainContainer {
   width: 700;
 }
 .mainContainerOne {
-  height: 83vh;
+  height: 80vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -46,8 +47,8 @@ main.mainContainer {
   /* font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif; */
   font-family: "Roboto", "Verdana", "Geneva", sans-serif;
-  padding-left: 5rem;
-  padding-right: 5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   padding-top: 2rem;
   /* background-color: #fff; */
   background: linear-gradient(
@@ -376,6 +377,7 @@ main.mainContainer {
 }
 .before-process-header{
   display: flex;
+  /* width: 100%; */
 }
 .file-name-wrapper{
   display: block;
