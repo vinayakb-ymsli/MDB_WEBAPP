@@ -3,27 +3,27 @@ import Modal from "./Modal";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { RxCrossCircled } from "react-icons/rx";
 import "../styles/Projectform.css";
+import request from "superagent";
 
 const CreateForm = ({ nameB, toggleForm, typeForm }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  // Separate states for project, client, and model forms
+  let token = localStorage.getItem("token");
   const [projectFormData, setProjectFormData] = useState({
     projectName: "",
-    projectType: "",
-    projectCompanyName: "",
+    folderName: "",
+    description: "",
   });
 
   const [clientFormData, setClientFormData] = useState({
-    clientName: "",
-    clientIndustry: "",
-    clientContact: "",
+    fullClientName: "",
+    folderName: "",
+    description: "",
   });
 
   const [modelFormData, setModelFormData] = useState({
     modelName: "",
     modelType: "",
-    modelManufacturer: "",
+    modelFile: null,
   });
 
   useEffect(() => {
@@ -32,47 +32,58 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
     }
   }, [toggleForm]);
 
-  // Handlers for project form
   const handleProjectChange = (e) => {
     setProjectFormData({
       ...projectFormData,
       [e.target.name]: e.target.value,
     });
+    console.log("client form ", projectFormData);
   };
 
   const handleProjectSubmit = (e) => {
     e.preventDefault();
-    // Handle project form submission logic
     console.log("Project Form submitted:", projectFormData);
     setIsOpen(false);
   };
 
-  // Handlers for client form
   const handleClientChange = (e) => {
     setClientFormData({
       ...clientFormData,
       [e.target.name]: e.target.value,
     });
+    console.log("client form ", clientFormData);
   };
-
-  const handleClientSubmit = (e) => {
+  const handleClientSubmit = async (e) => {
     e.preventDefault();
-    // Handle client form submission logic
     console.log("Client Form submitted:", clientFormData);
+    console.log(token);
+  
     setIsOpen(false);
+  
+    try {
+      const response = await request
+        .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-client")
+        .send({"client_name":clientFormData.folderName})  // Ensure clientFormData is the payload
+        .set("Content-Type", "application/json")
+        .set("Authorization", `${token}`);
+  
+      console.log("Response:", response.body);
+    } catch (error) {
+      console.error("Error:", error.response ? error.response.body : error.message);
+    }
   };
 
-  // Handlers for model form
   const handleModelChange = (e) => {
-    setModelFormData({
-      ...modelFormData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, files } = e.target;
+    setModelFormData((prevState) => ({
+      ...prevState,
+      [name]: files ? files[0] : value,
+    }));
+    console.log("client form ", modelFormData);
   };
 
   const handleModelSubmit = (e) => {
     e.preventDefault();
-    // Handle model form submission logic
     console.log("Model Form submitted:", modelFormData);
     setIsOpen(false);
   };
@@ -107,30 +118,24 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
         </div>
         <div className="input-container">
           <label className="input-label">
-            Project Type <span className="star">*</span>
+            Folder Name <span className="star">*</span>
           </label>
-          <select
-            name="projectType"
-            value={projectFormData.projectType}
+          <input
+            name="folderName"
+            value={projectFormData.folderName}
             onChange={handleProjectChange}
             className="select-field"
             required
-          >
-            <option value="" disabled>
-              Placeholder
-            </option>
-            <option value="type1">Type 1</option>
-            <option value="type2">Type 2</option>
-          </select>
+          ></input>
         </div>
         <div className="input-container">
           <label className="input-label">
-            Project Company Name <span className="star">*</span>
+            Description <span className="star">*</span>
           </label>
           <input
             type="text"
-            name="projectCompanyName"
-            value={projectFormData.projectCompanyName}
+            name="description"
+            value={projectFormData.description}
             onChange={handleProjectChange}
             className="input-field"
             placeholder="Placeholder"
@@ -171,12 +176,12 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
 
         <div className="input-container">
           <label className="input-label">
-            Client Name <span className="star">*</span>
+            Full Client Name<span className="star">*</span>
           </label>
           <input
             type="text"
-            name="clientName"
-            value={clientFormData.clientName}
+            name="fullClientName"
+            value={clientFormData.fullClientName}
             onChange={handleClientChange}
             className="input-field"
             placeholder="Placeholder"
@@ -185,12 +190,12 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
         </div>
         <div className="input-container">
           <label className="input-label">
-            Client Industry <span className="star">*</span>
+            Folder Name<span className="star">*</span>
           </label>
           <input
             type="text"
-            name="clientIndustry"
-            value={clientFormData.clientIndustry}
+            name="folderName"
+            value={clientFormData.folderName}
             onChange={handleClientChange}
             className="input-field"
             placeholder="Placeholder"
@@ -199,12 +204,12 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
         </div>
         <div className="input-container">
           <label className="input-label">
-            Client Contact <span className="star">*</span>
+            Description <span className="star">*</span>
           </label>
           <input
             type="text"
-            name="clientContact"
-            value={clientFormData.clientContact}
+            name="description"
+            value={clientFormData.description}
             onChange={handleClientChange}
             className="input-field"
             placeholder="Placeholder"
@@ -273,12 +278,11 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
         </div>
         <div className="input-container">
           <label className="input-label">
-            Model Manufacturer <span className="star">*</span>
+            Model File <span className="star">*</span>
           </label>
           <input
-            type="text"
-            name="modelManufacturer"
-            value={modelFormData.modelManufacturer}
+            type="file"
+            name="modelFile"
             onChange={handleModelChange}
             className="input-field"
             placeholder="Placeholder"
