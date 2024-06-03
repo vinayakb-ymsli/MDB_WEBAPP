@@ -54,7 +54,7 @@ const LoginPage = () => {
     <div className="auth-page">
       <div className="input-intro">
         <h1>CELL HANDLER™</h1>
-        <h6>
+        <span className="text-info-auth">
           The CELL HANDLER™ is an automated system for selecting and isolating
           spheroids/organoids or single cells individually. The integration of
           sophisticated picking and imaging technology enables precise cell
@@ -62,7 +62,7 @@ const LoginPage = () => {
           HANDLER™ can enhance the efficiency of drug discovery and biomedical
           research through the expansion of options in cell-based screening,
           cell quality management and cell line development.
-        </h6>
+        </span>
 
         <div className="login-section">
           <div className="auth-container">

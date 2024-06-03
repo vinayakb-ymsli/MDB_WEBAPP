@@ -243,3 +243,30 @@
   align-items: center;
   gap: 1rem;
 }
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.reload-icon {
+  color: rgb(13, 25, 114);
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+
+.reload-icon:active {
+  animation: rotate 1s linear;
+}

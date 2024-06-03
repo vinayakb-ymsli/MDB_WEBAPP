@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/projects.css";
-
+import { IoMdRefresh } from "react-icons/io";
 import {
   FaUserAlt,
   FaFolderOpen,
@@ -15,8 +15,9 @@ import { RiFolder3Line } from "react-icons/ri";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 import CreateProjectForm from "./Projectform";
 import clients from "./ClientList"; // Import the clients array
+import request from "superagent";
 
-const Projects = ({toggleForm,typeForm}) => {
+const Projects = ({ toggleForm, typeForm }) => {
   const [selectedClient, setSelectedClient] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,10 +25,68 @@ const Projects = ({toggleForm,typeForm}) => {
   const [expandedClient, setExpandedClient] = useState(null);
   const [expandedProject, setExpandedProject] = useState(null);
   const [nameButton, setNameButton] = useState("Clients");
+  // const [clients,setClients]
 
+  // -------------------------------------------
+  async function fetchClientData() {
+    const response = await request
+      .get("https://ejmnmassds.ap-south-1.awsapprunner.com/contents")
+      .query({ folder_name: "YMSLI" })
+      .set("Content-Type", "application/json");
+    const data = await response.json();
+    console.log(data);
+    return data;
+  }
+
+  function parseClientData(data) {
+    const clients = {};
+
+    data.forEach((path) => {
+      const parts = path.split("/").filter((part) => part);
+
+      if (parts.length === 1) {
+        // Skip root directories (e.g., "Model_files/")
+        return;
+      }
+
+      const [clientName, projectName, modelName] = parts;
+
+      if (!clients[clientName]) {
+        clients[clientName] = {};
+      }
+
+      if (projectName) {
+        if (!clients[clientName][projectName]) {
+          clients[clientName][projectName] = new Set();
+        }
+
+        if (modelName) {
+          clients[clientName][projectName].add(modelName);
+        }
+      }
+    });
+
+    const result = Object.keys(clients).map((clientName) => ({
+      clientName,
+      projects: Object.keys(clients[clientName]).map((projectName) => ({
+        projectName,
+        models: Array.from(clients[clientName][projectName]),
+      })),
+    }));
+
+    console.log(result);
+  }
+
+  async function fetchClients() {
+    const data = await fetchClientData();
+    const clients = parseClientData(data);
+    console.log(clients);
+    // return clients;
+  }
+  // ------------------------------------------------
   useEffect(() => {
     updateNameButton();
-    console.log(nameButton)
+    console.log(nameButton);
   }, [breadcrumbTrail]);
 
   const updateNameButton = () => {
@@ -229,12 +288,18 @@ const Projects = ({toggleForm,typeForm}) => {
   return (
     <div className="projects-page-layout">
       <div className="sidebar-wrapper">{renderSidebar()}</div>
-      <div className="border"><hr></hr></div>
+      <div className="border">
+        <hr></hr>
+      </div>
       <div className="projects-wrapper">
         <div className="header-project">
           <div className="left-section-projects">
             <span className="projects-head">Clients</span>
             <div className="breadcrums-project-holder">
+              <div>
+                <IoMdRefresh onClick={fetchClients} className="reload-icon" />
+              </div>
+
               {renderBreadcrumb()}
             </div>
 
@@ -254,7 +319,11 @@ const Projects = ({toggleForm,typeForm}) => {
           </div>
           <div className="right-project-header">
             <div className="project-button">
-              <CreateProjectForm nameB={nameButton} toggleForm={toggleForm} typeForm={nameButton}  />
+              <CreateProjectForm
+                nameB={nameButton}
+                toggleForm={toggleForm}
+                typeForm={nameButton}
+              />
             </div>
           </div>
         </div>
