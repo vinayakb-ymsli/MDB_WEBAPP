@@ -1,56 +1,51 @@
-import React, { createContext, useContext, useState } from "react";
-import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
-import "../styles/auth.css";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { FaLock } from "react-icons/fa6";
 import NotificationPopup from "./NotificationPopup";
 import { useAuth } from "./Authcontext";
 
-// Login component
 const LoginPage = () => {
   const { setIsLoggedIn, isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedInLocal, setisLoggedInLocal] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // New state for error message
- 
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = async () => {
-    
-    await login(email, password);
-    if (isLoggedIn) {
-      
-        console.log("logged in")
-        navigate("/"); // Navigate after login has finished
-        window.location.reload();
-      
-    } else {
-      setErrorMessage("Invalid username or password");
-      
+    try {
+      await login(email, password, (success) => {
+        if (success) {
+          console.log("logged in");
+          navigate("/");
+          window.location.reload();
+        } else {
+          setErrorMessage("Invalid username or password");
+        }
+      });
+    } catch (error) {
+      setErrorMessage("An error occurred during login");
+      console.error("Login error: ", error);
     }
   };
 
-
-
   const handleForgotPasswordClick = () => {
-    // Show the forgot password fields
     setShowForgotPassword(!showForgotPassword);
   };
 
   const handleResetPassword = () => {
-    // Implement logic to send reset password email
-    // For now, let's just log the email
     console.log("Reset password email sent to:", email);
     setShowNotification(true);
     setShowForgotPassword(false);
   };
+
   const closeNotification = () => {
     setShowNotification(false);
   };
+
   const closeWrongPassword = () => {
     setErrorMessage(null);
   };
@@ -85,10 +80,9 @@ const LoginPage = () => {
             )}
             {!showForgotPassword ? (
               <form>
-                {/* Email and Password input fields */}
-                <div class="input-wrapper">
-                  <div class="inputcontainerLogin">
-                    <div class="icon">
+                <div className="input-wrapper">
+                  <div className="inputcontainerLogin">
+                    <div className="icon">
                       <IoMdPerson
                         style={{
                           color: "rgb(13, 25, 114)",
@@ -107,9 +101,9 @@ const LoginPage = () => {
                   </div>
                 </div>
 
-                <div class="input-wrapper">
-                  <div class="inputcontainerLogin">
-                    <div class="icon">
+                <div className="input-wrapper">
+                  <div className="inputcontainerLogin">
+                    <div className="icon">
                       <FaLock
                         style={{
                           color: "rgb(13, 25, 114)",
@@ -128,7 +122,6 @@ const LoginPage = () => {
                   </div>
                 </div>
 
-                {/* Forgot Password link */}
                 <div className="forgot">
                   <span
                     onClick={handleForgotPasswordClick}
@@ -142,7 +135,6 @@ const LoginPage = () => {
                   </span>
                 </div>
 
-                {/* Login button */}
                 <button
                   style={{
                     backgroundColor: "rgb(13, 25, 114)",
@@ -159,10 +151,9 @@ const LoginPage = () => {
             ) : (
               <div>
                 <form>
-                  {/* Email input field for password reset */}
-                  <div class="input-wrapper">
-                    <div class="inputcontainerLogin">
-                      <div class="icon">
+                  <div className="input-wrapper">
+                    <div className="inputcontainerLogin">
+                      <div className="icon">
                         <IoMdPerson
                           style={{
                             color: "rgb(13, 25, 114)",
@@ -176,10 +167,9 @@ const LoginPage = () => {
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                      />{" "}
+                      />
                     </div>
                   </div>
-                  {/* Reset Password button */}
                   <button
                     style={{
                       backgroundColor: "rgb(13, 25, 114)",
@@ -208,7 +198,6 @@ const LoginPage = () => {
               </div>
             )}
 
-            {/* Register link */}
             {!showForgotPassword && (
               <p>
                 Don't have an account?{" "}
