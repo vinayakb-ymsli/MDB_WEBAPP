@@ -14,10 +14,10 @@ import { IoIosArrowForward } from "react-icons/io";
 import { RiFolder3Line } from "react-icons/ri";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 import CreateProjectForm from "./Projectform";
-import clients from "./ClientList"; // Import the clients array
 import request from "superagent";
 
 const Projects = ({ toggleForm, typeForm }) => {
+  const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,13 +29,22 @@ const Projects = ({ toggleForm, typeForm }) => {
 
   // -------------------------------------------
   async function fetchClientData() {
-    const response = await request
-      .get("https://ejmnmassds.ap-south-1.awsapprunner.com/contents")
-      .query({ folder_name: "YMSLI" })
-      .set("Content-Type", "application/json");
-    const data = await response.json();
-    console.log(data);
-    return data;
+    try {
+      const response = await request
+        .get("https://ejmnmassds.ap-south-1.awsapprunner.com/contents")
+        .set("Content-Type", "application/json")
+        .query({
+          folder_name: "",
+        });
+
+      const data = response.body;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+    // return data
   }
 
   function parseClientData(data) {
@@ -44,10 +53,10 @@ const Projects = ({ toggleForm, typeForm }) => {
     data.forEach((path) => {
       const parts = path.split("/").filter((part) => part);
 
-      if (parts.length === 1) {
-        // Skip root directories (e.g., "Model_files/")
-        return;
-      }
+      // if (parts.length === 1) {
+      //   // Skip root directories (e.g., "Model_files/")
+      //   return;
+      // }
 
       const [clientName, projectName, modelName] = parts;
 
@@ -75,6 +84,7 @@ const Projects = ({ toggleForm, typeForm }) => {
     }));
 
     console.log(result);
+    setClients(result);
   }
 
   async function fetchClients() {
@@ -83,6 +93,16 @@ const Projects = ({ toggleForm, typeForm }) => {
     console.log(clients);
     // return clients;
   }
+
+  useEffect(() => {
+    // Fetch data from API when component mounts for the first time
+    fetchClients();
+  }, []);
+
+  useEffect(() => {
+    // Store clients data in local storage
+    localStorage.setItem("clients", JSON.stringify(clients));
+  }, [clients]);
   // ------------------------------------------------
   useEffect(() => {
     updateNameButton();
@@ -294,7 +314,7 @@ const Projects = ({ toggleForm, typeForm }) => {
       <div className="projects-wrapper">
         <div className="header-project">
           <div className="left-section-projects">
-            <span className="projects-head">Clients</span>
+            <span className="projects-head">{nameButton}</span>
             <div className="breadcrums-project-holder">
               <div>
                 <IoMdRefresh onClick={fetchClients} className="reload-icon" />
