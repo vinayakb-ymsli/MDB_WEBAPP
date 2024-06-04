@@ -440,42 +440,54 @@ const ProcessPage = () => {
             )}
           </div>
         )}
-        
       </div>
       {processedImage && (
-          <div className="toggles">
-            <label className="toggles-label">
-              <input
-                className="toggles-input"
-                type="radio"
-                value="slider"
-                checked={selectedOption === "slider"}
-                onChange={(e) => handleOptionChange(e.target.value)}
-              />
-              Slider
-            </label>
-            <label className="toggles-label">
-              <input
-                className="toggles-input"
-                type="radio"
-                value="input"
-                checked={selectedOption === "input"}
-                onChange={(e) => handleOptionChange(e.target.value)}
-              />
-              Input
-            </label>
-            <label className="toggles-label">
-              <input
-                className="toggles-input"
-                type="radio"
-                value="processed"
-                checked={selectedOption === "processed"}
-                onChange={(e) => handleOptionChange(e.target.value)}
-              />
-              Processed
-            </label>
-          </div>
-        )}
+        <div className="toggles">
+          <label
+            className={`toggles-label ${
+              selectedOption === "slider" ? "active" : ""
+            }`}
+          >
+            <input
+              className="toggles-input"
+              type="radio"
+              value="slider"
+              checked={selectedOption === "slider"}
+              onChange={(e) => handleOptionChange(e.target.value)}
+            />
+            Slider
+          </label>
+          <label
+            className={`toggles-label ${
+              selectedOption === "input" ? "active" : ""
+            }`}
+          >
+            <input
+              className="toggles-input"
+              type="radio"
+              value="input"
+              checked={selectedOption === "input"}
+              onChange={(e) => handleOptionChange(e.target.value)}
+            />
+            Input
+          </label>
+          <label
+            className={`toggles-label ${
+              selectedOption === "processed" ? "active" : ""
+            }`}
+          >
+            <input
+              className="toggles-input"
+              type="radio"
+              value="processed"
+              checked={selectedOption === "processed"}
+              onChange={(e) => handleOptionChange(e.target.value)}
+            />
+            Processed
+          </label>
+        </div>
+      )}
+
       <div className="slider-holder-single" style={{ width: 700, height: 390 }}>
         {togglePreview ? (
           <div className="image-container">
@@ -515,15 +527,20 @@ const ProcessPage = () => {
             ) : (
               <>
                 {selectedOption === "slider" && (
-                  <span className="slider-wrapper-after-process">
+                  <div
+                    className="slider-holder"
+                    style={{ width: 700, height: 400, position: "relative" }}
+                    // onMouseEnter={handleMouseEnter}
+                    // onMouseLeave={handleMouseLeave}
+                  >
                     <div
-                      className="fullscreenLeft-single"
+                      className="fullscreenLeft"
                       onClick={() => toggleFullscreen("input")}
                     >
                       <FullscreenIcon style={{ color: "black" }} />
                     </div>
                     <div
-                      className="fullscreenRight-single"
+                      className="fullscreenRight"
                       onClick={() => toggleFullscreen("processed")}
                     >
                       <FullscreenIcon style={{ color: "white" }} />
@@ -537,8 +554,9 @@ const ProcessPage = () => {
                       sliderColor="white"
                       handleColor="rgb(0, 3, 59)"
                       handleBackgroundColor="white"
+                      style={{ width: 700, height: 390 }}
                     />
-                  </span>
+                  </div>
                 )}
                 {selectedOption === "input" && (
                   <>
@@ -567,7 +585,10 @@ const ProcessPage = () => {
             <ProcessButton onClick={processImage} isProcessed={togglePreview} />
             {processedImage ? (
               <div>
-                <button className="download-image" onClick={downloadSingleProcessedImage}>
+                <button
+                  className="download-image"
+                  onClick={downloadSingleProcessedImage}
+                >
                   Download Processed Image <GetApp />
                 </button>
               </div>
@@ -577,23 +598,27 @@ const ProcessPage = () => {
           </div>
         )}
         {!isLoading && (
-          <IconButton
-            component="label"
-            htmlFor="upload-image"
-            style={{ color: "#00033b" }}
-          >
-            <div className="buttonWithLabels">
-              <CloudUpload />
-              <input
-                type="file"
-                id="upload-image"
-                accept="image/*"
-                style={{ display: "none" }}
-                onChange={handleImageUpload}
-              />
-              <div className="labelButtons">Choose another Image</div>
-            </div>
-          </IconButton>
+          <div className="choosenewbutton">
+            <IconButton
+              component="label"
+              htmlFor="upload-image"
+              // style={{ color: "#00033b" }}
+              // style={{"backgroundColor":"none"}}
+            >
+              <div>
+                <input
+                  type="file"
+                  id="upload-image"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={handleImageUpload}
+                />
+                <div className="labelButtons">
+                  <CloudUpload /> Choose another Image
+                </div>
+              </div>
+            </IconButton>
+          </div>
         )}
       </div>
       {!showInfoSlider && (

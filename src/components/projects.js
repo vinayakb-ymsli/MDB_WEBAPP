@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/projects.css";
 import { IoMdRefresh } from "react-icons/io";
+import { MdDeleteOutline } from "react-icons/md";
 import {
   FaUserAlt,
   FaFolderOpen,
@@ -25,6 +26,36 @@ const Projects = ({ toggleForm, typeForm }) => {
   const [expandedClient, setExpandedClient] = useState(null);
   const [expandedProject, setExpandedProject] = useState(null);
   const [nameButton, setNameButton] = useState("Clients");
+  const [contextMenu, setContextMenu] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+    targetItem: null,
+  });
+  const ContextMenu = ({ x, y, onDelete, onClose }) => {
+    const menuRef = useRef();
+  
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+          onClose();
+        }
+      };
+  
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [onClose]);
+  
+    return (
+      <div ref={menuRef} className="context-menu" style={{ top: `${y}px`, left: `${x}px` }}>
+        <ul>
+          <li className="deleteContext" onClick={onDelete}><MdDeleteOutline /> Delete</li>
+        </ul>
+      </div>
+    );
+  };
   // const [clients,setClients]
 
   // -------------------------------------------
@@ -163,7 +194,10 @@ const Projects = ({ toggleForm, typeForm }) => {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
+  const toggleDeleteMenu = (e) => {
+    e.preventDefault();
+    console.log("rightClickedPressed");
+  };
   const renderBreadcrumb = () => {
     const iconMapping = {
       Home: { icon: IoHomeOutline, label: "Home" },
@@ -193,6 +227,21 @@ const Projects = ({ toggleForm, typeForm }) => {
       );
     });
   };
+  const handleContextMenu = (event, item) => {
+    event.preventDefault();
+    setContextMenu({
+      visible: true,
+      x: event.clientX,
+      y: event.clientY,
+      targetItem: item,
+    });
+  };
+
+  const handleDelete = () => {
+    // Implement the delete functionality here
+    console.log("Deleting:", contextMenu.targetItem);
+    setContextMenu({ ...contextMenu, visible: false });
+  };
   const renderFolders = () => {
     let filteredItems;
 
@@ -208,7 +257,11 @@ const Projects = ({ toggleForm, typeForm }) => {
               <span className="folder-name">Back</span>
             </div>
             {filteredItems.map((model, index) => (
-              <div key={index} className="folder-item">
+              <div
+                key={index}
+                className="folder-item"
+                onContextMenu={(e) => handleContextMenu(e, model)}
+              >
                 <RiFolder3Line className="folder-icon" />
                 <span className="folder-name">{model}</span>
               </div>
@@ -230,6 +283,7 @@ const Projects = ({ toggleForm, typeForm }) => {
                 key={index}
                 className="folder-item"
                 onClick={() => handleProjectClick(project)}
+                onContextMenu={(e) => handleContextMenu(e, project)}
               >
                 <FaFolderOpen className="folder-icon" />
                 <span className="folder-name">{project.projectName}</span>
@@ -247,6 +301,7 @@ const Projects = ({ toggleForm, typeForm }) => {
           key={index}
           className="folder-item"
           onClick={() => handleClientClick(client)}
+          onContextMenu={(e) => handleContextMenu(e, client)}
         >
           <FaFolderOpen className="folder-icon" />
           <span className="folder-name">{client.clientName}</span>
@@ -266,7 +321,7 @@ const Projects = ({ toggleForm, typeForm }) => {
   const renderSidebar = () => {
     return (
       <div className="sidebar-wrapper">
-        <h5>Explorer</h5>
+        <h6>Explorer</h6>
         <ul>
           {clients.map((client) => (
             <li key={client.clientName}>
@@ -274,7 +329,10 @@ const Projects = ({ toggleForm, typeForm }) => {
                 className="client-sidebar"
                 onClick={() => toggleClient(client.clientName)}
               >
-                <FaFolderOpen className="icon" />
+                <FaFolderOpen
+                  style={{ color: "rgb(13, 25, 114)" }}
+                  className="icon"
+                />
                 {client.clientName}
               </div>
               {expandedClient === client.clientName && (
@@ -285,14 +343,20 @@ const Projects = ({ toggleForm, typeForm }) => {
                         className="project-sidebar"
                         onClick={() => toggleProject(project.projectName)}
                       >
-                        <FaFolderOpen className="icon" />
+                        <FaFolderOpen
+                          style={{ color: "rgb(13, 25, 114)" }}
+                          className="icon"
+                        />
                         {project.projectName}
                       </div>
                       {expandedProject === project.projectName && (
                         <ul className="models">
                           {project.models.map((model) => (
                             <li key={model} className="model">
-                              <FaFileAlt className="icon" />
+                              <FaFileAlt
+                                style={{ color: "rgb(13, 25, 114)" }}
+                                className="icon-model"
+                              />
                               {model}
                             </li>
                           ))}
@@ -359,6 +423,19 @@ const Projects = ({ toggleForm, typeForm }) => {
 
         <div className="folders-container">{renderFolders()}</div>
       </div>
+      {contextMenu.visible && (
+        <ContextMenu
+          x={contextMenu.x}
+          y={contextMenu.y}
+          onDelete={handleDelete}
+          onClose={() => {
+            setContextMenu((prevState) => ({
+              ...prevState,
+              visible: false,
+            }));
+          }}
+        />
+      )}
     </div>
   );
 };

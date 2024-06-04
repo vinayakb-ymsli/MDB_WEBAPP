@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Navbar.css"; // Import CSS file for styling if needed
+import "../styles/InfoPopup.css"
 import { FaUser, FaSignInAlt, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import InfoPopup from "./InfoPopup";

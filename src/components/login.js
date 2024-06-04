@@ -164,6 +164,7 @@ const LoginPage = () => {
                       <input
                         style={{ border: "none", margin: "0" }}
                         type="email"
+                        className="inputLogin"
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -198,20 +199,7 @@ const LoginPage = () => {
               </div>
             )}
 
-            {!showForgotPassword && (
-              <p>
-                Don't have an account?{" "}
-                <Link
-                  style={{
-                    color: "rgb(13, 25, 114)",
-                    textDecoration: "underline",
-                  }}
-                  to="/register"
-                >
-                  Register
-                </Link>
-              </p>
-            )}
+            
           </div>
         </div>
       </div>

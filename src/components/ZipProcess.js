@@ -324,104 +324,106 @@ function ZipProcess() {
     <>
       {!isLoading ? (
         <div className="mainContainerOne">
-           <div className="project-process">
-        Image Name:{" "}
-        <div className="project-name-process">
-          {zipFileName}
-        </div>
-        Select Client:{" "}
-        <div className="process-page-dropdown-wrapper">
-          <div className="process-page-dropdown">
-            <div className="process-page-dropdown-header">
-              <select
-                value={selectedClient}
-                onChange={(e) => handleClientSelection(e.target.value)}
-                className="process-page-dropdown-select"
-              >
-                <option value="">Select Client</option>
-                {clients.map((client) => (
-                  <option key={client.clientName} value={client.clientName}>
-                    {client.clientName}
-                  </option>
-                ))}
-              </select>
-              {/* <MdOutlineKeyboardArrowRight
-                className={`process-page-icon ${
-                  selectedClient ? "process-page-open" : ""
-                }`}
-              ></MdOutlineKeyboardArrowRight> */}
-            </div>
-          </div>
-        </div>
-        {selectedClient && (
-          <div className="parameter-wrapper">
-            Select Project:{" "}
+          <div className="project-process">
+            File Name: <div className="project-name-process">{zipFileName}</div>
+            Select Client:{" "}
             <div className="process-page-dropdown-wrapper">
               <div className="process-page-dropdown">
                 <div className="process-page-dropdown-header">
                   <select
-                    value={selectedProject}
-                    onChange={(e) => handleProjectSelection(e.target.value)}
+                    value={selectedClient}
+                    onChange={(e) => handleClientSelection(e.target.value)}
                     className="process-page-dropdown-select"
                   >
-                    <option value="">Select Project</option>
-                    {clients
-                      .find((client) => client.clientName === selectedClient)
-                      .projects.map((project) => (
-                        <option
-                          key={project.projectName}
-                          value={project.projectName}
-                        >
-                          {project.projectName}
-                        </option>
-                      ))}
+                    <option value="">Select Client</option>
+                    {clients.map((client) => (
+                      <option key={client.clientName} value={client.clientName}>
+                        {client.clientName}
+                      </option>
+                    ))}
                   </select>
                   {/* <MdOutlineKeyboardArrowRight
-                    className={`process-page-icon ${
-                      selectedProject ? "process-page-open" : ""
-                    }`}
-                  ></MdOutlineKeyboardArrowRight> */}
+                className={`process-page-icon ${
+                  selectedClient ? "process-page-open" : ""
+                }`}
+              ></MdOutlineKeyboardArrowRight> */}
                 </div>
               </div>
             </div>
-            {selectedProject && (
+            {selectedClient && (
               <div className="parameter-wrapper">
-                Select Model:{" "}
+                Select Project:{" "}
                 <div className="process-page-dropdown-wrapper">
                   <div className="process-page-dropdown">
                     <div className="process-page-dropdown-header">
                       <select
-                        value={selectedModel}
-                        onChange={(e) => handleModelSelection(e.target.value)}
+                        value={selectedProject}
+                        onChange={(e) => handleProjectSelection(e.target.value)}
                         className="process-page-dropdown-select"
                       >
-                        <option value="">Select Model</option>
+                        <option value="">Select Project</option>
                         {clients
                           .find(
                             (client) => client.clientName === selectedClient
                           )
-                          .projects.find(
-                            (project) => project.projectName === selectedProject
-                          )
-                          .models.map((model) => (
-                            <option key={model} value={model}>
-                              {model}
+                          .projects.map((project) => (
+                            <option
+                              key={project.projectName}
+                              value={project.projectName}
+                            >
+                              {project.projectName}
                             </option>
                           ))}
                       </select>
                       {/* <MdOutlineKeyboardArrowRight
+                    className={`process-page-icon ${
+                      selectedProject ? "process-page-open" : ""
+                    }`}
+                  ></MdOutlineKeyboardArrowRight> */}
+                    </div>
+                  </div>
+                </div>
+                {selectedProject && (
+                  <div className="parameter-wrapper">
+                    Select Model:{" "}
+                    <div className="process-page-dropdown-wrapper">
+                      <div className="process-page-dropdown">
+                        <div className="process-page-dropdown-header">
+                          <select
+                            value={selectedModel}
+                            onChange={(e) =>
+                              handleModelSelection(e.target.value)
+                            }
+                            className="process-page-dropdown-select"
+                          >
+                            <option value="">Select Model</option>
+                            {clients
+                              .find(
+                                (client) => client.clientName === selectedClient
+                              )
+                              .projects.find(
+                                (project) =>
+                                  project.projectName === selectedProject
+                              )
+                              .models.map((model) => (
+                                <option key={model} value={model}>
+                                  {model}
+                                </option>
+                              ))}
+                          </select>
+                          {/* <MdOutlineKeyboardArrowRight
                         className={`process-page-icon ${
                           selectedModel ? "process-page-open" : ""
                         }`}
                       ></MdOutlineKeyboardArrowRight> */}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
           </div>
-        )}
-      </div>
           <div className="file-name-wrapper">
             <div className="before-process-leftNavRow ">
               {/* <div className="headingLeft">Uploaded Images</div> */}
@@ -430,7 +432,7 @@ function ZipProcess() {
                 <AiOutlineFileZip className="zip-file-icon" />{" "}
                 <div>{zipFileName}</div>
               </div>
-              Please select your paramters
+              <span>Please select your paramters <span className="star">*</span></span>
             </div>
             <div className="before-process-button">
               <ProcessButton onClick={handleZipChange} isProcessed={true} />
@@ -510,7 +512,11 @@ function ZipProcess() {
 
               {!pageLoader && (
                 <div className="toggles">
-                  <label className="toggles-label">
+                  <label
+                    className={`toggles-label ${
+                      selectedOption === "slider" ? "active" : ""
+                    }`}
+                  >
                     <input
                       className="toggles-input"
                       type="radio"
@@ -520,7 +526,11 @@ function ZipProcess() {
                     />
                     Slider
                   </label>
-                  <label className="toggles-label">
+                  <label
+                    className={`toggles-label ${
+                      selectedOption === "input" ? "active" : ""
+                    }`}
+                  >
                     <input
                       className="toggles-input"
                       type="radio"
@@ -530,7 +540,11 @@ function ZipProcess() {
                     />
                     Input
                   </label>
-                  <label className="toggles-label">
+                  <label
+                    className={`toggles-label ${
+                      selectedOption === "processed" ? "active" : ""
+                    }`}
+                  >
                     <input
                       className="toggles-input"
                       type="radio"
@@ -566,9 +580,7 @@ function ZipProcess() {
                       <ArrowBack style={{ color: "rgb(13, 25, 114)" }} />
                     </IconButton>
                   </div>
-                  <div className="labelButtons">
-                    Previous Image
-                  </div>
+                  <div className="labelButtons">Previous Image</div>
                 </div>
 
                 {isFullscreen && (
@@ -643,9 +655,6 @@ function ZipProcess() {
                         handleColor="rgb(0, 3, 59)"
                         handleBackgroundColor="white"
                       />
-                      <div className="image-name">
-                        <div className="image-name"> {selected}.jpg</div>
-                      </div>
                     </div>
                   )}
                   {selectedOption == "input" && (
@@ -653,6 +662,9 @@ function ZipProcess() {
                       <img
                         src={input_image}
                         style={{ width: 700, height: 400 }}
+                        className="slider-holder"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                       />
                     </>
                   )}
@@ -661,6 +673,9 @@ function ZipProcess() {
                       <img
                         src={processed_image}
                         style={{ width: 700, height: 400 }}
+                        className="slider-holder"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                       />
                     </>
                   )}
@@ -671,9 +686,7 @@ function ZipProcess() {
                       <ArrowForward style={{ color: "rgb(13, 25, 114)" }} />
                     </IconButton>
                   </div>
-                  <div className="labelButtons">
-                    Next <br></br> Image
-                  </div>
+                  <div className="labelButtons">Next Image</div>
                 </div>
                 {/* <IconButton onClick={setNextImage}>
               <div className="buttonWithLabels">
@@ -689,6 +702,7 @@ function ZipProcess() {
                     const filename = "processed_image.png";
                     downloadImage(imageData, filename);
                   }}
+                  className="download-button-zip"
                 >
                   Download Processed Image <GetApp></GetApp>
                 </button>
@@ -725,7 +739,6 @@ function ZipProcess() {
           )}
         </>
       )}
-      ;
     </>
   );
 }

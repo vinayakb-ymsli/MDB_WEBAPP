@@ -5,11 +5,10 @@ main.mainContainer {
   justify-content: space-around;
   /* font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif; */
-  font-family: "Roboto", "Verdana", "Geneva", sans-serif;  
+  font-family: "Roboto", "Verdana", "Geneva", sans-serif;
   position: relative; /* Ensure proper positioning of background image */
   overflow: hidden;
 }
-
 
 .fullscreenLeft {
   position: absolute;
@@ -49,7 +48,7 @@ main.mainContainer {
   font-family: "Roboto", "Verdana", "Geneva", sans-serif;
   padding-left: 3rem;
   padding-right: 3rem;
-  padding-top: 2rem;
+  /* padding-top: 2rem; */
   /* background-color: #fff; */
   background: linear-gradient(
     180deg,
@@ -99,7 +98,7 @@ main.mainContainer {
   justify-content: center; /* Horizontally center the contents */
   align-items: center;
   text-align: center;
-  margin-top: -29px;
+  margin-top: -50px;
   padding: 4px;
 }
 
@@ -215,20 +214,20 @@ main.mainContainer {
 }
 
 .project-name {
-  /* background-color: white; */
+  background-color: white;
   color: rgb(13, 25, 114);
-  font-weight: bolder;
+  font-weight: 500;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 0.25rem;
+  padding-left: 1rem;
   padding-right: 1rem;
-  /* border-radius: 7rem; */
+  border-radius: 7rem;
   /* position: absolute; */
   /* min-width: fit-content; */
 }
 .project {
   /* background-color: rgb(13, 25, 114); */
-  font-weight: bolder;
+  /* font-weight: bolder; */
   display: flex;
   max-width: fit-content;
   color: rgb(13, 25, 114);
@@ -242,6 +241,7 @@ main.mainContainer {
   align-items: center;
   gap: 1rem;
   position: relative;
+  /* margin-top: 1rem; */
 }
 
 .slider-holder {
@@ -270,14 +270,16 @@ main.mainContainer {
   align-items: center;
   gap: 1rem;
 }
-.downloadZipPage{
-  /* max-width: 20%; */
+.downloadZipPage {
+  width: 100%;
   display: flex;
+  /* padding-left: 5rem; */
+  text-align: center;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }
-.radioButtonViewer{
+.radioButtonViewer {
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -286,140 +288,116 @@ main.mainContainer {
   gap: 1rem;
 }
 
-.toggles{
+.toggles {
   scale: 0.8;
   position: absolute;
-
   right: 0;
-  top: 2rem;  
-  /* gap: 1em; */
-
+  top: 0.5rem;
   border-radius: 10em;
-  overflow: visible;
-
+  overflow: hidden; /* Ensure child elements do not overflow */
   height: 3em;
   width: 20em;
-
   display: flex;
   flex-direction: row;
+  /* background-color: #f0f0f0; Background color for visibility */
+}
 
-  > * {
-    flex: 0 0 33.33%;
-  }
+.toggles:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 1px solid rgb(13, 25, 114);
+  border-radius: 10em;
+  pointer-events: none;
+}
 
-  &:after{
-    content: "";
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    border: 1px solid #00033B;
-    border-radius: 10em;
-    pointer-events: none;
-  }
+.toggles > * {
+  flex: 1; /* Ensure all labels take equal space */
 }
 
 .toggles-input {
-	display: none;
-
-	&:checked + .toggles__label {
-		background-color: #607BBE;
-		color: #607BBE;
-
-		&:before {
-			opacity: 1;
-		}
-		
-		&:last-of-type {
-			background: linear-gradient(90deg, green 0%, blue 100%);
-		}
-	}
-  &:nth-of-type(1) + label { order: 4 }
-	&:nth-of-type(2) + label { order: 3 }
-	&:nth-of-type(3) + label { order: 2 }
-	&:nth-of-type(4) + label { order: 1 }
-	
-	&:nth-of-type(1):checked,
-	&:nth-of-type(2):checked {
-		~ label:last-of-type {
-			margin-right: -33.33%;
-		}
-	}
+  display: none;
 }
 
-.toggles-label{
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-  /* font-size: small;
-  font-weight: bold; */
-
-	position: relative;
-	cursor: pointer;
-	transition: all 0.2s ease-out;
-  color: black;
-
-	&:hover {
-		color: #607BBE;
-	}
-
-	&:nth-of-type(2) {
-		border-left: 1px solid #00033B;
-		border-right: 1px solid #00033B;
-	}
-	
-	/* &:nth-of-type(3) {
-		margin: 7px
-	} */
+.toggles-label {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the text */
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  /* color: black; */
+  padding: 0.5em 1em; /* Add padding for better visual separation */
+  border-radius: 10em; /* Add border radius for rounded corners */
+  margin: 0.2em; /* Add margin for spacing between labels */
+  /* background-color: #e0e0e0; Default background color */
+  overflow: hidden; /* Prevent text overflow */
+  white-space: nowrap; /* Prevent text wrapping */
+  text-align: center; /* Center text alignment */
 }
-.before-process-header{
+
+.toggles-label:hover {
+  color: rgb(13, 25, 114);
+}
+
+.toggles-label:nth-of-type(2) {
+  /* border-left: 1px solid #00033B;
+  border-right: 1px solid #00033B; */
+}
+
+.toggles-label.active {
+  background-color: rgb(13, 25, 114);
+  color: white;
+}
+
+.before-process-header {
   display: flex;
   /* width: 100%; */
 }
-.file-name-wrapper{
+.file-name-wrapper {
   display: block;
   justify-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
 }
 .before-process-leftNavRow {
-  
   display: flex;
   flex-direction: column;
   /* justify-content: center; Horizontally center the contents */
   /* align-items: center;
   text-align: center; */
-  margin-top: 50px;
+  /* margin-top: 50px; */
   margin-bottom: 29px;
   padding-left: 2rem;
   padding-right: 2rem;
   padding: 2rem;
-  gap:1rem;
+  gap: 1rem;
   background-color: white;
   border-radius: 20px;
   /* max-width: 50%; */
-  box-shadow:  rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.name-holder{
+.name-holder {
   display: flex;
   padding: 2rem;
   /* background-color: rgb(34, 42, 185); */
   border: 1.6px dashed rgb(227, 227, 227);
   border-radius: 20px;
   /* color: white; */
-  
+
   flex-direction: column;
-  gap:1rem;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
   color: rgb(13, 25, 114);
   font-weight: 600;
-
 }
-.zip-file-icon{
+.zip-file-icon {
   font-size: xxx-large;
   color: rgb(13, 25, 114);
 }
@@ -430,9 +408,16 @@ main.mainContainer {
   text-align: center;
   max-width: 80%;
 }
-.before-process-button{
+.before-process-button {
   display: flex;
   justify-content: center;
   /* min-width: 100%; */
   /* max-width: 25%; */
+}
+.download-button-zip {
+  background-color: rgb(13, 25, 114);
+}
+.choosenewbutton {
+  background-color: rgb(242, 243, 250);
+  border-radius: 10px;
 }

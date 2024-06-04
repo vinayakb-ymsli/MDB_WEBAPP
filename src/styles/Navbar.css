@@ -253,3 +253,12 @@
   margin-left: 15px;
   padding-bottom: 5px;
 }
+.imageContainer-zoomedin h2{
+  margin-top: 4%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding-left: 4%;
+  padding-right: 4%;
+  color: rgb(240, 25, 25);
+}
