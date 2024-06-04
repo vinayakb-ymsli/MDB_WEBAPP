@@ -146,6 +146,9 @@
   border-radius: 10%;
   cursor: pointer;
 }
+.slider-wrapper-after-process{
+  position: relative;
+}
 .breadcrumbs-project-page {
   display: flex;
   /* flex-direction: row; */

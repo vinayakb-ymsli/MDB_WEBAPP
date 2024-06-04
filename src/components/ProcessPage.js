@@ -338,135 +338,144 @@ const ProcessPage = () => {
         <div className="project-name-process">
           {uploadedImage ? uploadedImage.name : "No image selected"}
         </div>
-        Select Client:{" "}
-        <div className="process-page-dropdown-wrapper">
-          <div className="process-page-dropdown">
-            <div className="process-page-dropdown-header">
-              <select
-                value={selectedClient}
-                onChange={(e) => handleClientSelection(e.target.value)}
-                className="process-page-dropdown-select"
-              >
-                <option value="">Select Client</option>
-                {clients.map((client) => (
-                  <option key={client.clientName} value={client.clientName}>
-                    {client.clientName}
-                  </option>
-                ))}
-              </select>
-              {/* <MdOutlineKeyboardArrowRight
-                className={`process-page-icon ${
-                  selectedClient ? "process-page-open" : ""
-                }`}
-              ></MdOutlineKeyboardArrowRight> */}
-            </div>
-          </div>
-        </div>
-        {selectedClient && (
-          <div className="parameter-wrapper">
-            Select Project:{" "}
+        {/* {!isLoading && ()} */}
+        {!processedImage && (
+          <div className="drop-flex">
+            Select Client:{" "}
             <div className="process-page-dropdown-wrapper">
               <div className="process-page-dropdown">
                 <div className="process-page-dropdown-header">
                   <select
-                    value={selectedProject}
-                    onChange={(e) => handleProjectSelection(e.target.value)}
+                    value={selectedClient}
+                    onChange={(e) => handleClientSelection(e.target.value)}
                     className="process-page-dropdown-select"
                   >
-                    <option value="">Select Project</option>
-                    {clients
-                      .find((client) => client.clientName === selectedClient)
-                      .projects.map((project) => (
-                        <option
-                          key={project.projectName}
-                          value={project.projectName}
-                        >
-                          {project.projectName}
-                        </option>
-                      ))}
+                    <option value="">Select Client</option>
+                    {clients.map((client) => (
+                      <option key={client.clientName} value={client.clientName}>
+                        {client.clientName}
+                      </option>
+                    ))}
                   </select>
                   {/* <MdOutlineKeyboardArrowRight
-                    className={`process-page-icon ${
-                      selectedProject ? "process-page-open" : ""
-                    }`}
-                  ></MdOutlineKeyboardArrowRight> */}
+                className={`process-page-icon ${
+                  selectedClient ? "process-page-open" : ""
+                }`}
+              ></MdOutlineKeyboardArrowRight> */}
                 </div>
               </div>
             </div>
-            {selectedProject && (
+            {selectedClient && (
               <div className="parameter-wrapper">
-                Select Model:{" "}
+                Select Project:{" "}
                 <div className="process-page-dropdown-wrapper">
                   <div className="process-page-dropdown">
                     <div className="process-page-dropdown-header">
                       <select
-                        value={selectedModel}
-                        onChange={(e) => handleModelSelection(e.target.value)}
+                        value={selectedProject}
+                        onChange={(e) => handleProjectSelection(e.target.value)}
                         className="process-page-dropdown-select"
                       >
-                        <option value="">Select Model</option>
+                        <option value="">Select Project</option>
                         {clients
                           .find(
                             (client) => client.clientName === selectedClient
                           )
-                          .projects.find(
-                            (project) => project.projectName === selectedProject
-                          )
-                          .models.map((model) => (
-                            <option key={model} value={model}>
-                              {model}
+                          .projects.map((project) => (
+                            <option
+                              key={project.projectName}
+                              value={project.projectName}
+                            >
+                              {project.projectName}
                             </option>
                           ))}
                       </select>
                       {/* <MdOutlineKeyboardArrowRight
+                    className={`process-page-icon ${
+                      selectedProject ? "process-page-open" : ""
+                    }`}
+                  ></MdOutlineKeyboardArrowRight> */}
+                    </div>
+                  </div>
+                </div>
+                {selectedProject && (
+                  <div className="parameter-wrapper">
+                    Select Model:{" "}
+                    <div className="process-page-dropdown-wrapper">
+                      <div className="process-page-dropdown">
+                        <div className="process-page-dropdown-header">
+                          <select
+                            value={selectedModel}
+                            onChange={(e) =>
+                              handleModelSelection(e.target.value)
+                            }
+                            className="process-page-dropdown-select"
+                          >
+                            <option value="">Select Model</option>
+                            {clients
+                              .find(
+                                (client) => client.clientName === selectedClient
+                              )
+                              .projects.find(
+                                (project) =>
+                                  project.projectName === selectedProject
+                              )
+                              .models.map((model) => (
+                                <option key={model} value={model}>
+                                  {model}
+                                </option>
+                              ))}
+                          </select>
+                          {/* <MdOutlineKeyboardArrowRight
                         className={`process-page-icon ${
                           selectedModel ? "process-page-open" : ""
                         }`}
                       ></MdOutlineKeyboardArrowRight> */}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
           </div>
         )}
+        
       </div>
-
       {processedImage && (
-        <div className="toggles">
-          <label className="toggles-label">
-            <input
-              className="toggles-input"
-              type="radio"
-              value="slider"
-              checked={selectedOption === "slider"}
-              onChange={(e) => handleOptionChange(e.target.value)}
-            />
-            Slider
-          </label>
-          <label className="toggles-label">
-            <input
-              className="toggles-input"
-              type="radio"
-              value="input"
-              checked={selectedOption === "input"}
-              onChange={(e) => handleOptionChange(e.target.value)}
-            />
-            Input
-          </label>
-          <label className="toggles-label">
-            <input
-              className="toggles-input"
-              type="radio"
-              value="processed"
-              checked={selectedOption === "processed"}
-              onChange={(e) => handleOptionChange(e.target.value)}
-            />
-            Processed
-          </label>
-        </div>
-      )}
-
+          <div className="toggles">
+            <label className="toggles-label">
+              <input
+                className="toggles-input"
+                type="radio"
+                value="slider"
+                checked={selectedOption === "slider"}
+                onChange={(e) => handleOptionChange(e.target.value)}
+              />
+              Slider
+            </label>
+            <label className="toggles-label">
+              <input
+                className="toggles-input"
+                type="radio"
+                value="input"
+                checked={selectedOption === "input"}
+                onChange={(e) => handleOptionChange(e.target.value)}
+              />
+              Input
+            </label>
+            <label className="toggles-label">
+              <input
+                className="toggles-input"
+                type="radio"
+                value="processed"
+                checked={selectedOption === "processed"}
+                onChange={(e) => handleOptionChange(e.target.value)}
+              />
+              Processed
+            </label>
+          </div>
+        )}
       <div className="slider-holder-single" style={{ width: 700, height: 390 }}>
         {togglePreview ? (
           <div className="image-container">
@@ -506,7 +515,7 @@ const ProcessPage = () => {
             ) : (
               <>
                 {selectedOption === "slider" && (
-                  <>
+                  <span className="slider-wrapper-after-process">
                     <div
                       className="fullscreenLeft-single"
                       onClick={() => toggleFullscreen("input")}
@@ -529,7 +538,7 @@ const ProcessPage = () => {
                       handleColor="rgb(0, 3, 59)"
                       handleBackgroundColor="white"
                     />
-                  </>
+                  </span>
                 )}
                 {selectedOption === "input" && (
                   <>

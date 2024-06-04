@@ -6,7 +6,13 @@ import "../styles/Projectform.css";
 import request from "superagent";
 import NotificationPopup from "./NotificationPopup";
 
-const CreateForm = ({ nameB, toggleForm, typeForm }) => {
+const CreateForm = ({
+  nameB,
+  toggleForm,
+  typeForm,
+  parentClient,
+  parentProject,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const closeNotification = () => {
@@ -54,7 +60,7 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
     try {
       const response = await request
         .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-client")
-        .send({ client_name: clientFormData.folderName.toUpperCase() }) 
+        .send({ client_name: clientFormData.folderName.toUpperCase() })
         .set("Content-Type", "application/json")
         .set("Authorization", `${token}`);
 
@@ -85,8 +91,8 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
       const response = await request
         .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-project")
         .send({
-          client_name: "ravinder_tester32",
-          project_name: projectFormData.folderName.toUpperCase()
+          client_name: { parentClient },
+          project_name: projectFormData.folderName.toUpperCase(),
         })
         .set("Content-Type", "application/json")
         .set("Authorization", `${token}`);
@@ -119,15 +125,18 @@ const CreateForm = ({ nameB, toggleForm, typeForm }) => {
       const response = await request
         .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-model")
         .send({
-          client_name: "ravinder_tester32",
-          project_name: "REACT",
-          model_name: modelFormData.modelName.toUpperCase()
+          client_name: parentClient,
+          project_name: parentProject,
+          model_name: modelFormData.modelName.toUpperCase(),
         })
         .set("Content-Type", "application/json")
         .set("Authorization", `${token}`);
 
       console.log("Response:", response.body);
       setErrorMessage("Created Project Successfully");
+      setTimeout(function () {
+        window.location.reload();
+      }, 200);
     } catch (error) {
       console.error(
         "Error:",

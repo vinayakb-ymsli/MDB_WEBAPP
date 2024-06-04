@@ -47,7 +47,7 @@ const Projects = ({ toggleForm, typeForm }) => {
     // return data
   }
 
-  function parseClientData(data) {
+  async function  parseClientData(data) {
     const clients = {};
 
     data.forEach((path) => {
@@ -85,12 +85,15 @@ const Projects = ({ toggleForm, typeForm }) => {
 
     console.log(result);
     setClients(result);
+    // window.location.reload();
   }
 
   async function fetchClients() {
     const data = await fetchClientData();
-    const clients = parseClientData(data);
+    const clients = await parseClientData(data);
+    
     console.log(clients);
+    
     // return clients;
   }
 
@@ -102,6 +105,7 @@ const Projects = ({ toggleForm, typeForm }) => {
   useEffect(() => {
     // Store clients data in local storage
     localStorage.setItem("clients", JSON.stringify(clients));
+    // window.location.reload();
   }, [clients]);
   // ------------------------------------------------
   useEffect(() => {
@@ -339,10 +343,15 @@ const Projects = ({ toggleForm, typeForm }) => {
           </div>
           <div className="right-project-header">
             <div className="project-button">
+              {/* {console.log("parentClient ",selectedClient.clientName, " parentProject: ", selectedProject.projectName)} */}
               <CreateProjectForm
                 nameB={nameButton}
                 toggleForm={toggleForm}
                 typeForm={nameButton}
+                parentClient={selectedClient ? selectedClient.clientName : null}
+                parentProject={
+                  selectedProject ? selectedProject.projectName : null
+                }
               />
             </div>
           </div>
