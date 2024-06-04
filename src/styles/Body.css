@@ -85,7 +85,9 @@
 .introtext h6 {
   color: rgb(0, 0, 0);
   padding-left: 7%;
-  margin-right: 10%;
+  padding-right: 7%;
+  /* margin-right: 10%; */
+  text-align: center;
 }
 
 .introtext h1 {
@@ -169,7 +171,7 @@ input[type="file"]::file-selector-button {
   /* margin: auto; */
   gap:4rem;
   justify-content: center;
-  scale: 0.9;
+  scale: 0.75;
 }
 
 .uploadContainerDash {

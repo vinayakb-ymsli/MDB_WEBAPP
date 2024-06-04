@@ -47,7 +47,7 @@ const Projects = ({ toggleForm, typeForm }) => {
     // return data
   }
 
-  async function  parseClientData(data) {
+  async function parseClientData(data) {
     const clients = {};
 
     data.forEach((path) => {
@@ -91,9 +91,9 @@ const Projects = ({ toggleForm, typeForm }) => {
   async function fetchClients() {
     const data = await fetchClientData();
     const clients = await parseClientData(data);
-    
+
     console.log(clients);
-    
+
     // return clients;
   }
 
@@ -347,7 +347,7 @@ const Projects = ({ toggleForm, typeForm }) => {
               <CreateProjectForm
                 nameB={nameButton}
                 toggleForm={toggleForm}
-                typeForm={nameButton}
+                typeForm={typeForm}
                 parentClient={selectedClient ? selectedClient.clientName : null}
                 parentProject={
                   selectedProject ? selectedProject.projectName : null

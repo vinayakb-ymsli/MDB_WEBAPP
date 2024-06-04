@@ -567,7 +567,7 @@ const ProcessPage = () => {
             <ProcessButton onClick={processImage} isProcessed={togglePreview} />
             {processedImage ? (
               <div>
-                <button onClick={downloadSingleProcessedImage}>
+                <button className="download-image" onClick={downloadSingleProcessedImage}>
                   Download Processed Image <GetApp />
                 </button>
               </div>

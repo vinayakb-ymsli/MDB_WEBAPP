@@ -567,7 +567,7 @@ function ZipProcess() {
                     </IconButton>
                   </div>
                   <div className="labelButtons">
-                    Previous <br></br> Image
+                    Previous Image
                   </div>
                 </div>
 

@@ -137,7 +137,7 @@ button {
   justify-content: center;
   align-items: center;
   color: rgb(13, 25, 114);
-  font-weight: bolder;
+  /* font-weight: bolder; */
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
@@ -350,4 +350,8 @@ button {
   color: rgb(13, 25, 114);
   font-weight: bold;
   cursor: pointer;
+}
+.download-image{
+  background-color: rgb(13, 25, 114);
+  font-weight: bold;
 }

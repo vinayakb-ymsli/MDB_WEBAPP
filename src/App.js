@@ -19,6 +19,7 @@ import Projects from "./components/projects";
 import "./App.css";
 import { AuthProvider } from "./components/Authcontext";
 import { useAuth } from "./components/Authcontext";
+import Navforms from "./components/Navforms";
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -79,7 +80,7 @@ function App() {
                 path="/projects/addproject"
                 element={
                   isLoggedIn ? (
-                    <Projects toggleForm={true} typeForm="project" />
+                    <Navforms typeForm="project" />
                   ) : (
                     <LoginPage />
                   )
@@ -90,7 +91,7 @@ function App() {
                 path="/projects/addmodel"
                 element={
                   isLoggedIn ? (
-                    <Projects toggleForm={true} typeForm="model" />
+                    <Navforms typeForm="model" />
                   ) : (
                     <LoginPage />
                   )
