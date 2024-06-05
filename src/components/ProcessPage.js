@@ -164,6 +164,7 @@ const ProcessPage = () => {
   const [hoverOnInput, setHoverOnInput] = useState(false);
   const [fullscreenImageType, setFullscreenImageType] = useState("input");
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [buttonStatus, setButtonStatus] = useState(true);
   const token = localStorage.getItem("token");
 
   const toggleFullscreen = (type) => {
@@ -180,21 +181,21 @@ const ProcessPage = () => {
     try {
       const formData = new FormData();
       formData.append("image", uploadedImage);
-      // formData.append("client_name", selectedClient);
-      //   formData.append("project_name", selectedProject);
-      //   formData.append("model_name", selectedModel);
+      formData.append("client_name", selectedClient);
+      formData.append("project_name", selectedProject);
+      formData.append("model_name", selectedModel);
 
       const response = await axios.post(
         "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload",
-        formData
-        // {
-        //   headers: {
-        //     "Content-Type":
-        //       "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
-        //     Authorization: `${token}`, // Example of adding an Authorization header
-        //     // Add any other headers you need
-        //   },
-        // }
+        formData,
+        {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
+            Authorization: `${token}`, // Example of adding an Authorization header
+            // Add any other headers you need
+          },
+        }
       );
 
       const processedImage = `data:image/png;base64, ${response?.data?.image}`;
@@ -301,6 +302,7 @@ const ProcessPage = () => {
   // Function to handle model selection
   const handleModelSelection = (modelName) => {
     setSelectedModel(modelName);
+    setButtonStatus(false);
   };
 
   useEffect(() => {
@@ -594,7 +596,12 @@ const ProcessPage = () => {
       <div className="buttonsContainerSingle">
         {!isLoading && (
           <div className="firstRowButtons">
-            <ProcessButton onClick={processImage} isProcessed={togglePreview} />
+            <div hidden={buttonStatus}>
+              <ProcessButton
+                onClick={processImage}
+                isProcessed={togglePreview}
+              />
+            </div>
             {processedImage ? (
               <div>
                 <button

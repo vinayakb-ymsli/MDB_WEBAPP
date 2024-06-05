@@ -6,6 +6,8 @@ import { RxCrossCircled } from "react-icons/rx";
 import "../styles/Projectform.css";
 import request from "superagent";
 import NotificationPopup from "./NotificationPopup";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const Navforms = ({ typeForm, parentClient, parentProject }) => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -45,9 +47,15 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
   };
 
   useEffect(() => {
-    if(modelFormData.clientName!=""){
-    setProjects(clients[modelFormData.clientName].projects);}
-  }, [modelFormData.clientName]);
+    if (modelFormData.clientName !== "") {
+      const selectedClient = clients.find(
+        (client) => client.clientName === modelFormData.clientName
+      );
+      if (selectedClient) {
+        setProjects(selectedClient.projects);
+      }
+    }
+  }, [modelFormData.clientName, clients]);
 
   const handleProjectSubmit = async (e) => {
     e.preventDefault();
@@ -66,6 +74,7 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
 
       console.log("Response:", response.body);
       setErrorMessage("Created Project Successfully");
+      window.location.href = "/projects";
     } catch (error) {
       console.error(
         "Error:",
@@ -89,21 +98,39 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
     setIsOpen(false);
 
     try {
-      const response = await request
-        .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-model")
-        .send({
-          client_name: modelFormData.clientName,
-          project_name: modelFormData.projectName,
-          model_name: modelFormData.modelName.toUpperCase(),
-        })
-        .set("Content-Type", "application/json")
-        .set("Authorization", `${token}`);
+      const formData = new FormData();
+      formData.append("client_name", modelFormData.clientName);
+      formData.append("project_name", modelFormData.projectName);
+      formData.append("model_name", modelFormData.modelName.toUpperCase());
+      formData.append("model_file", modelFormData.modelFile);
+      const response = await axios.post(
+        "https://ejmnmassds.ap-south-1.awsapprunner.com/create-model",
+        formData,
+        {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
+            Authorization: `${token}`, // Example of adding an Authorization header
+            // Add any other headers you need
+          },
+        }
+      );
+      // const response = await request
+      //   .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-model")
+      //   .send({
+      //     client_name: modelFormData.clientName,
+      //     project_name: modelFormData.projectName,
+      //     model_name: modelFormData.modelName.toUpperCase(),
+      //   })
+      //   .set("Content-Type", "application/json")
+      //   .set("Authorization", `${token}`);
 
       console.log("Response:", response.body);
       setErrorMessage("Created Project Successfully");
-      setTimeout(function () {
-        window.location.reload();
-      }, 200);
+      window.location.href = "/projects";
+      // setTimeout(function () {
+      //   window.location.reload();
+      // }, 200);
     } catch (error) {
       console.error(
         "Error:",
@@ -242,8 +269,8 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
               Select Project <span className="star">*</span>
             </label>
             <select
-              name="clientName"
-              value={projectFormData.clientName}
+              name="projectName"
+              value={modelFormData.projectName}
               onChange={handleModelChange}
               className="input-field"
               required
@@ -251,16 +278,16 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
               <option value="" disabled>
                 Select a client
               </option>
-              {clients.map((client, index) => (
-                <option key={index} value={client.clientName}>
-                  {client.clientName}
+              {projects.map((project, index) => (
+                <option key={index} value={project.projectName}>
+                  {project.projectName}
                 </option>
               ))}
             </select>
           </div>
         )}
 
-        <div className="input-container">
+        {/* <div className="input-container">
           <label className="input-label">
             Project Name <span className="star">*</span>
           </label>
@@ -273,7 +300,7 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
             placeholder="Placeholder"
             required
           />
-        </div>
+        </div> */}
         <div className="input-container">
           <label className="input-label">
             Model Name <span className="star">*</span>

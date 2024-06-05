@@ -5,6 +5,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import "../styles/Projectform.css";
 import request from "superagent";
 import NotificationPopup from "./NotificationPopup";
+import axios from "axios";
 
 const CreateForm = ({
   nameB,
@@ -91,7 +92,7 @@ const CreateForm = ({
       const response = await request
         .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-project")
         .send({
-          client_name: { parentClient },
+          client_name: parentClient ,
           project_name: projectFormData.folderName.toUpperCase(),
         })
         .set("Content-Type", "application/json")
@@ -122,18 +123,36 @@ const CreateForm = ({
     setIsOpen(false);
 
     try {
-      const response = await request
-        .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-model")
-        .send({
-          client_name: parentClient,
-          project_name: parentProject,
-          model_name: modelFormData.modelName.toUpperCase(),
-        })
-        .set("Content-Type", "application/json")
-        .set("Authorization", `${token}`);
+      // const response = await request
+      //   .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-model")
+      //   .send({
+      //     client_name: parentClient,
+      //     project_name: parentProject,
+      //     model_name: modelFormData.modelName.toUpperCase(),
+      //   })
+      //   .set("Content-Type", "application/json")
+      //   .set("Authorization", `${token}`);
+      const formData = new FormData();
+      formData.append("client_name", parentClient);
+      formData.append("project_name", parentProject);
+      formData.append("model_name", modelFormData.modelName.toUpperCase());
+      formData.append("model_file", modelFormData.modelFile);
+
+      const response = await axios.post(
+        "https://ejmnmassds.ap-south-1.awsapprunner.com/create-model",
+        formData,
+        {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
+            Authorization: `${token}`, // Example of adding an Authorization header
+            // Add any other headers you need
+          },
+        }
+      );
 
       console.log("Response:", response.body);
-      setErrorMessage("Created Project Successfully");
+      setErrorMessage("Created Model Successfully");
       setTimeout(function () {
         window.location.reload();
       }, 200);

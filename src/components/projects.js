@@ -16,6 +16,7 @@ import { RiFolder3Line } from "react-icons/ri";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 import CreateProjectForm from "./Projectform";
 import request from "superagent";
+import axios from "axios";
 
 const Projects = ({ toggleForm, typeForm }) => {
   const [clients, setClients] = useState([]);
@@ -26,12 +27,14 @@ const Projects = ({ toggleForm, typeForm }) => {
   const [expandedClient, setExpandedClient] = useState(null);
   const [expandedProject, setExpandedProject] = useState(null);
   const [nameButton, setNameButton] = useState("Clients");
+  const [isError, setIsError] = useState("");
   const [contextMenu, setContextMenu] = useState({
     visible: false,
     x: 0,
     y: 0,
     targetItem: null,
   });
+  const token=localStorage.getItem("token")
   const ContextMenu = ({ x, y, onDelete, onClose }) => {
     const menuRef = useRef();
 
@@ -251,9 +254,38 @@ const Projects = ({ toggleForm, typeForm }) => {
     });
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     // Implement the delete functionality here
-    console.log("Deleting:", contextMenu.targetItem);
+    console.log(
+      "Deleting:",
+      contextMenu.targetItem.projectName,
+      "client: ",
+      selectedClient.clientName
+    );
+    const formData = new FormData();
+    formData.append("client_name", selectedClient.clientName);
+    formData.append("project_name", contextMenu.targetItem.projectName);
+    try {
+    const response = await axios.post(
+      "https://ejmnmassds.ap-south-1.awsapprunner.com/delete-project",
+      formData,
+      {
+        headers: {
+          "Content-Type":
+            "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
+          Authorization: `${token}`, // Example of adding an Authorization header
+          // Add any other headers you need
+        },
+      }
+    );}
+    catch(error){
+      setIsError(error.message);
+    }
+    finally{
+      setIsError("Deleted Successfully")
+      console.log("Deletedd finally")
+    }
+
     setContextMenu({ ...contextMenu, visible: false });
   };
   const renderFolders = () => {
@@ -271,11 +303,7 @@ const Projects = ({ toggleForm, typeForm }) => {
               <span className="folder-name">Back</span>
             </div>
             {filteredItems.map((model, index) => (
-              <div
-                key={index}
-                className="folder-item"
-                onContextMenu={(e) => handleContextMenu(e, model)}
-              >
+              <div key={index} className="folder-item">
                 <RiFolder3Line className="folder-icon" />
                 <span className="folder-name">{model}</span>
               </div>
@@ -297,7 +325,9 @@ const Projects = ({ toggleForm, typeForm }) => {
                 key={index}
                 className="folder-item"
                 onClick={() => handleProjectClick(project)}
-                onContextMenu={(e) => handleContextMenu(e, project)}
+                onContextMenu={(e) =>
+                  handleContextMenu(e, project, selectedClient)
+                }
               >
                 <FaFolderOpen className="folder-icon" />
                 <span className="folder-name">{project.projectName}</span>
@@ -315,7 +345,7 @@ const Projects = ({ toggleForm, typeForm }) => {
           key={index}
           className="folder-item"
           onClick={() => handleClientClick(client)}
-          onContextMenu={(e) => handleContextMenu(e, client)}
+          // onContextMenu={(e) => handleContextMenu(e, client)}
         >
           <FaFolderOpen className="folder-icon" />
           <span className="folder-name">{client.clientName}</span>
@@ -389,7 +419,7 @@ const Projects = ({ toggleForm, typeForm }) => {
 
   return (
     <div className="projects-page-layout">
-      <div >{renderSidebar()}</div>
+      <div>{renderSidebar()}</div>
       {/* <div className="border">
         <hr></hr>
       </div> */}
