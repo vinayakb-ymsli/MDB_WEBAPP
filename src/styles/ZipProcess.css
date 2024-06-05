@@ -37,7 +37,7 @@ main.mainContainer {
   width: 700;
 }
 .mainContainerOne {
-  height: 80vh;
+  height: 85vh;
   /* overflow: hidden; */
   display: flex;
   flex-direction: column;
@@ -360,6 +360,7 @@ main.mainContainer {
 .file-name-wrapper {
   display: block;
   justify-content: center;
+  padding-top: 2rem;
   margin-top: auto;
   margin-bottom: auto;
   margin-left: auto;
