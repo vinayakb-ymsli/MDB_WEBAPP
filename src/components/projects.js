@@ -34,24 +34,30 @@ const Projects = ({ toggleForm, typeForm }) => {
   });
   const ContextMenu = ({ x, y, onDelete, onClose }) => {
     const menuRef = useRef();
-  
+
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (menuRef.current && !menuRef.current.contains(event.target)) {
           onClose();
         }
       };
-  
+
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [onClose]);
-  
+
     return (
-      <div ref={menuRef} className="context-menu" style={{ top: `${y}px`, left: `${x}px` }}>
+      <div
+        ref={menuRef}
+        className="context-menu"
+        style={{ top: `${y}px`, left: `${x}px` }}
+      >
         <ul>
-          <li className="deleteContext" onClick={onDelete}><MdDeleteOutline /> Delete</li>
+          <li className="deleteContext" onClick={onDelete}>
+            <MdDeleteOutline /> Delete
+          </li>
         </ul>
       </div>
     );
@@ -128,6 +134,14 @@ const Projects = ({ toggleForm, typeForm }) => {
     // return clients;
   }
 
+  async function reloadClients() {
+    // const data = await fetchClientData();
+    // const clients = await parseClientData(data);
+
+    // console.log(clients);
+    window.location.reload();
+    // return clients;
+  }
   useEffect(() => {
     // Fetch data from API when component mounts for the first time
     fetchClients();
@@ -375,17 +389,17 @@ const Projects = ({ toggleForm, typeForm }) => {
 
   return (
     <div className="projects-page-layout">
-      <div className="sidebar-wrapper">{renderSidebar()}</div>
-      <div className="border">
+      <div >{renderSidebar()}</div>
+      {/* <div className="border">
         <hr></hr>
-      </div>
+      </div> */}
       <div className="projects-wrapper">
         <div className="header-project">
           <div className="left-section-projects">
             <span className="projects-head">{nameButton}</span>
             <div className="breadcrums-project-holder">
               <div>
-                <IoMdRefresh onClick={fetchClients} className="reload-icon" />
+                <IoMdRefresh onClick={reloadClients} className="reload-icon" />
               </div>
 
               {renderBreadcrumb()}

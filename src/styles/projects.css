@@ -1,7 +1,8 @@
 .projects-page-layout {
   display: flex;
   flex-direction: row;
-
+  overflow: hidden;
+  /* height: 82vh; */
   /* background-color: #f2f2f2; */
   /* margin-top: 3rem; */
 }
@@ -12,6 +13,8 @@
   background-color: #ffffff;
   /* padding-top: 3rem; */
   overflow-x: hidden;
+  overflow-y: hidden;
+
   padding-bottom: 10px;
 }
 
@@ -174,15 +177,32 @@
 /* Basic styles for the sidebar */
 .sidebar-wrapper {
   width: 150px;
-  /* background-color: #f8f9fa; */
   padding-left: 10px;
   padding-top: 10px;
   font-family: Arial, sans-serif;
   font-size: 15px;
-  /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); */
-  /* overflow-y: scroll; */
+   /* Make the sidebar take the full height of the viewport */
+  overflow-y: auto; /* Add a scrollbar when the content overflows */
+  overflow-x:hidden ;
+  height: 85vh;
+}
+.sidebar-wrapper::-webkit-scrollbar {
+  width: 7px;
 }
 
+.sidebar-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(13, 25, 114,0.4);
+  /* border-radius: 10px; */
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgb(13, 25, 114);
+}
 .sidebar-wrapper h2 {
   /* font-size: 1.5em; */
   margin-bottom: 20px;
@@ -215,7 +235,7 @@
   /* border-right: 2px solid rgba(0, 3, 59,0.1); */
   /* margin-top: 1rem; */
   /* height: 80vh; */
-  overflow: hidden;
+  /* overflow: hidden; */
   min-width: 200px;
   /* overflow-y: scroll; */
 }
