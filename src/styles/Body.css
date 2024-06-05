@@ -2,13 +2,13 @@
   height: 83vh;
   /* background: rgb(2,0,36); */
   /* background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%); */
-  /* background: linear-gradient(
+  background: linear-gradient(
     180deg,
     rgb(206, 218, 238) 0%,
     rgb(235, 239, 246) 25%,
     rgb(255, 255, 255) 52%
-  ); */
-  background-color: #fff; 
+  );
+  /* background-color: #fff;  */
  overflow: hidden;
 }
 .upload {
@@ -85,7 +85,9 @@
 .introtext h6 {
   color: rgb(0, 0, 0);
   padding-left: 7%;
-  margin-right: 10%;
+  padding-right: 7%;
+  /* margin-right: 10%; */
+  text-align: center;
 }
 
 .introtext h1 {
@@ -152,17 +154,24 @@ input[type="file"]::file-selector-button {
   padding: 10px;
   /* border: 2px dashed #4CAF50;  */
   border-radius: 5px;
-  margin: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  scale: 0.8;
+  /* margin: 5px; */
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.48); */
+  /* scale: 0.8; */
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .uploadBoxes {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  margin: 10px;
+  /* justify-content: start; */
+  /* margin: auto; */
+  /* align-items: center; */
+  /* padding: 12px;
+  margin: 10px; */
+  /* padding-left: 7px; */
+  /* margin: auto; */
+  gap:4rem;
+  justify-content: center;
+  scale: 0.75;
 }
 
 .uploadContainerDash {

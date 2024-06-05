@@ -1,0 +1,29 @@
+.breadcrumb-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #667085;
+    font-weight: normal;
+  }
+  
+  .breadcrumb-container a{
+    color: rgb(79, 79, 79);
+    text-decoration: none;
+  }
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .breadcrumb-item.active {
+    color: rgb(13, 25, 114); /* Assuming yamahaBlue is #0044cc */
+    font-weight: bold;
+  }
+  
+  .breadcrumb-separator {
+    font-size: 1rem;
+    color: #667085;
+  }

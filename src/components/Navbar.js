@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import "../styles/Navbar.css"; // Import CSS file for styling if needed
+import "../styles/InfoPopup.css"
 import { FaUser, FaSignInAlt, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import InfoPopup from "./InfoPopup";
 import { PiSelectionBackgroundFill } from "react-icons/pi";
+import { useAuth } from "./Authcontext";
 // import img from "../images/yamaha.png";
 
-
-const Navbar = ({setisBlurr}) => {
-
-  const [popUp, setpopUp] = useState(false)
-  const [image, setimage] = useState(false)
-  const [details, setdetails] = useState(false)
-  const [title, settitle] = useState(false)
-
+const Navbar = ({ setisBlurr }) => {
+  const [popUp, setpopUp] = useState(false);
+  const [image, setimage] = useState(false);
+  const [details, setdetails] = useState(false);
+  const [title, settitle] = useState(false);
+  const [zoomed, setzoomed] = useState(false);
+  const {isLoggedIn,logout}=useAuth();
   const handleFalsePositive = () => {
     console.log("False Positive");
   };
@@ -30,6 +31,10 @@ const Navbar = ({setisBlurr}) => {
     settitle(clicked_title);
     setimage(clicked_image);
   }
+  function handleZoom() {
+    setzoomed(!zoomed);
+    console.log("Zoom");
+  }
   return (
     <>
       <div className="navbarContainer">
@@ -44,21 +49,24 @@ const Navbar = ({setisBlurr}) => {
           <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
         </div>
       </div> */}
-        <div style={{position:"absolute", zIndex:"-1"}}>
-          <img className="banner" 
-            src="images/kv_pc.jpg" /> 
+        <div className="head-nav">
+          <div className="banner"></div>
+          <div className="head-nav-content">
+            <div className="head-nav-left">
+              <a href="/">
+              <span className="head-nav-heading">CELL HANDLER™</span>
+              </a>
+              <span className="head-nav-sub-heading">
+                Cell Picking & Imaging System
+              </span>
+            </div>
+            <div>
+              <img className="logo" src="/images/yamaha.png" />
+            </div>
+          </div>
+        </div>
 
-        </div>
-        <div className="nav-body">
-          <div className="nav-left-section">
-            <span>CELL HANDLER™</span>
-            <span className="nav-left-section-subscript">Cell picking and Imaging System</span>
-          </div>
-          <div className="nav-right-section">
-            <img className="logo" src="/images/yamaha.png" />
-            {/* <img src={img} alt="logo" /> */}
-          </div>
-        </div>
+        <div className="nav-body"></div>
         <div className="secondNav">
           <div className="left-section">
             <div className="dropdown">
@@ -74,10 +82,12 @@ const Navbar = ({setisBlurr}) => {
                 <a href="#">Analytics</a>
                 <a href="#">Structure</a>
                 <a href="#">History</a>
-                <a href="#">Add a Repository</a>
-                <a href="#">Delete a Repository</a>
-                <a href="#">Update a Repository</a>
-                <a href="#">Filter a Repository</a>
+                <a href="/projects">View Clients</a>
+                <a href="/projects/addclient">Add Client</a>
+                
+                <a href="/projects/addproject">Add Project</a>
+             
+                <a href="/projects/addmodel">Add Model</a>
                 <a href="#">Search a Repository</a>
               </div>
             </div>
@@ -172,21 +182,30 @@ const Navbar = ({setisBlurr}) => {
           </div>
 
           <div className="right-section">
-            <a href="https://global.yamaha-motor.com/"><FaUser /> Admin</a>
-            <a href="https://global.yamaha-motor.com/news/"><FaSignInAlt/> Login</a>
+            <a href="https://global.yamaha-motor.com/">
+              <FaUser /> Admin
+            </a>
+            <a href="/login">
+              {isLoggedIn ? (<span onClick={logout}>Logout {<FaSignInAlt />}</span> ): (<>{<FaSignInAlt />} Login</>)}
+              
+            </a>
             <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
           </div>
         </div>
         {popUp && (
           <div className="popup">
-            <div className="infoContainer">
+            <div
+              className={zoomed ? "infoContainer-Zoomedin" : "infoContainer"}
+            >
               <div className="title">
                 <h2>{title}</h2>
               </div>
               <div className="details_box">{details}</div>
             </div>
-            <div className="imageContainer">
-              <img src={image} alt="" />
+            <div
+              className={zoomed ? "imageContainer-zoomedin" : "imageContainer"}
+            >
+              <img onClick={handleZoom} src={image} alt="" />
               <button onClick={closePopup}>Close</button>
             </div>
             {/* <div className="cancelButton">
