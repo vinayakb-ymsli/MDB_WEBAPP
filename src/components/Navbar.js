@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Navbar.css"; // Import CSS file for styling if needed
-import "../styles/InfoPopup.css"
+import "../styles/InfoPopup.css";
 import { FaUser, FaSignInAlt, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import InfoPopup from "./InfoPopup";
@@ -14,7 +14,7 @@ const Navbar = ({ setisBlurr }) => {
   const [details, setdetails] = useState(false);
   const [title, settitle] = useState(false);
   const [zoomed, setzoomed] = useState(false);
-  const {isLoggedIn,logout}=useAuth();
+  const { isLoggedIn, logout } = useAuth();
   const handleFalsePositive = () => {
     console.log("False Positive");
   };
@@ -54,7 +54,7 @@ const Navbar = ({ setisBlurr }) => {
           <div className="head-nav-content">
             <div className="head-nav-left">
               <a href="/">
-              <span className="head-nav-heading">CELL HANDLER™</span>
+                <span className="head-nav-heading">CELL HANDLER™</span>
               </a>
               <span className="head-nav-sub-heading">
                 Cell Picking & Imaging System
@@ -70,30 +70,30 @@ const Navbar = ({ setisBlurr }) => {
         <div className="secondNav">
           <div className="left-section">
             <div className="dropdown">
-              <h6 className="dropbtn">
+              <span className="dropbtn">
                 <a href="/" style={{ textDecoration: "None", color: "white" }}>
                   Home
                 </a>
-              </h6>
+              </span>
             </div>
             <div className="dropdown">
-              <h6 className="dropbtn">Repository</h6>
+              <span className="dropbtn">Repository</span>
               <div className="dropdown-content">
                 <a href="#">Analytics</a>
                 <a href="#">Structure</a>
                 <a href="#">History</a>
                 <a href="/projects">View Clients</a>
                 <a href="/projects/addclient">Add Client</a>
-                
+
                 <a href="/projects/addproject">Add Project</a>
-             
+
                 <a href="/projects/addmodel">Add Model</a>
                 <a href="#">Search a Repository</a>
               </div>
             </div>
 
             <div className="dropdown">
-              <h6 className="dropbtn">Visualization</h6>
+              <span className="dropbtn">Visualization</span>
               <div className="dropdown-content">
                 <a href="#">Input Images</a>
                 <a href="#">Output Images</a>
@@ -138,7 +138,7 @@ const Navbar = ({ setisBlurr }) => {
             </div>
 
             <div className="dropdown">
-              <h6 className="dropbtn">Model</h6>
+              <span className="dropbtn">Model</span>
               <div className="dropdown-content">
                 <a href="#">Algorithms</a>
                 <a href="#">Intution</a>
@@ -149,7 +149,7 @@ const Navbar = ({ setisBlurr }) => {
             </div>
 
             <div className="dropdown">
-              <h6 className="dropbtn">Metrics</h6>
+              <span className="dropbtn">Metrics</span>
               <div className="dropdown-content">
                 <a
                   href="#"
@@ -177,7 +177,7 @@ const Navbar = ({ setisBlurr }) => {
             </div>
 
             <div className="dropdown">
-              <h6 className="dropbtn">Help</h6>
+              <span className="dropbtn">Help</span>
             </div>
           </div>
 
@@ -186,8 +186,11 @@ const Navbar = ({ setisBlurr }) => {
               <FaUser /> Admin
             </a>
             <a href="/login">
-              {isLoggedIn ? (<span onClick={logout}>Logout {<FaSignInAlt />}</span> ): (<>{<FaSignInAlt />} Login</>)}
-              
+              {isLoggedIn ? (
+                <span onClick={logout}>Logout {<FaSignInAlt />}</span>
+              ) : (
+                <>{<FaSignInAlt />} Login</>
+              )}
             </a>
             <a href="https://global.yamaha-motor.com/jp/">Japanese Site</a>
           </div>

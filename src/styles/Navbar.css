@@ -124,13 +124,19 @@
 
 .right-section a {
   margin-left: 20px;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: bold;
   text-decoration: none;
   color: rgb(255, 255, 255);
+  /* display: inline-flex; */
+  /* flex-direction: row;
+  align-items: center;
+  gap:1rem; */
+  text-align: justify;
 }
 
 .right-section a:hover {
-  color: blue;
+  color: rgb(174, 174, 251);
 }
 @media (max-width: 1024px) {
   .left-section span {
@@ -169,6 +175,7 @@
   transition: color 0.3s ease;
   display: flex;
   justify-content: center;
+  /* fotn */
 }
 
 .dropbtn:hover,

@@ -343,10 +343,6 @@ main.mainContainer {
   color: rgb(13, 25, 114);
 }
 
-.toggles-label:nth-of-type(2) {
-  /* border-left: 1px solid #00033B;
-  border-right: 1px solid #00033B; */
-}
 
 .toggles-label.active {
   background-color: rgb(13, 25, 114);
