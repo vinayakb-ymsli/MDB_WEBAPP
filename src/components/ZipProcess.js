@@ -40,7 +40,9 @@ function ZipProcess() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState("");
   const [selectedOption, setSelectedOption] = useState("slider");
-
+  const [buttonStatus, setButtonStatus] = useState(true);
+  const [hitApi, setHitApi] = useState(false);
+  const token=localStorage.getItem("token")
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,10 +56,22 @@ function ZipProcess() {
         }
 
         const formData = new FormData();
-        formData.append("file", selectedFile);
+        formData.append("client_name", selectedClient);
+        formData.append("project_name", selectedProject);
+        formData.append("model_name", selectedModel);
+        formData.append("zip_file", selectedFile);
+
         const response = await axios.post(
-          "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload_zip",
-          formData
+          "https://ejmnmassds.ap-south-1.awsapprunner.com/upload-zip",
+          formData,
+          {
+            headers: {
+              "Content-Type":
+                "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
+                "Authorization": `${token}`, // Example of adding an Authorization header
+              // Add any other headers you need
+            },
+          }
         );
 
         sessionStorage.setItem("zipFileName", zipFileName);
@@ -67,13 +81,14 @@ function ZipProcess() {
         alert(error.message);
       } finally {
         setPreLoader(false);
+        setHitApi(false);
       }
     };
 
-    if (inputFile) {
+    if (inputFile && selectedModel != null) {
       fetchData();
     }
-  }, [inputFile]);
+  }, [hitApi == true]);
 
   useEffect(() => {
     if (res_data) {
@@ -96,6 +111,7 @@ function ZipProcess() {
 
   const handleZipChange = () => {
     setIsLoading(true);
+    setHitApi(true);
   };
 
   const handleOptionChange = (option) => {
@@ -310,6 +326,7 @@ function ZipProcess() {
   // Function to handle model selection
   const handleModelSelection = (modelName) => {
     setSelectedModel(modelName);
+    setButtonStatus(false);
   };
 
   useEffect(() => {
@@ -432,9 +449,18 @@ function ZipProcess() {
                 <AiOutlineFileZip className="zip-file-icon" />{" "}
                 <div>{zipFileName}</div>
               </div>
-              <span>Please select your paramters <span className="star">*</span></span>
+              {buttonStatus ? (
+                <span style={{ textAlign: "center" }}>
+                  Please select your paramters<br></br> from above dropdown
+                  <span className="star">*</span>
+                </span>
+              ) : (
+                <span style={{ textAlign: "center" }}>
+                  Click on the process button <br /> to continue.
+                </span>
+              )}
             </div>
-            <div className="before-process-button">
+            <div hidden={buttonStatus} className="before-process-button">
               <ProcessButton onClick={handleZipChange} isProcessed={true} />
             </div>
           </div>

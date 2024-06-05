@@ -164,6 +164,7 @@ const ProcessPage = () => {
   const [hoverOnInput, setHoverOnInput] = useState(false);
   const [fullscreenImageType, setFullscreenImageType] = useState("input");
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const token = localStorage.getItem("token");
 
   const toggleFullscreen = (type) => {
     setIsFullscreen(!isFullscreen);
@@ -179,10 +180,21 @@ const ProcessPage = () => {
     try {
       const formData = new FormData();
       formData.append("image", uploadedImage);
+      // formData.append("client_name", selectedClient);
+      //   formData.append("project_name", selectedProject);
+      //   formData.append("model_name", selectedModel);
 
       const response = await axios.post(
         "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload",
         formData
+        // {
+        //   headers: {
+        //     "Content-Type":
+        //       "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
+        //     Authorization: `${token}`, // Example of adding an Authorization header
+        //     // Add any other headers you need
+        //   },
+        // }
       );
 
       const processedImage = `data:image/png;base64, ${response?.data?.image}`;
