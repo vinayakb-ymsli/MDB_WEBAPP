@@ -110,11 +110,15 @@ const CreateForm = ({
 
   const handleModelChange = async (e) => {
     const { name, value, files } = e.target;
-    setModelFormData((prevState) => ({
-      ...prevState,
-      [name]: files ? files[0] : value,
-    }));
-    console.log("client form ", modelFormData);
+    if (!/^[^.-]*$/.test(value)) {
+      alert("Model Name cannot contain '.' or '-'");
+    } else {
+      setModelFormData((prevState) => ({
+        ...prevState,
+        [name]: files ? files[0] : value,
+      }));
+      console.log("client form ", modelFormData);
+    }
   };
 
   const handleModelSubmit = async (e) => {
@@ -349,6 +353,7 @@ const CreateForm = ({
             onChange={handleModelChange}
             className="input-field"
             placeholder="Placeholder"
+            pattern="^[^.-]*$"
             required
           />
         </div>
