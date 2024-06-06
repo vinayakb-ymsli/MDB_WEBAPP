@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "../styles/projects.css";
 import { IoMdRefresh } from "react-icons/io";
 import { MdDeleteOutline } from "react-icons/md";
+import NotificationPopup from "./NotificationPopup";
 import {
   FaUserAlt,
   FaFolderOpen,
@@ -34,7 +35,11 @@ const Projects = ({ toggleForm, typeForm }) => {
     y: 0,
     targetItem: null,
   });
-  const token=localStorage.getItem("token")
+  const [errorMessage, setErrorMessage] = useState("");
+  const closeNotification = () => {
+    setErrorMessage(null);
+  };
+  const token = localStorage.getItem("token");
   const ContextMenu = ({ x, y, onDelete, onClose }) => {
     const menuRef = useRef();
 
@@ -266,24 +271,25 @@ const Projects = ({ toggleForm, typeForm }) => {
     formData.append("client_name", selectedClient.clientName);
     formData.append("project_name", contextMenu.targetItem.projectName);
     try {
-    const response = await axios.post(
-      "https://ejmnmassds.ap-south-1.awsapprunner.com/delete-project",
-      formData,
-      {
-        headers: {
-          "Content-Type":
-            "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
-          Authorization: `${token}`, // Example of adding an Authorization header
-          // Add any other headers you need
-        },
-      }
-    );}
-    catch(error){
+      const response = await axios.post(
+        "https://ejmnmassds.ap-south-1.awsapprunner.com/delete-project",
+        formData,
+        {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
+            Authorization: `${token}`, // Example of adding an Authorization header
+            // Add any other headers you need
+          },
+        }
+      );
+    } catch (error) {
       setIsError(error.message);
-    }
-    finally{
-      setIsError("Deleted Successfully")
-      console.log("Deletedd finally")
+    } finally {
+      setIsError("Deleted Successfully");
+      setErrorMessage("Deleted Successfully")
+      console.log("Deletedd finally");
+      window.location.reload();
     }
 
     setContextMenu({ ...contextMenu, visible: false });
@@ -419,6 +425,15 @@ const Projects = ({ toggleForm, typeForm }) => {
 
   return (
     <div className="projects-page-layout">
+      {errorMessage && (
+        <div className="error-message">
+          <NotificationPopup
+            message={errorMessage}
+            duration={3000}
+            onClose={closeNotification}
+          />
+        </div>
+      )}
       <div>{renderSidebar()}</div>
       {/* <div className="border">
         <hr></hr>

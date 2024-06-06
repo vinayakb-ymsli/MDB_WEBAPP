@@ -73,6 +73,9 @@ const CreateForm = ({
         error.response ? error.response.body : error.message
       );
     }
+    finally{
+      window.location.reload();
+    }
   };
 
   const handleProjectChange = (e) => {
@@ -105,6 +108,9 @@ const CreateForm = ({
         "Error:",
         error.response ? error.response.body : error.message
       );
+    }
+    finally{
+      window.location.reload();
     }
   };
 
@@ -165,6 +171,8 @@ const CreateForm = ({
         "Error:",
         error.response ? error.response.body : error.message
       );
+    }finally{
+      window.location.reload();
     }
   };
 
