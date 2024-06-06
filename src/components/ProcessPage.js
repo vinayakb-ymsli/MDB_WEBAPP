@@ -186,7 +186,7 @@ const ProcessPage = () => {
       formData.append("model_name", selectedModel);
 
       const response = await axios.post(
-        "https://dvegmk6pcy.ap-south-1.awsapprunner.com/upload",
+        "https://ejmnmassds.ap-south-1.awsapprunner.com/upload-image",
         formData,
         {
           headers: {
