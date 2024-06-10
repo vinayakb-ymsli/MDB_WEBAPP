@@ -1,0 +1,6 @@
+
+.bkg_blurr{
+    filter: blur(5px); /* Adjust the blur intensity as needed */
+    pointer-events: none; /* Prevents clicking on elements behind the blurred element */
+} 
+

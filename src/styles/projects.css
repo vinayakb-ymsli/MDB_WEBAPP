@@ -1,0 +1,330 @@
+.projects-page-layout {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  /* height: 82vh; */
+  /* background-color: #f2f2f2; */
+  /* margin-top: 3rem; */
+}
+
+.projects-wrapper {
+  /* margin-top: 3rem; */
+  margin-left: 1rem;
+  background-color: #ffffff;
+  /* padding-top: 3rem; */
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  padding-bottom: 10px;
+}
+
+.projects-head {
+  color: rgb(13, 25, 114);
+  font-size: 1.75rem;
+  font-weight: bolder;
+  margin-bottom: 0;
+}
+
+.header-project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  /* min-width: 100vw; */
+  overflow: hidden;
+}
+
+.project-button {
+  margin-right: 1rem;
+  width: 100%;
+  min-width: 250px;
+}
+
+.project-button svg {
+  margin-left: 10px;
+}
+
+.folders-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  min-width: 100vw;
+  padding-right: 12rem;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 200px;
+}
+
+.folder-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: rgb(13, 25, 114);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 200px;
+  /* gap:1rem; */
+}
+.back-icon {
+  font-size: 20px;
+  margin-right: 10px;
+  color: rgb(13, 25, 114); /* Adjust color if necessary */
+  font-weight: bold;
+}
+.folder-name {
+  font-size: 16px;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+  /* font-weight: 500; */
+}
+
+.search-bar {
+  /* margin-bottom: 20px; */
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  margin-right: 1rem;
+}
+.search-bar-wrapper {
+  border: 1px solid #ccc;
+  /* width: 100%; */
+  min-width: 500px;
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+  border-radius: 5px;
+}
+.input-search-projects {
+  padding: 10px;
+  width: 100%;
+  max-width: 500px;
+  border: none;
+  outline: none;
+}
+.right-project-header {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  /* width: 100%; */
+  right: 0;
+  /* justify-content: right; */
+  /* align-items: end; */
+}
+.fullscreenLeft-single {
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(265, 265, 265, 0.5);
+  /* opacity: 50%; */
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 10%;
+  cursor: pointer;
+}
+.fullscreenRight-single {
+  position: absolute;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(265, 265, 265, 0.5);
+  /* opacity: 50%; */
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 10%;
+  cursor: pointer;
+}
+.slider-wrapper-after-process{
+  position: relative;
+}
+.breadcrumbs-project-page {
+  display: flex;
+  /* flex-direction: row; */
+  align-items: center;
+}
+.breadcrums-project-holder {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* justify-content: center; */
+}
+.breadcrumbs-project-page {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  /* justify-content: center; */
+}
+.left-section-projects {
+  width: 100%;
+}
+
+/* Basic styles for the sidebar */
+.sidebar-wrapper {
+  width: 150px;
+  padding-left: 10px;
+  padding-top: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+   /* Make the sidebar take the full height of the viewport */
+  overflow-y: auto; /* Add a scrollbar when the content overflows */
+  overflow-x:hidden ;
+  height: 85vh;
+}
+.sidebar-wrapper::-webkit-scrollbar {
+  width: 7px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 3, 59,0.4);
+  /* border-radius: 10px; */
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgb(13, 25, 114);
+}
+.sidebar-wrapper h2 {
+  /* font-size: 1.5em; */
+  margin-bottom: 20px;
+  /* height: 100vh;
+  display: flex;
+  justify-content: start; */
+}
+
+.sidebar-wrapper ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-wrapper li {
+  margin-bottom: 10px;
+}
+
+.client-sidebar,
+.project-sidebar {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5px;
+  border-radius: 5px;
+  overflow: hidden;
+  /* border-right: 2px solid rgba(0, 3, 59,0.1); */
+}
+.sidebar-wrapper {
+  /* background-color: #f2f2f2; */
+  /* border-right: 2px solid rgba(0, 3, 59,0.1); */
+  /* margin-top: 1rem; */
+  /* height: 80vh; */
+  /* overflow: hidden; */
+  min-width: 200px;
+  /* overflow-y: scroll; */
+}
+.border {
+  height: 83vh;
+  /* margin-top: 1.2rem; */
+  /* border-right: 2px solid rgba(0, 3, 59,0.1); */
+}
+.icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+.icon-model{
+  margin-right: 10px;
+  font-size: 1rem;
+}
+.projects-sidebar,
+.models {
+  /* margin-top: 10px; */
+  margin-left: 18px;
+}
+.models {
+  margin-left: 20px;
+}
+.model {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  font-size: 14px;
+}
+.parameter-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.reload-icon {
+  color: rgb(13, 25, 114);
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+
+.reload-icon:active {
+  animation: rotate 1s linear;
+}
+.context-menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.context-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.context-menu ul li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.context-menu ul li:hover {
+  background-color: #f0f0f0;
+}
+.deleteContext{
+  color: red;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}

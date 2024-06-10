@@ -1,0 +1,176 @@
+/* auth.css */
+.page {
+  /* height: ; */
+  /* display: flex; */
+  /* min-width: 1000px; */
+
+  height: 83vh;
+  /* padding-top: rem; */
+  display: flex;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  justify-content: space-between;
+}
+.input-intro {
+  max-width: 55%;
+  text-align: center;
+  justify-content: center;
+  margin-top: 4rem;
+  /* margin-top: 2rem; */
+}
+.auth-page {
+  background: linear-gradient(
+    180deg,
+    rgb(206, 218, 238) 0%,
+    rgb(235, 239, 246) 25%,
+    rgb(255, 255, 255) 52%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 83vh;
+  /* margin-top: 1rem; */
+  /* height: 100%; */
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  font-family: "Roboto", "Verdana", "Geneva", sans-serif;
+  overflow: hidden;
+}
+.text-info-auth{
+  /* margin-top: -1rem; */
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  /* word-spacing: 25%; */
+}
+.input-intro {
+  margin-bottom: 10%;
+  /* margin-top: 8%; */
+}
+.login-section {
+  /* margin-top: 2rem; */
+}
+.input-intro h6 {
+  color: rgb(0, 0, 0);
+  /* padding-left: 7%; */
+  margin-right: 10%;
+}
+
+.input-intro h1 {
+  margin-top: 9%;
+  color: rgb(13, 25, 114);
+  font-size: 3rem;
+  /* padding-left: 30%; */
+  padding-bottom: 3%;
+  font-weight: bolder;
+}
+.auth-container {
+  margin: auto;
+  max-width: 600px;
+  /* margin-left: auto;
+    margin-right: auto;
+    margin-top:auto;
+    margin-bottom: auto; */
+  /* max-height: 100%; */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.auth-container h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-container input[type="email"],
+.auth-container input[type="password"] {
+  /* margin-bottom: 15px; */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.auth-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-container button:hover {
+  background-color: #0056b3;
+}
+
+.auth-container p {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.auth-container p a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.auth-container p a:hover {
+  text-decoration: underline;
+}
+
+.machine-login {
+  height: 50vh;
+  margin-left: 5%;
+  margin-right: 7%;
+}
+
+.input-wrapper {
+  border: 1px solid #ccc; /* Border for the outer div */
+  padding: 5px; /* Padding for the outer div */
+  display: flex; /* Ensure the wrapper uses flexbox */
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.inputcontainerLogin {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  width: 100%; /* Make sure it takes the full width */
+  /* padding: 10px; */
+}
+
+.icon {
+  margin-right: 6px; /* Space between icon and input */
+  border-right: 2px solid rgb(13, 25, 114);
+  padding-right: 5px;
+  padding-left: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputLogin {
+  flex: 1; /* Take up remaining space */
+  border: none; /* Remove border from input */
+  outline: none; /* Remove outline for better aesthetics */
+}
+.forgot{
+  display: flex;
+  justify-content: right;
+  margin-bottom: 10px;
+}
+.heading-form-login{
+  font-size:1.5rem;
+  font-weight: bold;
+  color: rgb(13, 25, 114);
+  margin-bottom: 0.8rem;
+}
