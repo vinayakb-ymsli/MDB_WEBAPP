@@ -3,6 +3,10 @@ import "../styles/projects.css";
 import { IoMdRefresh } from "react-icons/io";
 import { MdDeleteOutline } from "react-icons/md";
 import NotificationPopup from "./NotificationPopup";
+import { IoCloseCircle } from "react-icons/io5";
+import { FaArrowRight } from "react-icons/fa";
+// import { FaArrowLeft } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 import {
   FaUserAlt,
   FaFolderOpen,
@@ -18,6 +22,7 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import CreateProjectForm from "./Projectform";
 import request from "superagent";
 import axios from "axios";
+import { inout } from "./sample";
 
 const Projects = ({ toggleForm, typeForm }) => {
   const [clients, setClients] = useState([]);
@@ -29,6 +34,11 @@ const Projects = ({ toggleForm, typeForm }) => {
   const [expandedProject, setExpandedProject] = useState(null);
   const [nameButton, setNameButton] = useState("Clients");
   const [isError, setIsError] = useState("");
+  const [selectedModel, setSelectedModel] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageList, setImageList] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const [contextMenu, setContextMenu] = useState({
     visible: false,
     x: 0,
@@ -287,35 +297,201 @@ const Projects = ({ toggleForm, typeForm }) => {
       setIsError(error.message);
     } finally {
       setIsError("Deleted Successfully");
-      setErrorMessage("Deleted Successfully")
+      setErrorMessage("Deleted Successfully");
       console.log("Deletedd finally");
       window.location.reload();
     }
 
     setContextMenu({ ...contextMenu, visible: false });
   };
+  const ImagePopup = ({
+    images,
+    currentIndex,
+    onClose,
+    setCurrentImageIndex,
+  }) => {
+    const handleNext = () => {
+      const nextIndex = (currentImageIndex + 1) % imageList.length;
+      setCurrentImageIndex(nextIndex);
+    };
+
+    const handlePrev = () => {
+      const prevIndex =
+        (currentImageIndex - 1 + imageList.length) % imageList.length;
+      setCurrentImageIndex(prevIndex);
+    };
+
+    return (
+      <div className="image-popup">
+        <div className="popup-overlay" onClick={onClose}></div>
+        <div className="popup-content-wrapper">
+          <div className="popup-content">
+            <button className="prev-button" onClick={handlePrev}>
+              <FaArrowLeft />
+            </button>
+            <img
+              src={`data:image/png;base64,${images[currentIndex].base64}`}
+              alt={images[currentIndex].name}
+            />
+            <button className="next-button" onClick={handleNext}>
+              <FaArrowRight />
+            </button>
+          </div>
+          <button className="closee-button" onClick={onClose}>Close</button>
+        </div>
+      </div>
+    );
+  };
+
+  const handleModelClick = async (model) => {
+    let inputData = {};
+    let outputData = {};
+
+    try {
+      const responseIn = await request
+        .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/get-images")
+        .set("Content-Type", "application/json")
+        .query({
+          folder_name: `${selectedClient.clientName}/${selectedProject.projectName}/${model}/input_folder`,
+        });
+
+      inputData = responseIn.body;
+      console.log("Input Images: ", inputData);
+    } catch (error) {
+      console.error("Error fetching input images: ", error);
+    }
+
+    try {
+      const responseOut = await request
+        .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/get-images")
+        .set("Content-Type", "application/json")
+        .query({
+          folder_name: `${selectedClient.clientName}/${selectedProject.projectName}/${model}/output_folder`,
+        });
+
+      outputData = responseOut.body;
+      console.log("Output Images: ", outputData);
+    } catch (error) {
+      console.error("Error fetching output images: ", error);
+    }
+
+    // Transform the API response data into the desired format
+    const transformedData = {
+      input: Object.keys(inputData).map((key) => ({
+        name: key,
+        base64: inputData[key],
+      })),
+      output: Object.keys(outputData).map((key) => ({
+        name: key,
+        base64: outputData[key],
+      })),
+    };
+
+    // Update the state with the fetched and transformed image data
+
+    setImageList(transformedData);
+    setSelectedModel(model);
+  };
+
+  const handleFolderClick = (folderType) => {
+    setImageList(imageList[folderType]);
+  };
+
+  const openImagePopup = (index) => {
+    setCurrentImageIndex(index);
+    setIsPopupOpen(true);
+  };
+
   const renderFolders = () => {
     let filteredItems;
 
     if (selectedClient) {
       if (selectedProject) {
-        filteredItems = selectedProject.models.filter((model) =>
-          model.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        return (
-          <>
-            <div className="back-button" onClick={handleBackClick}>
-              <IoReturnUpBackSharp className="back-icon" />
-              <span className="folder-name">Back</span>
-            </div>
-            {filteredItems.map((model, index) => (
-              <div key={index} className="folder-item">
-                <RiFolder3Line className="folder-icon" />
-                <span className="folder-name">{model}</span>
+        if (selectedModel) {
+          {
+            console.log(imageList);
+          }
+          if (imageList && imageList.length > 0) {
+            {
+              console.log(imageList);
+            }
+            return (
+              <>
+                <div
+                  className="back-button"
+                  onClick={() => setSelectedModel(null)}
+                >
+                  <IoReturnUpBackSharp className="back-icon" />
+                  <span className="folder-name">Back</span>
+                </div>
+
+                <div className="image-grid">
+                  {imageList.map((image, index) => (
+                    <div
+                      key={index}
+                      className="image-item"
+                      onClick={() => openImagePopup(index)}
+                    >
+                      <img
+                        src={`data:image/png;base64,${image.base64}`}
+                        alt={image.name}
+                      />
+                      <span className="image-name">{image.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            );
+          } else {
+            return (
+              <>
+                <div
+                  className="back-button"
+                  onClick={() => setSelectedModel(null)}
+                >
+                  <IoReturnUpBackSharp className="back-icon" />
+                  <span className="folder-name">Back</span>
+                </div>
+                <div
+                  className="folder-item"
+                  onClick={() => handleFolderClick("input")}
+                >
+                  <FaFolderOpen className="folder-icon" />
+                  <span className="folder-name">Input Images</span>
+                </div>
+                <div
+                  className="folder-item"
+                  onClick={() => handleFolderClick("output")}
+                >
+                  <FaFolderOpen className="folder-icon" />
+                  <span className="folder-name">Output Images</span>
+                </div>
+              </>
+            );
+          }
+        } else {
+          filteredItems = selectedProject.models.filter((model) =>
+            model.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          return (
+            <>
+              <div className="back-button" onClick={handleBackClick}>
+                <IoReturnUpBackSharp className="back-icon" />
+                <span className="folder-name">Back</span>
               </div>
-            ))}
-          </>
-        );
+              {filteredItems.map((model, index) => (
+                <div
+                  key={index}
+                  className="folder-item"
+                  onClick={() => handleModelClick(model)}
+                >
+                  <RiFolder3Line className="folder-icon" />
+                  <span className="folder-name">{model}</span>
+                </div>
+              ))}
+            </>
+          );
+        }
       } else {
         filteredItems = selectedClient.projects.filter((project) =>
           project.projectName.toLowerCase().includes(searchQuery.toLowerCase())
@@ -493,6 +669,14 @@ const Projects = ({ toggleForm, typeForm }) => {
               visible: false,
             }));
           }}
+        />
+      )}
+      {isPopupOpen && (
+        <ImagePopup
+          images={imageList}
+          currentIndex={currentImageIndex}
+          onClose={() => setIsPopupOpen(false)}
+          setCurrentImageIndex={setCurrentImageIndex}
         />
       )}
     </div>
