@@ -64,7 +64,7 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
 
     try {
       const response = await request
-        .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-project")
+        .post("https://xssvwicjvk.ap-south-1.awsapprunner.com/create-project")
         .send({
           client_name: projectFormData.clientName,
           project_name: projectFormData.folderName.toUpperCase(),
@@ -104,7 +104,7 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
       formData.append("model_name", modelFormData.modelName.toUpperCase());
       formData.append("model_file", modelFormData.modelFile);
       const response = await axios.post(
-        "https://ejmnmassds.ap-south-1.awsapprunner.com/create-model",
+        "https://xssvwicjvk.ap-south-1.awsapprunner.com/create-model",
         formData,
         {
           headers: {
@@ -116,7 +116,7 @@ const Navforms = ({ typeForm, parentClient, parentProject }) => {
         }
       );
       // const response = await request
-      //   .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-model")
+      //   .post("https://xssvwicjvk.ap-south-1.awsapprunner.com/create-model")
       //   .send({
       //     client_name: modelFormData.clientName,
       //     project_name: modelFormData.projectName,

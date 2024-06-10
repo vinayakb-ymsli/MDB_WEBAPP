@@ -71,7 +71,7 @@ const Projects = ({ toggleForm, typeForm }) => {
   async function fetchClientData() {
     try {
       const response = await request
-        .get("https://ejmnmassds.ap-south-1.awsapprunner.com/contents")
+        .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/contents")
         .set("Content-Type", "application/json")
         .query({
           folder_name: "",
@@ -271,7 +271,7 @@ const Projects = ({ toggleForm, typeForm }) => {
     formData.append("project_name", contextMenu.targetItem.projectName);
     try {
       const response = await axios.post(
-        "https://ejmnmassds.ap-south-1.awsapprunner.com/delete-project",
+        "https://xssvwicjvk.ap-south-1.awsapprunner.com/delete-project",
         formData,
         {
           headers: {
