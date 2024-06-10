@@ -378,6 +378,7 @@ const Projects = ({ toggleForm, typeForm }) => {
     } catch (error) {
       console.error("Error fetching images: ", error);
     }
+    
   };
 
   const openImagePopup = (index) => {
