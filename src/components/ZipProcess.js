@@ -56,9 +56,18 @@ function ZipProcess() {
         }
 
         const formData = new FormData();
-        formData.append("client_name", selectedClient.includes("YMSLJ") ? "YMC" : selectedClient);
-        formData.append("project_name", selectedProject.includes("Cellular_Tx_001") ? "FMS" : selectedProject);
-        formData.append("model_name", selectedModel);
+        formData.append(
+          "client_name",
+          selectedClient.includes("YMSLJ") ? "YMC" : selectedClient
+        );
+        formData.append(
+          "project_name",
+          selectedProject.includes("Cellular_Tx_001") ? "FMS" : selectedProject
+        );
+        formData.append(
+          "model_name",
+          selectedModel.includes("Stardist") ? "Models" : selectedModel
+        );
         formData.append("zip_file", selectedFile);
 
         const response = await axios.post(
@@ -395,7 +404,9 @@ function ZipProcess() {
                                 : project.projectName}
                             </option>
                           ))}
-                          <option value="" disabled>Cellular_ZXB_008</option>
+                        <option value="" disabled>
+                          Cellular_ZXB_008
+                        </option>
                       </select>
                       {/* <MdOutlineKeyboardArrowRight
                     className={`process-page-icon ${
@@ -429,9 +440,12 @@ function ZipProcess() {
                               )
                               .models.map((model) => (
                                 <option key={model} value={model}>
-                                  {model}
+                                  {model.includes("Models")
+                                    ? "Stardist"
+                                    : model}
                                 </option>
                               ))}
+                            <option disabled>Cellpose</option>
                           </select>
                           {/* <MdOutlineKeyboardArrowRight
                         className={`process-page-icon ${
