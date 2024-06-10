@@ -34,7 +34,7 @@ const Projects = ({ toggleForm, typeForm }) => {
     y: 0,
     targetItem: null,
   });
-  const token=localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   const ContextMenu = ({ x, y, onDelete, onClose }) => {
     const menuRef = useRef();
 
@@ -238,7 +238,8 @@ const Projects = ({ toggleForm, typeForm }) => {
             </div>
           )}{" "}
           {/* Render icon if available */}
-          {label || item}{" "}
+          {(item=="FMS" ? "Cellular_Tx_001" : (item=="YMC" ? "YMSLJ" : (label || item)))}{" "}
+
           {/* Render label if available, otherwise render item */}
         </div>
       );
@@ -266,24 +267,23 @@ const Projects = ({ toggleForm, typeForm }) => {
     formData.append("client_name", selectedClient.clientName);
     formData.append("project_name", contextMenu.targetItem.projectName);
     try {
-    const response = await axios.post(
-      "https://ejmnmassds.ap-south-1.awsapprunner.com/delete-project",
-      formData,
-      {
-        headers: {
-          "Content-Type":
-            "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
-          Authorization: `${token}`, // Example of adding an Authorization header
-          // Add any other headers you need
-        },
-      }
-    );}
-    catch(error){
+      const response = await axios.post(
+        "https://ejmnmassds.ap-south-1.awsapprunner.com/delete-project",
+        formData,
+        {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
+            Authorization: `${token}`, // Example of adding an Authorization header
+            // Add any other headers you need
+          },
+        }
+      );
+    } catch (error) {
       setIsError(error.message);
-    }
-    finally{
-      setIsError("Deleted Successfully")
-      console.log("Deletedd finally")
+    } finally {
+      setIsError("Deleted Successfully");
+      console.log("Deletedd finally");
     }
 
     setContextMenu({ ...contextMenu, visible: false });
@@ -330,9 +330,21 @@ const Projects = ({ toggleForm, typeForm }) => {
                 }
               >
                 <FaFolderOpen className="folder-icon" />
-                <span className="folder-name">{project.projectName}</span>
+                <span className="folder-name">
+                  {project.projectName.includes("FMS")
+                    ? "Cellular_Tx_001"
+                    : project.projectName}
+                </span>
               </div>
             ))}
+            <div
+              // key={index}
+              className="folder-item"
+              style={{ opacity: "50%" }}
+            >
+              <FaFolderOpen className="folder-icon" />
+              <span className="folder-name">Cellular_ZXB_008</span>
+            </div>
           </>
         );
       }
@@ -348,7 +360,9 @@ const Projects = ({ toggleForm, typeForm }) => {
           // onContextMenu={(e) => handleContextMenu(e, client)}
         >
           <FaFolderOpen className="folder-icon" />
-          <span className="folder-name">{client.clientName}</span>
+          <span className="folder-name">
+            {client.clientName.includes("YMC") ? "YMSLJ" : client.clientName}
+          </span>
         </div>
       ));
     }
@@ -377,7 +391,9 @@ const Projects = ({ toggleForm, typeForm }) => {
                   style={{ color: "rgb(13, 25, 114)" }}
                   className="icon"
                 />
-                {client.clientName}
+                {client.clientName.includes("YMC")
+                  ? "YMSLJ"
+                  : client.clientName}
               </div>
               {expandedClient === client.clientName && (
                 <ul className="projects-sidebar">
@@ -391,7 +407,9 @@ const Projects = ({ toggleForm, typeForm }) => {
                           style={{ color: "rgb(13, 25, 114)" }}
                           className="icon"
                         />
-                        {project.projectName}
+                        {project.projectName.includes("FMS")
+                          ? "Cellular_Tx_001"
+                          : project.projectName}
                       </div>
                       {expandedProject === project.projectName && (
                         <ul className="models">
