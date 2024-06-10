@@ -60,7 +60,7 @@ const CreateForm = ({
 
     try {
       const response = await request
-        .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-client")
+        .post("https://xssvwicjvk.ap-south-1.awsapprunner.com/create-client")
         .send({ client_name: clientFormData.folderName.toUpperCase() })
         .set("Content-Type", "application/json")
         .set("Authorization", `${token}`);
@@ -93,7 +93,7 @@ const CreateForm = ({
 
     try {
       const response = await request
-        .post("https://ejmnmassds.ap-south-1.awsapprunner.com/create-project")
+        .post("https://xssvwicjvk.ap-south-1.awsapprunner.com/create-project")
         .send({
           client_name: parentClient ,
           project_name: projectFormData.folderName.toUpperCase(),
@@ -149,7 +149,7 @@ const CreateForm = ({
       formData.append("model_file", modelFormData.modelFile);
 
       const response = await axios.post(
-        "https://ejmnmassds.ap-south-1.awsapprunner.com/create-model",
+        "https://xssvwicjvk.ap-south-1.awsapprunner.com/create-model",
         formData,
         {
           headers: {

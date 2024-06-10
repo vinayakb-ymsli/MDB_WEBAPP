@@ -62,7 +62,7 @@ function ZipProcess() {
         formData.append("zip_file", selectedFile);
 
         const response = await axios.post(
-          "https://ejmnmassds.ap-south-1.awsapprunner.com/upload-zip",
+          "https://xssvwicjvk.ap-south-1.awsapprunner.com/upload-zip",
           formData,
           {
             headers: {
@@ -225,7 +225,7 @@ function ZipProcess() {
   async function fetchClientData() {
     try {
       const response = await request
-        .get("https://ejmnmassds.ap-south-1.awsapprunner.com/contents")
+        .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/contents")
         .set("Content-Type", "application/json")
         .query({
           folder_name: "",

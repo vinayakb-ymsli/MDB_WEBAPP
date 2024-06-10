@@ -23,6 +23,8 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import CreateProjectForm from "./Projectform";
 import request from "superagent";
 import axios from "axios";
+import Loader from "react-js-loader";
+
 
 const Projects = ({ toggleForm, typeForm }) => {
   const [clients, setClients] = useState([]);
@@ -38,6 +40,7 @@ const Projects = ({ toggleForm, typeForm }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageList, setImageList] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [preLoader, setPreLoader] = useState(false);
 
   const [contextMenu, setContextMenu] = useState({
     visible: false,
@@ -86,7 +89,7 @@ const Projects = ({ toggleForm, typeForm }) => {
   async function fetchClientData() {
     try {
       const response = await request
-        .get("https://ejmnmassds.ap-south-1.awsapprunner.com/contents")
+        .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/contents")
         .set("Content-Type", "application/json")
         .query({
           folder_name: "",
@@ -282,7 +285,7 @@ const Projects = ({ toggleForm, typeForm }) => {
     formData.append("project_name", contextMenu.targetItem.projectName);
     try {
       const response = await axios.post(
-        "https://ejmnmassds.ap-south-1.awsapprunner.com/delete-project",
+        "https://xssvwicjvk.ap-south-1.awsapprunner.com/delete-project",
         formData,
         {
           headers: {
@@ -348,44 +351,48 @@ const Projects = ({ toggleForm, typeForm }) => {
     setSelectedModel(model);
     setImageList([]);
   };
-  
+
   const handleFolderClick = async (folderType) => {
     try {
+      setTwoFolder(true);
+      setPreLoader(true);
       let folderName;
       if (folderType === "input") {
         folderName = "input_folder";
       } else if (folderType === "output") {
         folderName = "output_folder";
       }
-  
+
       const response = await request
         .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/get-images")
         .set("Content-Type", "application/json")
         .query({
           folder_name: `${selectedClient.clientName}/${selectedProject.projectName}/${selectedModel}/${folderName}`,
         });
-  
+
       const imageData = response.body;
-  
+
       // Transform the API response data into the desired format
       const images = Object.keys(imageData).map((key) => ({
         name: key,
         base64: imageData[key],
       }));
-  
+
       // Update the state with the fetched image data
       setImageList(images);
     } catch (error) {
       console.error("Error fetching images: ", error);
     }
-    
+    finally{
+      setPreLoader(false);
+    }
   };
 
   const openImagePopup = (index) => {
     setCurrentImageIndex(index);
     setIsPopupOpen(true);
   };
-  const [twoFolder,setTwoFolder]=useState(true)
+  const [twoFolder, setTwoFolder] = useState(false);
 
   const renderFolders = () => {
     let filteredItems;
@@ -396,31 +403,55 @@ const Projects = ({ toggleForm, typeForm }) => {
           {
             console.log(imageList);
           }
-          if (imageList && imageList.length > 0 && twoFolder) {
+          if (twoFolder) {
             return (
               <>
-              <div
-                  className="back-button"
-                  onClick={() => setTwoFolder(false)}
-                >
-                  <IoReturnUpBackSharp className="back-icon" />
-                  <span className="folder-name">Back</span>
-                </div>
-              <div className="image-grid">
-                {imageList.map((image, index) => (
+                {preLoader ? (
                   <div
-                    key={index}
-                    className="image-item"
-                    onClick={() => openImagePopup(index)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "600px",
+                      width: "100%",
+                      backgroundColor: "white",
+                    }}
                   >
-                    <img
-                      src={`data:image/png;base64,${image.base64}`}
-                      alt={image.name}
+                    <Loader
+                      type="bubble-loop"
+                      bgColor="blue"
+                      color="black"
+                      title="Populating Images"
+                      size={100}
                     />
-                    <span className="image-name">{image.name}</span>
                   </div>
-                ))}
-              </div></>
+                ) : (
+                  <>
+                    <div
+                      className="back-button"
+                      onClick={() => setTwoFolder(false)}
+                    >
+                      <IoReturnUpBackSharp className="back-icon" />
+                      <span className="folder-name">Back</span>
+                    </div>
+                    <div className="image-grid">
+                      {imageList.map((image, index) => (
+                        <div
+                          key={index}
+                          className="image-item"
+                          onClick={() => openImagePopup(index)}
+                        >
+                          <img
+                            src={`data:image/png;base64,${image.base64}`}
+                            alt={image.name}
+                          />
+                          <span className="image-name">{image.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </>
             );
           } else {
             return (
@@ -449,7 +480,6 @@ const Projects = ({ toggleForm, typeForm }) => {
               </>
             );
           }
-        
         } else {
           filteredItems = selectedProject.models.filter((model) =>
             model.toLowerCase().includes(searchQuery.toLowerCase())

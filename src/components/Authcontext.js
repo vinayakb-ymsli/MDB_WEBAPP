@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await request
-        .post("https://ejmnmassds.ap-south-1.awsapprunner.com/login")
+        .post("https://xssvwicjvk.ap-south-1.awsapprunner.com/login")
         .send({ username, password })
         .set("Content-Type", "application/json");
 
