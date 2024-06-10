@@ -12,8 +12,10 @@ import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import request from "superagent";
+import { useAuth } from "./Authcontext";
 
 const ProcessPage = () => {
+  const { logout } = useAuth();
   const { state } = useLocation();
   let image;
   try {
@@ -87,6 +89,13 @@ const ProcessPage = () => {
         });
 
       const data = response.body;
+      const parse= JSON.parse
+      if (JSON.parse(data)["400"] === "token error" && data.error === "Token has expired") {
+        // Redirect to the login page
+        alert("Token expired, please login again")
+        logout();
+        return; // Stop further execution
+      }
       console.log(data);
       return data;
     } catch (error) {
