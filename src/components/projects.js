@@ -445,7 +445,7 @@ const Projects = ({ toggleForm, typeForm }) => {
                             src={`data:image/png;base64,${image.base64}`}
                             alt={image.name}
                           />
-                          <span className="image-name">{(image.name).slice(-10)}</span>
+                          <span className="image-name">...{(image.name).slice(-15)}</span>
                         </div>
                       ))}
                     </div>
