@@ -238,8 +238,11 @@ const Projects = ({ toggleForm, typeForm }) => {
             </div>
           )}{" "}
           {/* Render icon if available */}
-          {(item=="FMS" ? "Cellular_Tx_001" : (item=="YMC" ? "YMSLJ" : (label || item)))}{" "}
-
+          {item == "FMS"
+            ? "Cellular_Tx_001"
+            : item == "YMC"
+            ? "YMSLJ"
+            : label || item}{" "}
           {/* Render label if available, otherwise render item */}
         </div>
       );
@@ -305,9 +308,20 @@ const Projects = ({ toggleForm, typeForm }) => {
             {filteredItems.map((model, index) => (
               <div key={index} className="folder-item">
                 <RiFolder3Line className="folder-icon" />
-                <span className="folder-name">{model}</span>
+                <span className="folder-name">
+                  {" "}
+                  {model.includes("Models") ? "Stardist" : model}
+                </span>
               </div>
             ))}
+            <div
+              // key={index}
+              className="folder-item"
+              style={{ opacity: "50%" }}
+            >
+              <RiFolder3Line className="folder-icon" />
+              <span className="folder-name">Cellpose</span>
+            </div>
           </>
         );
       } else {
@@ -419,7 +433,7 @@ const Projects = ({ toggleForm, typeForm }) => {
                                 style={{ color: "rgb(13, 25, 114)" }}
                                 className="icon-model"
                               />
-                              {model}
+                              {model.includes("Models") ? "Stardist" : model}
                             </li>
                           ))}
                         </ul>

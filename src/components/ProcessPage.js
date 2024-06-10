@@ -183,7 +183,7 @@ const ProcessPage = () => {
       formData.append("image", uploadedImage);
       formData.append("client_name", selectedClient.includes("YMSLJ") ? "YMC" : selectedClient);
       formData.append("project_name", selectedProject.includes("Cellular_Tx_001") ? "FMS" : selectedProject);
-      formData.append("model_name", selectedModel);
+      formData.append("model_name", selectedModel.includes("Stardist") ? "Models" : selectedModel);
 
       const response = await axios.post(
         "https://ejmnmassds.ap-south-1.awsapprunner.com/upload-image",
@@ -438,9 +438,11 @@ const ProcessPage = () => {
                               )
                               .models.map((model) => (
                                 <option key={model} value={model}>
-                                  {model}
+                                  {model.includes("Models") ? "Stardist" : model}
+                                  
                                 </option>
                               ))}
+                              <option disabled>Cellpose</option>
                           </select>
                           {/* <MdOutlineKeyboardArrowRight
                         className={`process-page-icon ${
