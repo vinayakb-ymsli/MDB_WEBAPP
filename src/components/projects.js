@@ -5,8 +5,9 @@ import { MdDeleteOutline } from "react-icons/md";
 import NotificationPopup from "./NotificationPopup";
 import { IoCloseCircle } from "react-icons/io5";
 import { FaArrowRight } from "react-icons/fa";
-// import { FaArrowLeft } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+// import { FaArrowLeft } from "react-icons/fa";
+// import { IoClose } from "react-icons/io5";
 import {
   FaUserAlt,
   FaFolderOpen,
@@ -22,7 +23,6 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import CreateProjectForm from "./Projectform";
 import request from "superagent";
 import axios from "axios";
-import { inout } from "./sample";
 
 const Projects = ({ toggleForm, typeForm }) => {
   const [clients, setClients] = useState([]);
@@ -325,6 +325,8 @@ const Projects = ({ toggleForm, typeForm }) => {
       <div className="image-popup">
         <div className="popup-overlay" onClick={onClose}></div>
         <div className="popup-content-wrapper">
+          <IoClose className="closee-button" onClick={onClose} />
+
           <div className="popup-content">
             <button className="prev-button" onClick={handlePrev}>
               <FaArrowLeft />
@@ -337,7 +339,6 @@ const Projects = ({ toggleForm, typeForm }) => {
               <FaArrowRight />
             </button>
           </div>
-          <button className="closee-button" onClick={onClose}>Close</button>
         </div>
       </div>
     );

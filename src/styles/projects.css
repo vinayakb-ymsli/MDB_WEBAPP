@@ -343,7 +343,7 @@
 .popup-content-wrapper{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
 }
 .popup-overlay {
   position: absolute;
@@ -379,7 +379,11 @@
 
 .closee-button {
   max-width: 25%;
-  background-color: rgb(13, 25, 114);
+  background-color: white;
+  color: black;
+  /* padding: 10px; */
+  border-radius: 100%;
+  font-size: 1.75rem;
   margin-top: 1rem;
   cursor: pointer;
   /* font-weight: bold; */
