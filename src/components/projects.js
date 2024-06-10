@@ -345,63 +345,46 @@ const Projects = ({ toggleForm, typeForm }) => {
   };
 
   const handleModelClick = async (model) => {
-    let inputData = {};
-    let outputData = {};
-
-    try {
-      const responseIn = await request
-        .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/get-images")
-        .set("Content-Type", "application/json")
-        .query({
-          folder_name: `${selectedClient.clientName}/${selectedProject.projectName}/${model}/input_folder`,
-        });
-
-      inputData = responseIn.body;
-      console.log("Input Images: ", inputData);
-    } catch (error) {
-      console.error("Error fetching input images: ", error);
-    }
-
-    try {
-      const responseOut = await request
-        .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/get-images")
-        .set("Content-Type", "application/json")
-        .query({
-          folder_name: `${selectedClient.clientName}/${selectedProject.projectName}/${model}/output_folder`,
-        });
-
-      outputData = responseOut.body;
-      console.log("Output Images: ", outputData);
-    } catch (error) {
-      console.error("Error fetching output images: ", error);
-    }
-
-    // Transform the API response data into the desired format
-    const transformedData = {
-      input: Object.keys(inputData).map((key) => ({
-        name: key,
-        base64: inputData[key],
-      })),
-      output: Object.keys(outputData).map((key) => ({
-        name: key,
-        base64: outputData[key],
-      })),
-    };
-
-    // Update the state with the fetched and transformed image data
-
-    setImageList(transformedData);
     setSelectedModel(model);
+    setImageList([]);
   };
-
-  const handleFolderClick = (folderType) => {
-    setImageList(imageList[folderType]);
+  
+  const handleFolderClick = async (folderType) => {
+    try {
+      let folderName;
+      if (folderType === "input") {
+        folderName = "input_folder";
+      } else if (folderType === "output") {
+        folderName = "output_folder";
+      }
+  
+      const response = await request
+        .get("https://xssvwicjvk.ap-south-1.awsapprunner.com/get-images")
+        .set("Content-Type", "application/json")
+        .query({
+          folder_name: `${selectedClient.clientName}/${selectedProject.projectName}/${selectedModel}/${folderName}`,
+        });
+  
+      const imageData = response.body;
+  
+      // Transform the API response data into the desired format
+      const images = Object.keys(imageData).map((key) => ({
+        name: key,
+        base64: imageData[key],
+      }));
+  
+      // Update the state with the fetched image data
+      setImageList(images);
+    } catch (error) {
+      console.error("Error fetching images: ", error);
+    }
   };
 
   const openImagePopup = (index) => {
     setCurrentImageIndex(index);
     setIsPopupOpen(true);
   };
+  const [twoFolder,setTwoFolder]=useState(true)
 
   const renderFolders = () => {
     let filteredItems;
@@ -412,36 +395,31 @@ const Projects = ({ toggleForm, typeForm }) => {
           {
             console.log(imageList);
           }
-          if (imageList && imageList.length > 0) {
-            {
-              console.log(imageList);
-            }
+          if (imageList && imageList.length > 0 && twoFolder) {
             return (
               <>
-                <div
+              <div
                   className="back-button"
-                  onClick={() => setSelectedModel(null)}
+                  onClick={() => setTwoFolder(false)}
                 >
                   <IoReturnUpBackSharp className="back-icon" />
                   <span className="folder-name">Back</span>
                 </div>
-
-                <div className="image-grid">
-                  {imageList.map((image, index) => (
-                    <div
-                      key={index}
-                      className="image-item"
-                      onClick={() => openImagePopup(index)}
-                    >
-                      <img
-                        src={`data:image/png;base64,${image.base64}`}
-                        alt={image.name}
-                      />
-                      <span className="image-name">{image.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </>
+              <div className="image-grid">
+                {imageList.map((image, index) => (
+                  <div
+                    key={index}
+                    className="image-item"
+                    onClick={() => openImagePopup(index)}
+                  >
+                    <img
+                      src={`data:image/png;base64,${image.base64}`}
+                      alt={image.name}
+                    />
+                    <span className="image-name">{image.name}</span>
+                  </div>
+                ))}
+              </div></>
             );
           } else {
             return (
@@ -470,6 +448,7 @@ const Projects = ({ toggleForm, typeForm }) => {
               </>
             );
           }
+        
         } else {
           filteredItems = selectedProject.models.filter((model) =>
             model.toLowerCase().includes(searchQuery.toLowerCase())
