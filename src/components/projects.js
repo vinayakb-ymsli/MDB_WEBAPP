@@ -412,7 +412,7 @@ const Projects = ({ toggleForm, typeForm }) => {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      height: "600px",
+                      height: "71.5vh",
                       width: "100%",
                       backgroundColor: "white",
                     }}
@@ -426,7 +426,7 @@ const Projects = ({ toggleForm, typeForm }) => {
                     />
                   </div>
                 ) : (
-                  <>
+                  <div className="folder-wrapper">
                     <div
                       className="back-button"
                       onClick={() => setTwoFolder(false)}
@@ -449,7 +449,7 @@ const Projects = ({ toggleForm, typeForm }) => {
                         </div>
                       ))}
                     </div>
-                  </>
+                  </div>
                 )}
               </>
             );
@@ -622,9 +622,9 @@ const Projects = ({ toggleForm, typeForm }) => {
         </div>
       )}
       <div>{renderSidebar()}</div>
-      {/* <div className="border">
+      <div className="border">
         <hr></hr>
-      </div> */}
+      </div>
       <div className="projects-wrapper">
         <div className="header-project">
           <div className="left-section-projects">
