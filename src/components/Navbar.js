@@ -79,25 +79,46 @@ const Navbar = ({ setisBlurr }) => {
             <div className="dropdown">
               <span className="dropbtn">Repository</span>
               <div className="dropdown-content">
-                <a className="inactive-link" href="#">Analytics</a>
-                <a className="inactive-link" href="#">Structure</a>
-                <a className="inactive-link" href="#">History</a>
-                <a className="active-link" href="/projects">View Clients</a>
-                <a className="active-link" href="/projects/addclient">Add Client</a>
+                <a className="inactive-link" href="#">
+                  Analytics
+                </a>
+                <a className="inactive-link" href="#">
+                  Structure
+                </a>
+                <a className="inactive-link" href="#">
+                  History
+                </a>
+                <a className="active-link" href="/projects">
+                  View Clients
+                </a>
+                <a className="active-link" href="/projects/addclient">
+                  Add Client
+                </a>
 
-                <a className="active-link" href="/projects/addproject">Add Project</a>
+                <a className="active-link" href="/projects/addproject">
+                  Add Project
+                </a>
 
-                <a className="active-link" href="/projects/addmodel">Add Model</a>
-                <a className="inactive-link" href="#">Search a Repository</a>
+                <a className="active-link" href="/projects/addmodel">
+                  Add Model
+                </a>
+                <a className="inactive-link" href="#">
+                  Search a Repository
+                </a>
               </div>
             </div>
 
             <div className="dropdown">
               <span className="dropbtn">Visualization</span>
               <div className="dropdown-content">
-                <a className="inactive-link" href="#">Input Images</a>
-                <a className="inactive-link" href="#">Output Images</a>
-                <a className="active-link"
+                <a className="inactive-link" href="#">
+                  Input Images
+                </a>
+                <a className="inactive-link" href="#">
+                  Output Images
+                </a>
+                <a
+                  className="active-link"
                   href="#"
                   onClick={() =>
                     openPopup(
@@ -109,7 +130,8 @@ const Navbar = ({ setisBlurr }) => {
                 >
                   False Positive comparison
                 </a>
-                <a className="active-link"
+                <a
+                  className="active-link"
                   href="#"
                   onClick={() =>
                     openPopup(
@@ -121,8 +143,11 @@ const Navbar = ({ setisBlurr }) => {
                 >
                   Number of cells segmented
                 </a>
-                <a className="inactive-link" href="#">Inference time graph</a>
-                <a className="active-link"
+                <a className="inactive-link" href="#">
+                  Inference time graph
+                </a>
+                <a
+                  className="active-link"
                   href="#"
                   onClick={() =>
                     openPopup(
@@ -140,18 +165,32 @@ const Navbar = ({ setisBlurr }) => {
             <div className="dropdown">
               <span className="dropbtn">Model</span>
               <div className="dropdown-content">
-                <a className="inactive-link" href="#">Algorithms</a>
-                <a className="inactive-link" href="#">Intution</a>
-                <a className="inactive-link" href="#">Improvement area</a>
-                <a className="inactive-link" href="#">Comparison with older models</a>
-                <a className="inactive-link" href="#">Versioning</a>
+                <a className="inactive-link" href="#">
+                  Algorithms
+                </a>
+                <a className="inactive-link" href="#">
+                  Intution
+                </a>
+                <a className="inactive-link" href="#">
+                  Improvement area
+                </a>
+                <a className="inactive-link" href="#">
+                  Comparison with older models
+                </a>
+                <a className="inactive-link" href="#">
+                  Versioning
+                </a>
               </div>
             </div>
 
             <div className="dropdown">
               <span className="dropbtn">Metrics</span>
               <div className="dropdown-content">
-                <a className="active-link"
+                <a className="inactive-link" href="#">
+                  Precision recall
+                </a>
+                <a
+                  className="active-link"
                   href="#"
                   onClick={() =>
                     openPopup(
@@ -163,16 +202,20 @@ const Navbar = ({ setisBlurr }) => {
                 >
                   Accuracy
                 </a>
-                <a className="inactive-link" href="#">Precision recall</a>
-                <a className="inactive-link" href="#">F1 score</a>
-                <a className="inactive-link" href="#">Intersection over union</a>
+                <a className="inactive-link" href="#">
+                  F1 score
+                </a>
+
+                {/* <a className="inactive-link" href="#">Intersection over union</a>
                 <a className="inactive-link" href="#">Area based normality</a>
                 <a className="inactive-link" href="#">Weights and parameters</a>
-                <a className="inactive-link" href="#">Precision curve</a>
-                <a className="inactive-link" href="#">Pixel based confusion matrix</a>
+                <a className="inactive-link" href="#">Precision curve</a> */}
+                {/* <a className="inactive-link" href="#">Pixel based confusion matrix</a>
                 <a className="inactive-link" href="#">Pixel based sensitivity curve</a>
-                <a className="inactive-link" href="#">Pixel based specificity curve</a>
-                <a className="inactive-link" href="#">Picking condition</a>
+                <a className="inactive-link" href="#">Pixel based specificity curve</a> */}
+                <a className="inactive-link" href="#">
+                  Picking condition
+                </a>
               </div>
             </div>
 

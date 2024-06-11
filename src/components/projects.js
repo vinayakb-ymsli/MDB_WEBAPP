@@ -25,7 +25,6 @@ import request from "superagent";
 import axios from "axios";
 import Loader from "react-js-loader";
 
-
 const Projects = ({ toggleForm, typeForm }) => {
   const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState(null);
@@ -256,7 +255,11 @@ const Projects = ({ toggleForm, typeForm }) => {
             </div>
           )}{" "}
           {/* Render icon if available */}
-          {label || item}{" "}
+          {item == "FMS"
+            ? "Cellular_Tx_001"
+            : item == "YMC"
+            ? "YMSLJ"
+            : label || item}{" "}
           {/* Render label if available, otherwise render item */}
         </div>
       );
@@ -382,8 +385,7 @@ const Projects = ({ toggleForm, typeForm }) => {
       setImageList(images);
     } catch (error) {
       console.error("Error fetching images: ", error);
-    }
-    finally{
+    } finally {
       setPreLoader(false);
     }
   };
@@ -445,7 +447,9 @@ const Projects = ({ toggleForm, typeForm }) => {
                             src={`data:image/png;base64,${image.base64}`}
                             alt={image.name}
                           />
-                          <span className="image-name">...{(image.name).slice(-15)}</span>
+                          <span className="image-name">
+                            ...{image.name.slice(-15)}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -497,9 +501,19 @@ const Projects = ({ toggleForm, typeForm }) => {
                   onClick={() => handleModelClick(model)}
                 >
                   <RiFolder3Line className="folder-icon" />
-                  <span className="folder-name">{model}</span>
+                  <span className="folder-name">
+                    {model.includes("Models") ? "Stardist" : model}
+                  </span>
                 </div>
               ))}
+              <div
+                // key={index}
+                className="folder-item"
+                style={{ opacity: "50%" }}
+              >
+                <RiFolder3Line className="folder-icon" />
+                <span className="folder-name">Cellpose</span>
+              </div>
             </>
           );
         }
@@ -523,9 +537,21 @@ const Projects = ({ toggleForm, typeForm }) => {
                 }
               >
                 <FaFolderOpen className="folder-icon" />
-                <span className="folder-name">{project.projectName}</span>
+                <span className="folder-name">
+                  {project.projectName.includes("FMS")
+                    ? "Cellular_Tx_001"
+                    : project.projectName}
+                </span>
               </div>
             ))}
+            <div
+              // key={index}
+              className="folder-item"
+              style={{ opacity: "50%" }}
+            >
+              <FaFolderOpen className="folder-icon" />
+              <span className="folder-name">Cellular_ZXB_008</span>
+            </div>
           </>
         );
       }
@@ -541,7 +567,9 @@ const Projects = ({ toggleForm, typeForm }) => {
           // onContextMenu={(e) => handleContextMenu(e, client)}
         >
           <FaFolderOpen className="folder-icon" />
-          <span className="folder-name">{client.clientName}</span>
+          <span className="folder-name">
+            {client.clientName.includes("YMC") ? "YMSLJ" : client.clientName}
+          </span>
         </div>
       ));
     }
@@ -570,7 +598,9 @@ const Projects = ({ toggleForm, typeForm }) => {
                   style={{ color: "rgb(13, 25, 114)" }}
                   className="icon"
                 />
-                {client.clientName}
+                {client.clientName.includes("YMC")
+                  ? "YMSLJ"
+                  : client.clientName}
               </div>
               {expandedClient === client.clientName && (
                 <ul className="projects-sidebar">
@@ -584,7 +614,9 @@ const Projects = ({ toggleForm, typeForm }) => {
                           style={{ color: "rgb(13, 25, 114)" }}
                           className="icon"
                         />
-                        {project.projectName}
+                        {project.projectName.includes("FMS")
+                          ? "Cellular_Tx_001"
+                          : project.projectName}
                       </div>
                       {expandedProject === project.projectName && (
                         <ul className="models">
@@ -594,7 +626,7 @@ const Projects = ({ toggleForm, typeForm }) => {
                                 style={{ color: "rgb(13, 25, 114)" }}
                                 className="icon-model"
                               />
-                              {model}
+                              {model.includes("Models") ? "Stardist" : model}
                             </li>
                           ))}
                         </ul>
