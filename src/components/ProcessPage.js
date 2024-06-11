@@ -181,9 +181,9 @@ const ProcessPage = () => {
     try {
       const formData = new FormData();
       formData.append("image", uploadedImage);
-      formData.append("client_name", selectedClient);
-      formData.append("project_name", selectedProject);
-      formData.append("model_name", selectedModel);
+      formData.append("client_name", selectedClient.includes("YMSLJ") ? "YMC" : selectedClient);
+      formData.append("project_name", selectedProject.includes("Cellular_Tx_001") ? "FMS" : selectedProject);
+      formData.append("model_name", selectedModel.includes("Stardist") ? "Models" : selectedModel);
 
       const response = await axios.post(
         "https://xssvwicjvk.ap-south-1.awsapprunner.com/upload-image",
@@ -367,7 +367,7 @@ const ProcessPage = () => {
                     <option value="">Select Client</option>
                     {clients.map((client) => (
                       <option key={client.clientName} value={client.clientName}>
-                        {client.clientName}
+                        {client.clientName.includes("YMC") ? "YMSLJ" : client.clientName}
                       </option>
                     ))}
                   </select>
@@ -400,9 +400,11 @@ const ProcessPage = () => {
                               key={project.projectName}
                               value={project.projectName}
                             >
-                              {project.projectName}
+                              {project.projectName.includes("FMS") ? "Cellular_Tx_001" : project.projectName}
+                            
                             </option>
                           ))}
+                          <option value="" disabled>Cellular_ZXB_008</option>
                       </select>
                       {/* <MdOutlineKeyboardArrowRight
                     className={`process-page-icon ${
@@ -436,9 +438,11 @@ const ProcessPage = () => {
                               )
                               .models.map((model) => (
                                 <option key={model} value={model}>
-                                  {model}
+                                  {model.includes("Models") ? "Stardist" : model}
+                                  
                                 </option>
                               ))}
+                              <option disabled>Cellpose</option>
                           </select>
                           {/* <MdOutlineKeyboardArrowRight
                         className={`process-page-icon ${

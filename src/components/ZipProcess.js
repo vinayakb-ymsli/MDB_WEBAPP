@@ -42,7 +42,7 @@ function ZipProcess() {
   const [selectedOption, setSelectedOption] = useState("slider");
   const [buttonStatus, setButtonStatus] = useState(true);
   const [hitApi, setHitApi] = useState(false);
-  const token=localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,9 +56,18 @@ function ZipProcess() {
         }
 
         const formData = new FormData();
-        formData.append("client_name", selectedClient);
-        formData.append("project_name", selectedProject);
-        formData.append("model_name", selectedModel);
+        formData.append(
+          "client_name",
+          selectedClient.includes("YMSLJ") ? "YMC" : selectedClient
+        );
+        formData.append(
+          "project_name",
+          selectedProject.includes("Cellular_Tx_001") ? "FMS" : selectedProject
+        );
+        formData.append(
+          "model_name",
+          selectedModel.includes("Stardist") ? "Models" : selectedModel
+        );
         formData.append("zip_file", selectedFile);
 
         const response = await axios.post(
@@ -68,7 +77,7 @@ function ZipProcess() {
             headers: {
               "Content-Type":
                 "multipart/form-data; boundary=<calculated when request is sent>", // Ensure this matches your form data type
-                "Authorization": `${token}`, // Example of adding an Authorization header
+              Authorization: `${token}`, // Example of adding an Authorization header
               // Add any other headers you need
             },
           }
@@ -355,7 +364,9 @@ function ZipProcess() {
                     <option value="">Select Client</option>
                     {clients.map((client) => (
                       <option key={client.clientName} value={client.clientName}>
-                        {client.clientName}
+                        {client.clientName.includes("YMC")
+                          ? "YMSLJ"
+                          : client.clientName}
                       </option>
                     ))}
                   </select>
@@ -388,9 +399,14 @@ function ZipProcess() {
                               key={project.projectName}
                               value={project.projectName}
                             >
-                              {project.projectName}
+                              {project.projectName.includes("FMS")
+                                ? "Cellular_Tx_001"
+                                : project.projectName}
                             </option>
                           ))}
+                        <option value="" disabled>
+                          Cellular_ZXB_008
+                        </option>
                       </select>
                       {/* <MdOutlineKeyboardArrowRight
                     className={`process-page-icon ${
@@ -424,9 +440,12 @@ function ZipProcess() {
                               )
                               .models.map((model) => (
                                 <option key={model} value={model}>
-                                  {model}
+                                  {model.includes("Models")
+                                    ? "Stardist"
+                                    : model}
                                 </option>
                               ))}
+                            <option disabled>Cellpose</option>
                           </select>
                           {/* <MdOutlineKeyboardArrowRight
                         className={`process-page-icon ${
